@@ -15,7 +15,7 @@ Then for the classes the students take in each academic period, we will have sec
 - Note: Each section is essentially a course in an academic period with a section number.
 
 
-### RequirementsRequirements
+### Requirements
 The following is a list of requirements you are asked to implement:
 - We need to authenticate the user and know what they will have access to. Implement it in the most optimal way, assuming that we store user credentials in our system(instead of using 3rd party services like Google, Microsoft, etc.)
 - An endpoint that shows a list of students:
