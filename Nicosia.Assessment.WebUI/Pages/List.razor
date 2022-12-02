@@ -1,0 +1,79 @@
+﻿@page "/list"
+
+<h1 class="bg-info text-white">Create Customer</h1>
+<h2 class="p-2">@Message</h2>
+
+<hr />
+@using Nicosia.Assessment.Presentation.Front.Models
+@inject HttpClient Http
+@inject NavigationManager _navigationManager
+
+@if (_customers == null)
+{
+    <p>No customers found.</p>
+}
+else
+{
+    <table class="table table-sm table-bordered table-striped ">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date Of Birth</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Bank Account Number</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in _customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Firstname</td>
+                    <td>@customer.Lastname</td>
+                    <td>@customer.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
+                    <td>@customer.PhoneNumber</td>
+                    <td>@customer.Email</td>
+                    <td>@customer.BankAccountNumber</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" href="/create/@customer.Id">Edit</a>
+                        </td>
+                    <td>
+                        <button class="btn btn-sm btn-danger"
+                        @onclick="@(() => Delete(customer))">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private CustomerData[] _customers;
+    public string Message { get; set; } = "";
+
+    protected override async Task OnInitializedAsync() =>
+        _customers = await Http.GetFromJsonAsync<CustomerData[]>("http://localhost:5000/customer/list");
+
+    public async void Delete(CustomerData customer)
+    {
+        var result = await Http.DeleteAsync("http://localhost:5000/Customer/" + customer.Id);
+        if (result?.IsSuccessStatusCode ?? false)
+        {
+            _navigationManager.NavigateTo("list", true);
+        }
+        else
+        {
+            var json = result.Content.ReadAsStringAsync().Result;
+            var obj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            string message = (string)obj["message"];
+            Message = message;
+        }
+    }
+}

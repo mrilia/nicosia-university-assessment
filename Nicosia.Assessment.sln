@@ -1,0 +1,108 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32505.173
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.UnitTests", "Nicosia.Assessment.UnitTests\Nicosia.Assessment.UnitTests.csproj", "{00E0E714-1EB4-4B62-950F-AE7C3BFD6766}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.Shared", "Nicosia.Assessment.Shared\Nicosia.Assessment.Shared.csproj", "{661369DC-0F78-4889-BA3B-639513A49789}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{668A2F8A-D003-4081-8F42-07925D23398D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{E0490B91-B6C7-402D-AAC3-9BD146536463}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{E6B52426-1F79-4777-BF58-9BB21DED7C90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{8233ECB0-FFC0-4004-9032-55282FBEF763}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D8F51CA4-B89B-49FA-B6B3-8F31F884A78B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{54A0145C-AC8D-46AA-B17D-285A610F8D04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BBFAB54E-CCBB-40F0-B83C-FCC7D021C6B1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BDAF9F30-948D-4DDD-BAE9-EB3439A3AC78}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.Application", "Nicosia.Assessment.Application\Nicosia.Assessment.Application.csproj", "{9350D752-E201-442D-954D-9125823B19CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.Domain", "Nicosia.Assessment.Domain\Nicosia.Assessment.Domain.csproj", "{F0E6B19D-A05F-450E-995B-0F46D160EB32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.Persistence", "Nicosia.Assessment.Persistence\Nicosia.Assessment.Persistence.csproj", "{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.AcceptanceTests", "Nicosia.Assessment.AcceptanceTests\Nicosia.Assessment.AcceptanceTests.csproj", "{2F5726B3-9E8E-4007-80EA-B98BEC85D30A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.WebUI", "Nicosia.Assessment.WebUI\Nicosia.Assessment.WebUI.csproj", "{39C3F12B-A831-4BC7-AB57-072215C59322}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.WebApi", "Nicosia.Assessment.WebApi\Nicosia.Assessment.WebApi.csproj", "{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B0EC865-0F6C-4E58-AC70-1D28E520E595}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+		Nicosia.Assessment.DotSettings = Nicosia.Assessment.DotSettings
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00E0E714-1EB4-4B62-950F-AE7C3BFD6766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E0E714-1EB4-4B62-950F-AE7C3BFD6766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E0E714-1EB4-4B62-950F-AE7C3BFD6766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00E0E714-1EB4-4B62-950F-AE7C3BFD6766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{661369DC-0F78-4889-BA3B-639513A49789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661369DC-0F78-4889-BA3B-639513A49789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661369DC-0F78-4889-BA3B-639513A49789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661369DC-0F78-4889-BA3B-639513A49789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9350D752-E201-442D-954D-9125823B19CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9350D752-E201-442D-954D-9125823B19CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9350D752-E201-442D-954D-9125823B19CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9350D752-E201-442D-954D-9125823B19CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E6B19D-A05F-450E-995B-0F46D160EB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E6B19D-A05F-450E-995B-0F46D160EB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E6B19D-A05F-450E-995B-0F46D160EB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E6B19D-A05F-450E-995B-0F46D160EB32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C3F12B-A831-4BC7-AB57-072215C59322}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C3F12B-A831-4BC7-AB57-072215C59322}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C3F12B-A831-4BC7-AB57-072215C59322}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C3F12B-A831-4BC7-AB57-072215C59322}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{00E0E714-1EB4-4B62-950F-AE7C3BFD6766} = {BDAF9F30-948D-4DDD-BAE9-EB3439A3AC78}
+		{661369DC-0F78-4889-BA3B-639513A49789} = {BBFAB54E-CCBB-40F0-B83C-FCC7D021C6B1}
+		{E6B52426-1F79-4777-BF58-9BB21DED7C90} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{8233ECB0-FFC0-4004-9032-55282FBEF763} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{D8F51CA4-B89B-49FA-B6B3-8F31F884A78B} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{54A0145C-AC8D-46AA-B17D-285A610F8D04} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{BBFAB54E-CCBB-40F0-B83C-FCC7D021C6B1} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{BDAF9F30-948D-4DDD-BAE9-EB3439A3AC78} = {668A2F8A-D003-4081-8F42-07925D23398D}
+		{9350D752-E201-442D-954D-9125823B19CE} = {8233ECB0-FFC0-4004-9032-55282FBEF763}
+		{F0E6B19D-A05F-450E-995B-0F46D160EB32} = {D8F51CA4-B89B-49FA-B6B3-8F31F884A78B}
+		{491BAD3D-3FDD-4C99-89A6-7F0B2674D25E} = {54A0145C-AC8D-46AA-B17D-285A610F8D04}
+		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A} = {BDAF9F30-948D-4DDD-BAE9-EB3439A3AC78}
+		{39C3F12B-A831-4BC7-AB57-072215C59322} = {E0490B91-B6C7-402D-AAC3-9BD146536463}
+		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB} = {E6B52426-1F79-4777-BF58-9BB21DED7C90}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}
+	EndGlobalSection
+EndGlobal

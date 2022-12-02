@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="IbanNet" Version="5.7.1" />
+		<PackageReference Include="libphonenumber-csharp" Version="8.13.1" />
+	</ItemGroup>
+
+</Project>

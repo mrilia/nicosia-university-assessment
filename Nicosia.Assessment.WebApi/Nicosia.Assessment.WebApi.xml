@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nicosia.Assessment.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.AddNew(Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer.AddNewCustomerCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new customer
+            Sample Phone Number: 044 668 18 00
+            Sample Bank Account Number: NL91ABNA0417164300
+            </summary>
+            <param name="addNewCustomerCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create customer successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Get(System.UInt64,System.Threading.CancellationToken)">
+            <summary>
+            Customer Info
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Customer info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If customer not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Customers 
+            </summary>
+            <param name="email"></param>
+            <param name="cancellationToken"></param>
+            <returns> Customers list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Delete(System.UInt64,System.Threading.CancellationToken)">
+            <summary>
+            Delete Customer
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If customer not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Update(Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer.UpdateCustomerCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Customer
+            </summary>
+            <param name="updateCustomerCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update customer successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="T:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware">
+            <summary>
+             OnExceptionMiddleware , Produce Custom message during Internal Server Exception
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware.#ctor(Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="env"></param>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

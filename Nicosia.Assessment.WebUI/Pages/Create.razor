@@ -1,0 +1,98 @@
+﻿@page "/create/{id:long}"
+@page "/create"
+
+<h1 class="bg-info text-white">@Title</h1>
+<h2 class="p-2">@Message</h2>
+
+<hr />
+@using Nicosia.Assessment.Presentation.Front.Models
+@inject HttpClient Http
+@inject NavigationManager _navigationManager
+
+<EditForm Model="_customerData" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>First Name</label>
+        <ValidationMessage For="@(() => _customerData.Firstname)" />
+        <InputText class="form-control col-md-3" @bind-Value="_customerData.Firstname" />
+    </div>
+    <div class="form-group">
+        <label>Last Name</label>
+        <ValidationMessage For="@(() => _customerData.Lastname)" />
+        <InputText class="form-control col-md-3" @bind-Value="_customerData.Lastname" />
+    </div>
+    <div class="form-group">
+        <label>Date Of Birth</label>
+        <ValidationMessage For="@(() => _customerData.DateOfBirth)" />
+        <InputDate class="form-control col-md-3" @bind-Value="_customerData.DateOfBirth" />
+    </div>
+    <div class="form-group">
+        <label>Phone Number</label>
+        <ValidationMessage For="@(() => _customerData.PhoneNumber)" />
+        <InputText class="form-control col-md-3" @bind-Value="_customerData.PhoneNumber" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <ValidationMessage For="@(() => _customerData.Email)" />
+        <InputText class="form-control col-md-3" @bind-Value="_customerData.Email" />
+    </div>
+    <div class="form-group">
+        <label>Bank Account Number</label>
+        <ValidationMessage For="@(() => _customerData.BankAccountNumber)" />
+        <InputText class="form-control col-md-3" @bind-Value="_customerData.BankAccountNumber" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public long Id { get; set; }
+
+    public string Message { get; set; } = "";
+    public string Title { get; set; } = "";
+    private CustomerData _customerData = new CustomerData();
+    public async void HandleValidSubmit()
+    {
+        var result = new HttpResponseMessage();
+        if (Id == 0)
+        {
+            result = await Http.PostAsJsonAsync("http://localhost:5000/Customer", _customerData);
+        }
+        else
+        {
+            result = await Http.PutAsJsonAsync("http://localhost:5000/Customer", _customerData);
+        }
+
+        if (result?.IsSuccessStatusCode ?? false)
+        {
+            _navigationManager.NavigateTo("/list");
+        }
+        else
+        {
+            var json = result.Content.ReadAsStringAsync().Result;
+            var obj = Newtonsoft.Json.Linq.JObject.Parse(json);
+            string message = (string)obj["message"];
+            Message = message;
+        }
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        if (Id != 0)
+        {
+            Title = "Update Customer";
+            _customerData = await Http.GetFromJsonAsync<CustomerData>("http://localhost:5000/Customer/" + Id);
+        }
+        else
+        {
+            Title = "Create Customer";
+        }
+    }
+
+    public void HandleInvalidSubmit() => Message = "Invalid Data Submitted";
+
+ }
