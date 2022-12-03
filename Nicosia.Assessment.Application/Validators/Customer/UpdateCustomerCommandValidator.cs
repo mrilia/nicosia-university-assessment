@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using FluentValidation;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Shared.Validators;
 
 namespace Nicosia.Assessment.Application.Validators.Customer
 {
-    public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
+    public class UpdateCustomerCommandValidator : AbstractValidator<UpdateStudentCommand>
     {
-        private readonly ICustomerContext _context;
+        private readonly IStudentContext _context;
 
-        public UpdateCustomerCommandValidator(ICustomerContext context)
+        public UpdateCustomerCommandValidator(IStudentContext context)
         {
             _context = context;
             //CascadeMode = CascadeMode.Stop;
@@ -48,9 +48,9 @@ namespace Nicosia.Assessment.Application.Validators.Customer
                 .Must(ValidPhoneNumberFormat).WithMessage(ResponseMessage.PhoneNumberNotValid).WithErrorCode("101");
         }
 
-        private bool EmailNotExists(UpdateCustomerCommand customerToCheck)
+        private bool EmailNotExists(UpdateStudentCommand customerToCheck)
         {
-            if (_context.Customers.Any(x => x.Id != customerToCheck.Id &&
+            if (_context.Students.Any(x => x.Id != customerToCheck.Id &&
                                                 x.Email.Replace(" ", "").ToLower() == customerToCheck.Email.Replace(" ", "").ToLower()))
                 return false;
 
@@ -72,13 +72,12 @@ namespace Nicosia.Assessment.Application.Validators.Customer
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);
         }
 
-        private bool CustomerNotExists(UpdateCustomerCommand customerToCheck)
+        private bool CustomerNotExists(UpdateStudentCommand customerToCheck)
         {
-            if (_context.Customers.Any(x =>
+            if (_context.Students.Any(x =>
                         x.Id != customerToCheck.Id &&
                         x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower() &&
-                        x.DateOfBirth == customerToCheck.DateOfBirth))
+                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower()))
                 return false;
 
             return true;

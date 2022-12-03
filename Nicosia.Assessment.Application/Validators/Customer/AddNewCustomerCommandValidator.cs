@@ -1,17 +1,17 @@
 ﻿using FluentValidation;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Shared.Validators;
 using System.Linq;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 
 namespace Nicosia.Assessment.Application.Validators.Customer
 {
     public class AddNewCustomerCommandValidator : AbstractValidator<AddNewCustomerCommand>
     {
-        private readonly ICustomerContext _context;
+        private readonly IDbContext _context;
 
-        public AddNewCustomerCommandValidator(ICustomerContext context)
+        public AddNewCustomerCommandValidator(IDbContext context)
         {
             _context = context;
             //CascadeMode = CascadeMode.Stop;
@@ -50,7 +50,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
 
         private bool EmailNotExists(string emailToCheck)
         {
-            if (_context.Customers.Any(x => x.Email.Replace(" ", "").ToLower() == emailToCheck.Replace(" ", "").ToLower()))
+            if (_context.Students.Any(x => x.Email.Replace(" ", "").ToLower() == emailToCheck.Replace(" ", "").ToLower()))
                 return false;
 
             return true;
@@ -73,10 +73,9 @@ namespace Nicosia.Assessment.Application.Validators.Customer
 
         private bool CustomerNotExists(AddNewCustomerCommand customerToCheck)
         {
-            if (_context.Customers.Any(x =>
+            if (_context.Students.Any(x =>
                         x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower() &&
-                        x.DateOfBirth == customerToCheck.DateOfBirth))
+                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower()))
                 return false;
 
             return true;

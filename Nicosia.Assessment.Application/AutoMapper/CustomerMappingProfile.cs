@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer;
-using Nicosia.Assessment.Application.Handlers.Customer.Dto;
-using Nicosia.Assessment.Domain.Models.Customer;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
+using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.AutoMapper
 {
@@ -10,12 +10,12 @@ namespace Nicosia.Assessment.Application.AutoMapper
     {
         public CustomerMappingProfile()
         {
-            CreateMap<Customer, CustomerDto>()
+            CreateMap<Student, StudentDto>()
                  //.ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => String.Format("{0:#(###) ###-####}", src.PhoneNumber)));
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
-            CreateMap<AddNewCustomerCommand, Customer>()
+            CreateMap<AddNewCustomerCommand, Student>()
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => ulong.Parse(src.PhoneNumber.Replace(" ", "").Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", ""))));
-            CreateMap<UpdateCustomerCommand, Customer>()
+            CreateMap<UpdateStudentCommand, Student>()
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => ulong.Parse(src.PhoneNumber.Replace(" ", "").Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", ""))));
         }
     }

@@ -28,7 +28,7 @@ namespace Nicosia.Assessment.WebApi.Installer
 
             services.AddFluentValidationAutoValidation();
             services.AddFluentValidationClientsideAdapters();
-            services.AddValidatorsFromAssemblyContaining<ICustomerContext>();
+            services.AddValidatorsFromAssemblyContaining<IStudentContext>();
 
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>());
 

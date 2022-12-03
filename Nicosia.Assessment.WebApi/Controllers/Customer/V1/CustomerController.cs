@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.DeleteCustomer;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer;
-using Nicosia.Assessment.Application.Handlers.Customer.Dto;
-using Nicosia.Assessment.Application.Handlers.Customer.Queries;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.DeleteStudent;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
+using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
 
 namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
@@ -31,7 +32,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         /// <response code="201">if create customer successfully </response>
         /// <response code="400">If Validation Failed</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(CustomerDto), 201)]
+        [ProducesResponseType(typeof(StudentDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost]
@@ -57,13 +58,13 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         /// <response code="200">if every thing is ok </response>
         /// <response code="404">If customer not found</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(CustomerDto), 200)]
+        [ProducesResponseType(typeof(StudentDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("{id}", Name = "GetCustomerInfo")]
-        public async Task<IActionResult> Get(ulong id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetCustomerQuery { Id = id }, cancellationToken);
+            var result = await _mediator.Send(new GetStudentQuery { Id = id }, cancellationToken);
 
             return result.ApiResult;
         }
@@ -71,20 +72,20 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
 
 
         /// <summary>
-        /// List Of Customers 
+        /// List Of Students 
         /// </summary>
         /// <param name="email"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns> Customers list</returns>
+        /// <returns> Students list</returns>
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(List<CustomerDto>), 200)]
+        [ProducesResponseType(typeof(List<StudentDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("list")]
         public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetCustomersListQuery { Email = email }, cancellationToken));
+            => Ok(await _mediator.Send(new GetStudentListQuery { Email = email }, cancellationToken));
 
 
 
@@ -101,9 +102,9 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(ulong id, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new DeleteCustomerCommand { Id = id }, cancellationToken);
+            var result = await _mediator.Send(new DeleteStudentCommand { Id = id }, cancellationToken);
 
             if (result.Success == false)
                 return result.ApiResult;
@@ -127,7 +128,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPut]
-        public async Task<IActionResult> Update(UpdateCustomerCommand updateCustomerCommand,
+        public async Task<IActionResult> Update(UpdateStudentCommand updateCustomerCommand,
             CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(updateCustomerCommand, cancellationToken);

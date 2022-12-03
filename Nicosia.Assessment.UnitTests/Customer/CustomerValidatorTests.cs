@@ -1,5 +1,5 @@
 ﻿using FluentValidation.TestHelper;
-using Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Validators.Customer;
 using Nicosia.Assessment.Persistence.Context;
@@ -13,7 +13,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Customer
 
         public CustomerValidatorTests()
         {
-            ICustomerContext context = new CustomerContext();
+            IDbContext context = new SqliteDbContext();
             _validator = new AddNewCustomerCommandValidator(context);
         }
 

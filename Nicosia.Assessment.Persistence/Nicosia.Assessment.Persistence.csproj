@@ -23,4 +23,8 @@
 		<ProjectReference Include="..\Nicosia.Assessment.Security\Nicosia.Assessment.Security.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Migrations\" />
+	</ItemGroup>
+
 </Project>
