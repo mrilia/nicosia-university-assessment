@@ -1,7 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
 using Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;

@@ -4,7 +4,7 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.AddNew(Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer.AddNewCustomerCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.AddNew(Nicosia.Assessment.Application.Handlers.Customer.Commands.AddNewCustomer.AddNewCustomerCommand,System.Threading.CancellationToken)">
             <summary>
             Add new customer
             Sample Phone Number: 044 668 18 00
@@ -16,7 +16,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Get(System.UInt64,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Get(System.UInt64,System.Threading.CancellationToken)">
             <summary>
             Customer Info
             </summary>
@@ -27,7 +27,7 @@
             <response code="404">If customer not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Customers 
             </summary>
@@ -38,7 +38,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Delete(System.UInt64,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Delete(System.UInt64,System.Threading.CancellationToken)">
             <summary>
             Delete Customer
             </summary>
@@ -48,7 +48,7 @@
             <response code="404">If customer not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.CustomerController.Update(Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer.UpdateCustomerCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Update(Nicosia.Assessment.Application.Handlers.Customer.Commands.UpdateCustomer.UpdateCustomerCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Customer
             </summary>

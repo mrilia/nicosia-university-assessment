@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Persistence.Context;
+using Nicosia.Assessment.Security.Authorization;
 
 namespace Nicosia.Assessment.Persistence
 {

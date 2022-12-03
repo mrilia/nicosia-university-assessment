@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<UserSecretsId>c81b6a0d-5b4c-46ef-83f2-e717e9413100</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
@@ -21,6 +21,8 @@
 	<ItemGroup>
 		<PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,11 +31,13 @@
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.4.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.4.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Nicosia.Assessment.Application\Nicosia.Assessment.Application.csproj" />
 	  <ProjectReference Include="..\Nicosia.Assessment.Persistence\Nicosia.Assessment.Persistence.csproj" />
+	  <ProjectReference Include="..\Nicosia.Assessment.Security\Nicosia.Assessment.Security.csproj" />
 	  <ProjectReference Include="..\Nicosia.Assessment.Shared\Nicosia.Assessment.Shared.csproj" />
 	</ItemGroup>
 

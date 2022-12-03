@@ -44,6 +44,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nicosia.Assessment.Security", "Nicosia.Assessment.Security\Nicosia.Assessment.Security.csproj", "{CE761BEE-41AB-49B3-9E00-B23B9C2140A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE761BEE-41AB-49B3-9E00-B23B9C2140A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE761BEE-41AB-49B3-9E00-B23B9C2140A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE761BEE-41AB-49B3-9E00-B23B9C2140A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE761BEE-41AB-49B3-9E00-B23B9C2140A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{2F5726B3-9E8E-4007-80EA-B98BEC85D30A} = {BDAF9F30-948D-4DDD-BAE9-EB3439A3AC78}
 		{39C3F12B-A831-4BC7-AB57-072215C59322} = {E0490B91-B6C7-402D-AAC3-9BD146536463}
 		{237E68A6-000A-41DF-82A9-8AC29E4D4CDB} = {E6B52426-1F79-4777-BF58-9BB21DED7C90}
+		{CE761BEE-41AB-49B3-9E00-B23B9C2140A6} = {E6B52426-1F79-4777-BF58-9BB21DED7C90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

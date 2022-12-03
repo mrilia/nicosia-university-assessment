@@ -10,7 +10,7 @@ using Nicosia.Assessment.Application.Handlers.Customer.Dto;
 using Nicosia.Assessment.Application.Handlers.Customer.Queries;
 using Nicosia.Assessment.Application.Messages;
 
-namespace Nicosia.Assessment.WebApi.Controllers.Customer
+namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
 {
     public class CustomerController : BaseController
     {

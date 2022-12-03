@@ -6,6 +6,7 @@ using Nicosia.Assessment.WebApi.Installer;
 using Nicosia.Assessment.Application;
 using Nicosia.Assessment.Persistence;
 using Nicosia.Assessment.Persistence.Context;
+using Nicosia.Assessment.WebApi.Middleware;
 
 namespace Nicosia.Assessment.WebApi
 {
@@ -33,9 +34,9 @@ namespace Nicosia.Assessment.WebApi
         {
             // if (env.IsDevelopment())
             // {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nicosia.Assessment.WebApi v1"));
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nicosia.Assessment.WebApi v1"));
             // }
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
@@ -47,6 +48,8 @@ namespace Nicosia.Assessment.WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("MyPolicy");
+            //app.UseMiddleware<JwtMiddleware>();
+
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

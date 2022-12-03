@@ -37,7 +37,6 @@ namespace Nicosia.Assessment.WebApi.Installer
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
@@ -51,8 +50,30 @@ namespace Nicosia.Assessment.WebApi.Installer
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
 
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
-            });
 
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "Please insert JWT with Bearer into field",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                } });
+
+                options.CustomSchemaIds((Type x) => x.FullName);
+            });
         }
     }
 }
