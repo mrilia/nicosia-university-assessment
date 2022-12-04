@@ -18,6 +18,10 @@ namespace Nicosia.Assessment.WebApi.Installer
     {
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
+            services
+                .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+                .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
+
             services.AddMemoryCache();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -33,12 +37,18 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>());
 
 
-            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new StudentMappingProfile()); });
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new StudentMappingProfile());
+                mc.AddProfile(new LecturerMappingProfile());
+            });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
             services.AddSwaggerGen(options =>
             {
+                options.UseDateOnlyTimeOnlyStringConverters();
+
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Nicosia Assessment Project",

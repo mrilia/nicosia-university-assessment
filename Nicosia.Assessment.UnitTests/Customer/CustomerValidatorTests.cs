@@ -1,6 +1,6 @@
 ﻿using FluentValidation.TestHelper;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
-using Nicosia.Assessment.Application.Validators.Customer;
+using Nicosia.Assessment.Application.Validators.Student;
 using Nicosia.Assessment.Persistence.Context;
 using Xunit;
 

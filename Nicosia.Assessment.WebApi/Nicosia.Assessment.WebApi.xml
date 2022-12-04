@@ -4,6 +4,60 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.AddNew(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer.AddNewLecturerCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new lecturer
+            Sample Phone Number: 044 668 18 00
+            </summary>
+            <param name="addNewLecturerCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create lecturer successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Lecturer Info 
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Lecturer info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If lecturer not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Lecturers 
+            </summary>
+            <param name="email"></param>
+            <param name="cancellationToken"></param>
+            <returns> Lecturers list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Delete Lecturer
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If lecturer not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Update(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer.UpdateLecturerCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Lecturer
+            </summary>
+            <param name="updateLecturerCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update lecturer successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Add new student

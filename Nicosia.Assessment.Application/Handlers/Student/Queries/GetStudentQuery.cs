@@ -35,7 +35,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 
             if (customer is null)
                 return Result<StudentDto>.Failed(new BadRequestObjectResult
-                (new ApiMessage(ResponseMessage.CustomerNotFound)));
+                (new ApiMessage(ResponseMessage.StudentNotFound)));
 
             return Result<StudentDto>.SuccessFul(_mapper.Map<StudentDto>(customer));
         }

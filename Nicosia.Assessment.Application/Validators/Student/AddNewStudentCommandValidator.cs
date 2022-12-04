@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using FluentValidation;
-using Nicosia.Assessment.Application.Messages;
-using Nicosia.Assessment.Shared.Validators;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Shared.Validators;
 
-namespace Nicosia.Assessment.Application.Validators.Customer
+namespace Nicosia.Assessment.Application.Validators.Student
 {
     public class AddNewStudentCommandValidator : AbstractValidator<AddNewStudentCommand>
     {
@@ -25,7 +25,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
             
             RuleFor(dto => dto)
-                .Must(CustomerNotExists).WithMessage(ResponseMessage.CustomerExists).WithErrorCode("201");
+                .Must(CustomerNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201");
 
             RuleFor(dto => dto.Email)
                 .NotEmpty().WithMessage(ResponseMessage.EmailIsRequired)
@@ -61,7 +61,8 @@ namespace Nicosia.Assessment.Application.Validators.Customer
         {
             if (_context.Students.Any(x =>
                         x.Firstname.Replace(" ", "").ToLower() == studentToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == studentToCheck.Lastname.Replace(" ", "").ToLower()))
+                        x.Lastname.Replace(" ", "").ToLower() == studentToCheck.Lastname.Replace(" ", "").ToLower() &&
+                        x.DateOfBirth == studentToCheck.DateOfBirth))
                 return false;
 
             return true;

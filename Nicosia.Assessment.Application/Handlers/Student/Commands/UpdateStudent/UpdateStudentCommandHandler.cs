@@ -27,7 +27,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent
 
             if (customerToUpdate is null)
                 return Result.Failed(new BadRequestObjectResult
-                (new ApiMessage(ResponseMessage.CustomerNotFound)));
+                (new ApiMessage(ResponseMessage.StudentNotFound)));
 
             _mapper.Map(request, customerToUpdate);
 

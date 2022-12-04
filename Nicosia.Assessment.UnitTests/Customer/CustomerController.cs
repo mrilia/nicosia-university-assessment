@@ -22,7 +22,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Customer
 
             mockData.Setup(x => x.Send(It.IsAny<GetStudentQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(
-                    Result<StudentDto>.Failed(new NotFoundObjectResult(new ApiMessage(ResponseMessage.CustomerNotFound))));
+                    Result<StudentDto>.Failed(new NotFoundObjectResult(new ApiMessage(ResponseMessage.StudentNotFound))));
 
             using var controller = new BaseConfiguration().WithMediatorService(mockData.Object).BuildCustomerController();
 

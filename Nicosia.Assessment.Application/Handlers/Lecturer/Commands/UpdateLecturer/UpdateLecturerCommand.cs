@@ -2,11 +2,11 @@
 using MediatR;
 using Nicosia.Assessment.Application.Results;
 
-namespace Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent
+namespace Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer
 {
-    public class UpdateStudentCommand : IRequest<Result>
+    public class UpdateLecturerCommand : IRequest<Result>
     {
-        public Guid StudentId { get; set; }
+        public Guid LecturerId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateOnly DateOfBirth { get; set; }

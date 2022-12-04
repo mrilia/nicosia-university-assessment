@@ -12,6 +12,7 @@ namespace Nicosia.Assessment.Persistence.Configurations
             builder.HasKey(e => e.LecturerId);
             builder.Property(e => e.Firstname).IsRequired();
             builder.Property(e => e.Lastname).IsRequired();
+            builder.Property(e => e.DateOfBirth).IsRequired();
             builder.Property(e => e.Email).IsRequired();
             builder.Property(e => e.PhoneNumber).IsRequired();
             builder.Property(e => e.SocialInsuranceNumber);

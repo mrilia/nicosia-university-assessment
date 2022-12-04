@@ -5,13 +5,13 @@ using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Shared.Validators;
 
-namespace Nicosia.Assessment.Application.Validators.Customer
+namespace Nicosia.Assessment.Application.Validators.Student
 {
-    public class UpdateCustomerCommandValidator : AbstractValidator<UpdateStudentCommand>
+    public class UpdateStudentCommandValidator : AbstractValidator<UpdateStudentCommand>
     {
         private readonly IStudentContext _context;
 
-        public UpdateCustomerCommandValidator(IStudentContext context)
+        public UpdateStudentCommandValidator(IStudentContext context)
         {
             _context = context;
             //CascadeMode = CascadeMode.Stop;
@@ -25,14 +25,14 @@ namespace Nicosia.Assessment.Application.Validators.Customer
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
 
             RuleFor(dto => dto)
-                .Must(CustomerNotExists).WithMessage(ResponseMessage.CustomerExists).WithErrorCode("201")
+                .Must(CustomerNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201")
                 .Must(EmailNotExists).WithMessage(ResponseMessage.EmailExists).WithErrorCode("202");
-            
+
             RuleFor(dto => dto.Email)
                 .NotEmpty().WithMessage(ResponseMessage.EmailIsRequired)
                 .NotNull().WithMessage(ResponseMessage.EmailIsRequired)
                 .Must(ValidEmailFormat).WithMessage(ResponseMessage.EmailNotValid).WithErrorCode("102");
-            
+
             RuleFor(dto => dto.PhoneNumber)
                 .NotEmpty().WithMessage(ResponseMessage.PhoneNumberIsRequired)
                 .NotNull().WithMessage(ResponseMessage.PhoneNumberIsRequired)
@@ -53,11 +53,6 @@ namespace Nicosia.Assessment.Application.Validators.Customer
             return EmailValidator.IsValid(emailToCheck);
         }
 
-        private bool ValidBankAccountFormat(string bankAccountToCheck)
-        {
-            return BankAccountValidator.IsValid(bankAccountToCheck);
-        }
-
         private bool ValidPhoneNumberFormat(string phoneNumberToCheck)
         {
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);
@@ -68,7 +63,8 @@ namespace Nicosia.Assessment.Application.Validators.Customer
             if (_context.Students.Any(x =>
                         x.StudentId != customerToCheck.StudentId &&
                         x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower()))
+                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower() &&
+                        x.DateOfBirth == customerToCheck.DateOfBirth))
                 return false;
 
             return true;

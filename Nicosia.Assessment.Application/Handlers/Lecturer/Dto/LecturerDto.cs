@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Nicosia.Assessment.Application.Handlers.Student.Dto
+namespace Nicosia.Assessment.Application.Handlers.Lecturer.Dto
 {
-    public class StudentDto
+    public class LecturerDto
     {
-        public Guid StudentId { get; set; }
+        public Guid LecturerId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public DateOnly DateOfBirth { get; set; }
