@@ -4,7 +4,7 @@ public class UserContext : IUserContext
 {
     public Guid UserId { get; set; }
 
-    public string Username { get; set; }
+    public string Username { get; set; } = null!;
 
     public Role Role { get; set; }
 

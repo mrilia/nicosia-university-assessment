@@ -42,6 +42,7 @@ namespace Nicosia.Assessment.WebApi.Installer
                 mc.AddProfile(new StudentMappingProfile());
                 mc.AddProfile(new LecturerMappingProfile());
                 mc.AddProfile(new CourseMappingProfile());
+                mc.AddProfile(new PeriodMappingProfile());
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

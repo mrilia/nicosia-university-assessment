@@ -7,7 +7,6 @@
         <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.AddNew(Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse.AddNewCourseCommand,System.Threading.CancellationToken)">
             <summary>
             Add new Course
-            Sample Phone Number: 044 668 18 00
             </summary>
             <param name="addNewCourseCommand"></param>
             <param name="cancellationToken"></param>
@@ -108,6 +107,59 @@
             <param name="updateLecturerCommand"></param>
             <param name="cancellationToken"></param>
             <response code="204">if update lecturer successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.AddNew(Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod.AddNewPeriodCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new Period
+            </summary>
+            <param name="addNewPeriodCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create Period successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Period Info 
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Period info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If Period not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Periods 
+            </summary>
+            <param name="code"></param>
+            <param name="cancellationToken"></param>
+            <returns> Periods list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Delete Period
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If Period not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Update(Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod.UpdatePeriodCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Period
+            </summary>
+            <param name="updatePeriodCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update Period successfully </response>
             <response code="400">If Validation Failed</response>
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>

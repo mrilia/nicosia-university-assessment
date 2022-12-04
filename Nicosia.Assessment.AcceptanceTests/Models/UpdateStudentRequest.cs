@@ -14,7 +14,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Models
         public string? Lastname { get; set; }
 
         [JsonPropertyName("dateofbirth")]
-        public string DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
 
         [JsonPropertyName("phonenumber")]
         public string? PhoneNumber { get; set; }
