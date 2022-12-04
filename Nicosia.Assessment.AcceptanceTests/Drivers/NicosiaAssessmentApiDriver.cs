@@ -77,7 +77,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
 
             var studentToUpdate = new UpdateStudentRequest()
             {
-                Id = studentBeforUpdate.Id,
+                StudentId = studentBeforUpdate.StudentId,
                 Firstname = $"{studentBeforUpdate.Firstname}",
                 Lastname = $"{studentBeforUpdate.Lastname}",
                 Email = newEmail,
@@ -94,7 +94,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
         {
             var studentToDelete = await GetStudentByEmail(email);
 
-            var response = _httpClient.DeleteAsync($"student/{studentToDelete?.First().Id}").Result;
+            var response = _httpClient.DeleteAsync($"student/{studentToDelete?.First().StudentId}").Result;
 
             _scenarioContext["Responses"] = new List<HttpResponseMessage>() { response };
         }

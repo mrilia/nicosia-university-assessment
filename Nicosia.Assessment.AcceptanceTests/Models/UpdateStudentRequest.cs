@@ -5,7 +5,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Models
     public class UpdateStudentRequest
     {
         [JsonPropertyName("id")]
-        public ulong Id { get; set; }
+        public Guid StudentId { get; set; }
         
         [JsonPropertyName("firstname")]
         public string? Firstname { get; set; }
@@ -14,7 +14,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Models
         public string? Lastname { get; set; }
 
         [JsonPropertyName("dateofbirth")]
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
 
         [JsonPropertyName("phonenumber")]
         public string? PhoneNumber { get; set; }
