@@ -6,6 +6,9 @@ using Nicosia.Assessment.WebApi.Installer;
 using Nicosia.Assessment.Application;
 using Nicosia.Assessment.Persistence;
 using Nicosia.Assessment.Persistence.Context;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Nicosia.Assessment.Security.Cryptography;
 
 namespace Nicosia.Assessment.WebApi
 {
@@ -40,8 +43,10 @@ namespace Nicosia.Assessment.WebApi
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
-                var context = serviceScope?.ServiceProvider.GetRequiredService<SqliteDbContext>();
-                context?.Database.EnsureCreated();
+                var dbContext = serviceScope?.ServiceProvider.GetRequiredService<SqliteDbContext>();
+                dbContext?.Database.EnsureCreated();
+
+                dbContext?.SeedDefaultData().Wait();
             }
 
             app.UseHttpsRedirection();

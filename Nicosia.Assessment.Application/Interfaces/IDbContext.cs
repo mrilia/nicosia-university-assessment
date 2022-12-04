@@ -6,6 +6,7 @@ namespace Nicosia.Assessment.Application.Interfaces
     public interface IBaseContext
     {
         Task SaveAsync(CancellationToken cancellationToken);
+        Task SeedDefaultData();
         Task CloseConnection();
     }
 }

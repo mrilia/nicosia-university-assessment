@@ -7,6 +7,7 @@ using Nicosia.Assessment.Domain.Models.Course;
 using Nicosia.Assessment.Domain.Models.Period;
 using Nicosia.Assessment.Domain.Models.Section;
 using Nicosia.Assessment.Domain.Models.User;
+using Nicosia.Assessment.Persistence.Seed;
 
 namespace Nicosia.Assessment.Persistence.Context
 {
@@ -37,6 +38,11 @@ namespace Nicosia.Assessment.Persistence.Context
 
         public Task SaveAsync(CancellationToken cancellationToken) =>
             base.SaveChangesAsync(cancellationToken);
+
+        public Task SeedDefaultData()
+        {
+            return new DbContextSeed().SeedMigrationAsync(this);
+        }
 
         public Task CloseConnection() =>
             base.Database.CloseConnectionAsync();
