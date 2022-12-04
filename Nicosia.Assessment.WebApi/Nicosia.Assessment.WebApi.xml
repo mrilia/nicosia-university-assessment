@@ -136,7 +136,7 @@
             <summary>
             List Of Periods 
             </summary>
-            <param name="code"></param>
+            <param name="name"></param>
             <param name="cancellationToken"></param>
             <returns> Periods list</returns>
             <response code="200">if every thing is ok </response>

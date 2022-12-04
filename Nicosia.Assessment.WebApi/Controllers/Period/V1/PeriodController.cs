@@ -72,7 +72,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         /// <summary>
         /// List Of Periods 
         /// </summary>
-        /// <param name="code"></param>
+        /// <param name="name"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Periods list</returns>
         /// <response code="200">if every thing is ok </response>
@@ -82,8 +82,8 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string code, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetPeriodListQuery { Name = code }, cancellationToken));
+        public async Task<IActionResult> GetList(string name, CancellationToken cancellationToken)
+            => Ok(await _mediator.Send(new GetPeriodListQuery { Name = name }, cancellationToken));
 
 
 
