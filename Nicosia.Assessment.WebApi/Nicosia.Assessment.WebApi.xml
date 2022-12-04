@@ -4,30 +4,29 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
-            Add new customer
+            Add new student
             Sample Phone Number: 044 668 18 00
-            Sample Bank Account Number: NL91ABNA0417164300
             </summary>
             <param name="addNewStudentCommand"></param>
             <param name="cancellationToken"></param>
-            <response code="201">if create customer successfully </response>
+            <response code="201">if create student successfully </response>
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
-            Customer Info
+            Student Info 
             </summary>
             <param name="id"></param>
             <param name="cancellationToken"></param>
-            <returns> Customer info</returns>
+            <returns> Student info</returns>
             <response code="200">if every thing is ok </response>
-            <response code="404">If customer not found</response>
+            <response code="404">If student not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Students 
             </summary>
@@ -38,23 +37,23 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
-            Delete Customer
+            Delete Student
             </summary>
             <param name="id"></param>
             <param name="cancellationToken"></param>
             <response code="204">if delete successfully </response>
-            <response code="404">If customer not found</response>
+            <response code="404">If student not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Customer.V1.CustomerController.Update(Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent.UpdateStudentCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Update(Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent.UpdateStudentCommand,System.Threading.CancellationToken)">
             <summary>
-            Update  Customer
+            Update  Student
             </summary>
-            <param name="updateCustomerCommand"></param>
+            <param name="updateStudentCommand"></param>
             <param name="cancellationToken"></param>
-            <response code="204">if update customer successfully </response>
+            <response code="204">if update student successfully </response>
             <response code="400">If Validation Failed</response>
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>

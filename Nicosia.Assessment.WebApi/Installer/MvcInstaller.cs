@@ -33,7 +33,7 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>());
 
 
-            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new CustomerMappingProfile()); });
+            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new StudentMappingProfile()); });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 

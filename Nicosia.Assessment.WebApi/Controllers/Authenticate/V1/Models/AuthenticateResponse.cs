@@ -15,7 +15,7 @@
 //        {
 //            User = new UserDto
 //            {
-//                Id = authenticatedUserDto.Id,
+//                StudentId = authenticatedUserDto.StudentId,
 //                Email = authenticatedUserDto.Email,
 //                FirstName = authenticatedUserDto.FirstName,
 //                LastName = authenticatedUserDto.LastName,

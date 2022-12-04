@@ -38,7 +38,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent
 
         private async Task<Domain.Models.User.Student> GetCustomerAsync(UpdateStudentCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.Id, cancellationToken);
+            return await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.StudentId, cancellationToken);
         }
 
     }

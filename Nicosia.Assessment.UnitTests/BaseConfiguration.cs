@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Moq;
-using Nicosia.Assessment.WebApi.Controllers.Customer.V1;
+using Nicosia.Assessment.WebApi.Controllers.Student.V1;
 
 namespace Nicosia.Assessment.AcceptanceTests
 {
@@ -19,7 +19,7 @@ namespace Nicosia.Assessment.AcceptanceTests
             return this;
         }
 
-        internal CustomerController BuildCustomerController() => new(_mediator);
+        internal StudentController BuildCustomerController() => new(_mediator);
 
     }
 }

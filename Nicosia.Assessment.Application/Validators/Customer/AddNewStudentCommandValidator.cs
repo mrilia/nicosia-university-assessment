@@ -23,11 +23,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
             RuleFor(dto => dto.Lastname)
                 .NotEmpty().WithMessage(ResponseMessage.LastnameIsRequired)
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
-
-            RuleFor(dto => dto.DateOfBirth)
-                .NotEmpty().WithMessage(ResponseMessage.DateOfBirthIsRequired)
-                .NotNull().WithMessage(ResponseMessage.DateOfBirthIsRequired);
-
+            
             RuleFor(dto => dto)
                 .Must(CustomerNotExists).WithMessage(ResponseMessage.CustomerExists).WithErrorCode("201");
 
@@ -36,12 +32,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
                 .NotNull().WithMessage(ResponseMessage.EmailIsRequired)
                 .Must(ValidEmailFormat).WithMessage(ResponseMessage.EmailNotValid).WithErrorCode("102")
                 .Must(EmailNotExists).WithMessage(ResponseMessage.EmailExists).WithErrorCode("202");
-
-            RuleFor(dto => dto.BankAccountNumber)
-                .NotEmpty().WithMessage(ResponseMessage.BankAccountNumberIsRequired)
-                .NotNull().WithMessage(ResponseMessage.BankAccountNumberIsRequired)
-                .Must(ValidBankAccountFormat).WithMessage(ResponseMessage.BankAccountNumberNotValid).WithErrorCode("103");
-
+            
             RuleFor(dto => dto.PhoneNumber)
                 .NotEmpty().WithMessage(ResponseMessage.PhoneNumberIsRequired)
                 .NotNull().WithMessage(ResponseMessage.PhoneNumberIsRequired)
@@ -60,12 +51,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
         {
             return EmailValidator.IsValid(emailToCheck);
         }
-
-        private bool ValidBankAccountFormat(string bankAccountToCheck)
-        {
-            return BankAccountValidator.IsValid(bankAccountToCheck);
-        }
-
+        
         private bool ValidPhoneNumberFormat(string phoneNumberToCheck)
         {
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);

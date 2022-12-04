@@ -35,7 +35,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Commands.DeleteStudent
 
         private async Task<Domain.Models.User.Student> GetCustomerAsync(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
-            return await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.Id, cancellationToken);
+            return await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.StudentId, cancellationToken);
         }
 
     }
