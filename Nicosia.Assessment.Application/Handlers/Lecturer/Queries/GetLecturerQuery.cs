@@ -14,7 +14,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
 {
     public class GetLecturerQuery : IRequest<Result<LecturerDto>>
     {
-        public Guid Id { get; set; }
+        public Guid LecturerId { get; set; }
     }
 
     public class GetLecturerQueryHandler : IRequestHandler<GetLecturerQuery, Result<LecturerDto>>
@@ -30,7 +30,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
 
         public async Task<Result<LecturerDto>> Handle(GetLecturerQuery request, CancellationToken cancellationToken)
         {
-            var lecturer = await _context.Lecturers.SingleOrDefaultAsync(x => x.LecturerId == request.Id,
+            var lecturer = await _context.Lecturers.SingleOrDefaultAsync(x => x.LecturerId == request.LecturerId,
                 cancellationToken);
 
             if (lecturer is null)

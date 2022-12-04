@@ -9,39 +9,39 @@
 @inject HttpClient Http
 @inject NavigationManager _navigationManager
 
-<EditForm Model="_customerData" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="_studentData" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="form-group">
         <label>First Name</label>
-        <ValidationMessage For="@(() => _customerData.Firstname)" />
-        <InputText class="form-control col-md-3" @bind-Value="_customerData.Firstname" />
+        <ValidationMessage For="@(() => _studentData.Firstname)" />
+        <InputText class="form-control col-md-3" @bind-Value="_studentData.Firstname" />
     </div>
     <div class="form-group">
         <label>Last Name</label>
-        <ValidationMessage For="@(() => _customerData.Lastname)" />
-        <InputText class="form-control col-md-3" @bind-Value="_customerData.Lastname" />
+        <ValidationMessage For="@(() => _studentData.Lastname)" />
+        <InputText class="form-control col-md-3" @bind-Value="_studentData.Lastname" />
     </div>
     <div class="form-group">
         <label>Date Of Birth</label>
-        <ValidationMessage For="@(() => _customerData.DateOfBirth)" />
-        <InputDate class="form-control col-md-3" @bind-Value="_customerData.DateOfBirth" />
+        <ValidationMessage For="@(() => _studentData.DateOfBirth)" />
+        <InputDate class="form-control col-md-3" @bind-Value="_studentData.DateOfBirth" />
     </div>
     <div class="form-group">
         <label>Phone Number</label>
-        <ValidationMessage For="@(() => _customerData.PhoneNumber)" />
-        <InputText class="form-control col-md-3" @bind-Value="_customerData.PhoneNumber" />
+        <ValidationMessage For="@(() => _studentData.PhoneNumber)" />
+        <InputText class="form-control col-md-3" @bind-Value="_studentData.PhoneNumber" />
     </div>
     <div class="form-group">
         <label>Email</label>
-        <ValidationMessage For="@(() => _customerData.Email)" />
-        <InputText class="form-control col-md-3" @bind-Value="_customerData.Email" />
+        <ValidationMessage For="@(() => _studentData.Email)" />
+        <InputText class="form-control col-md-3" @bind-Value="_studentData.Email" />
     </div>
     <div class="form-group">
         <label>Bank Account Number</label>
-        <ValidationMessage For="@(() => _customerData.BankAccountNumber)" />
-        <InputText class="form-control col-md-3" @bind-Value="_customerData.BankAccountNumber" />
+        <ValidationMessage For="@(() => _studentData.BankAccountNumber)" />
+        <InputText class="form-control col-md-3" @bind-Value="_studentData.BankAccountNumber" />
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -54,17 +54,17 @@
 
     public string Message { get; set; } = "";
     public string Title { get; set; } = "";
-    private CustomerData _customerData = new CustomerData();
+    private StudentData _studentData = new StudentData();
     public async void HandleValidSubmit()
     {
         var result = new HttpResponseMessage();
         if (Id == 0)
         {
-            result = await Http.PostAsJsonAsync("http://localhost:5000/Customer", _customerData);
+            result = await Http.PostAsJsonAsync("http://localhost:5000/Student", _studentData);
         }
         else
         {
-            result = await Http.PutAsJsonAsync("http://localhost:5000/Customer", _customerData);
+            result = await Http.PutAsJsonAsync("http://localhost:5000/Student", _studentData);
         }
 
         if (result?.IsSuccessStatusCode ?? false)
@@ -84,12 +84,12 @@
     {
         if (Id != 0)
         {
-            Title = "Update Customer";
-            _customerData = await Http.GetFromJsonAsync<CustomerData>("http://localhost:5000/Customer/" + Id);
+            Title = "Update Student";
+            _studentData = await Http.GetFromJsonAsync<StudentData>("http://localhost:5000/Student/" + Id);
         }
         else
         {
-            Title = "Create Customer";
+            Title = "Create Student";
         }
     }
 

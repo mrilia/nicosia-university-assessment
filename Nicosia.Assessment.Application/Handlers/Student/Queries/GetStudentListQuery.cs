@@ -16,12 +16,12 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
     }
 
 
-    public class GetCustomerListQueryHandler : IRequestHandler<GetStudentListQuery, List<StudentDto>>
+    public class GetStudentListQueryHandler : IRequestHandler<GetStudentListQuery, List<StudentDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
 
-        public GetCustomerListQueryHandler(IStudentContext context, IMapper mapper)
+        public GetStudentListQueryHandler(IStudentContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -29,14 +29,14 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 
         public async Task<List<StudentDto>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Models.User.Student> customers = _context.Students;
+            IQueryable<Domain.Models.User.Student> students = _context.Students;
 
             if (!string.IsNullOrWhiteSpace(request.Email))
             {
-                customers = customers.Where(x => x.Email.ToLower().Contains(request.Email.ToLower()));
+                students = students.Where(x => x.Email.ToLower().Contains(request.Email.ToLower()));
             }
 
-            return _mapper.Map<List<StudentDto>>(await customers.ToListAsync(cancellationToken));
+            return _mapper.Map<List<StudentDto>>(await students.ToListAsync(cancellationToken));
         }
     }
 }

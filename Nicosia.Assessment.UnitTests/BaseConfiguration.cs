@@ -19,7 +19,7 @@ namespace Nicosia.Assessment.AcceptanceTests
             return this;
         }
 
-        internal StudentController BuildCustomerController() => new(_mediator);
+        internal StudentController BuildStudentController() => new(_mediator);
 
     }
 }

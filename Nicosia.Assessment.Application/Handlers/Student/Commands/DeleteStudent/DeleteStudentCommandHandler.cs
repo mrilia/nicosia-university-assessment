@@ -20,20 +20,20 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Commands.DeleteStudent
 
         public async Task<Result> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
-            var customer = await GetCustomerAsync(request, cancellationToken);
+            var student = await GetStudentAsync(request, cancellationToken);
 
-            if (customer is null)
+            if (student is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.StudentNotFound)));
 
-            _context.Students.Remove(customer);
+            _context.Students.Remove(student);
 
             await _context.SaveAsync(cancellationToken);
 
             return Result.SuccessFul();
         }
 
-        private async Task<Domain.Models.User.Student> GetCustomerAsync(DeleteStudentCommand request, CancellationToken cancellationToken)
+        private async Task<Domain.Models.User.Student> GetStudentAsync(DeleteStudentCommand request, CancellationToken cancellationToken)
         {
             return await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.StudentId, cancellationToken);
         }

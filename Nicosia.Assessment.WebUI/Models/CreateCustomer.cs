@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Nicosia.Assessment.Presentation.Front.Models
 {
-    public class CreateCustomer
+    public class CreateStudent
     {
         public long Id { get; set; }
 

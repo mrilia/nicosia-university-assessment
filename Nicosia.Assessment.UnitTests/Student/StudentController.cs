@@ -11,9 +11,9 @@ using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Results;
 using Xunit;
 
-namespace Nicosia.Assessment.AcceptanceTests.Customer
+namespace Nicosia.Assessment.AcceptanceTests.Student
 {
-    public class CustomerController
+    public class StudentController
     {
         [Fact]
         public async Task WhenInvalidIdSend_ReturnNotFound()
@@ -24,7 +24,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Customer
                 .ReturnsAsync(
                     Result<StudentDto>.Failed(new NotFoundObjectResult(new ApiMessage(ResponseMessage.StudentNotFound))));
 
-            using var controller = new BaseConfiguration().WithMediatorService(mockData.Object).BuildCustomerController();
+            using var controller = new BaseConfiguration().WithMediatorService(mockData.Object).BuildStudentController();
 
             var result = await controller.Get(It.IsAny<Guid>(), It.IsAny<CancellationToken>());
 

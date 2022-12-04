@@ -63,7 +63,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Student.V1
         [HttpGet("{id}", Name = "GetStudentInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetStudentQuery { Id = id }, cancellationToken);
+            var result = await _mediator.Send(new GetStudentQuery { StudentId = id }, cancellationToken);
 
             return result.ApiResult;
         }

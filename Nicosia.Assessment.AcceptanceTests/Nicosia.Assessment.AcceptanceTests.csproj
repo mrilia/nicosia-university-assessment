@@ -27,29 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <SpecFlowFeatureFiles Update="Features\Customer\CreateCustomer.feature">
-        <Visible>$(UsingMicrosoftNETSdk)</Visible>
-        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-      </SpecFlowFeatureFiles>
-      <SpecFlowFeatureFiles Update="Features\Customer\DeleteCustomer.feature">
-        <Visible>$(UsingMicrosoftNETSdk)</Visible>
-        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-      </SpecFlowFeatureFiles>
-      <SpecFlowFeatureFiles Update="Features\Customer\EditCustomer.feature">
-        <Visible>$(UsingMicrosoftNETSdk)</Visible>
-        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-      </SpecFlowFeatureFiles>
-      <SpecFlowFeatureFiles Update="Features\Customer\ListCustomer.feature">
-        <Visible>$(UsingMicrosoftNETSdk)</Visible>
-        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-      </SpecFlowFeatureFiles>
-      <SpecFlowFeatureFiles Update="Features\Customer\GetCustomer.feature">
-        <Visible>$(UsingMicrosoftNETSdk)</Visible>
-        <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-      </SpecFlowFeatureFiles>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Nicosia.Assessment.Application\Nicosia.Assessment.Application.csproj" />
       <ProjectReference Include="..\Nicosia.Assessment.WebApi\Nicosia.Assessment.WebApi.csproj" />
     </ItemGroup>

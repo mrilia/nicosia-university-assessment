@@ -2,7 +2,7 @@
 
 namespace Nicosia.Assessment.AcceptanceTests.Models
 {
-    public class UpdateCustomerRequest
+    public class UpdateStudentRequest
     {
         [JsonPropertyName("id")]
         public ulong Id { get; set; }
@@ -22,7 +22,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Models
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
-        [JsonPropertyName("bankaccountnumber")]
-        public string? BankAccountNumber { get; set; }
+        [JsonPropertyName("password")]
+        public string? Password { get; set; }
     }
 }

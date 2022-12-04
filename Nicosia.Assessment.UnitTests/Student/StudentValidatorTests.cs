@@ -4,13 +4,13 @@ using Nicosia.Assessment.Application.Validators.Student;
 using Nicosia.Assessment.Persistence.Context;
 using Xunit;
 
-namespace Nicosia.Assessment.AcceptanceTests.Customer
+namespace Nicosia.Assessment.AcceptanceTests.Student
 {
-    public class CustomerValidatorTests
+    public class StudentValidatorTests
     {
         private readonly AddNewStudentCommandValidator _validator;
 
-        public CustomerValidatorTests()
+        public StudentValidatorTests()
         {
             var context = new SqliteDbContext();
             _validator = new AddNewStudentCommandValidator(context);

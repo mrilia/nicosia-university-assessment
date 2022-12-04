@@ -1,6 +1,6 @@
 ﻿@page "/list"
 
-<h1 class="bg-info text-white">Create Customer</h1>
+<h1 class="bg-info text-white">Create Student</h1>
 <h2 class="p-2">@Message</h2>
 
 <hr />
@@ -8,9 +8,9 @@
 @inject HttpClient Http
 @inject NavigationManager _navigationManager
 
-@if (_customers == null)
+@if (_students == null)
 {
-    <p>No customers found.</p>
+    <p>No students found.</p>
 }
 else
 {
@@ -29,22 +29,22 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var customer in _customers)
+            @foreach (var student in _students)
             {
                 <tr>
-                    <td>@customer.Id</td>
-                    <td>@customer.Firstname</td>
-                    <td>@customer.Lastname</td>
-                    <td>@customer.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
-                    <td>@customer.PhoneNumber</td>
-                    <td>@customer.Email</td>
-                    <td>@customer.BankAccountNumber</td>
+                    <td>@student.Id</td>
+                    <td>@student.Firstname</td>
+                    <td>@student.Lastname</td>
+                    <td>@student.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
+                    <td>@student.PhoneNumber</td>
+                    <td>@student.Email</td>
+                    <td>@student.BankAccountNumber</td>
                     <td>
-                        <a class="btn btn-sm btn-warning" href="/create/@customer.Id">Edit</a>
+                        <a class="btn btn-sm btn-warning" href="/create/@student.Id">Edit</a>
                         </td>
                     <td>
                         <button class="btn btn-sm btn-danger"
-                        @onclick="@(() => Delete(customer))">
+                        @onclick="@(() => Delete(student))">
                             Delete
                         </button>
                     </td>
@@ -55,15 +55,15 @@ else
 }
 
 @code {
-    private CustomerData[] _customers;
+    private StudentData[] _students;
     public string Message { get; set; } = "";
 
     protected override async Task OnInitializedAsync() =>
-        _customers = await Http.GetFromJsonAsync<CustomerData[]>("http://localhost:5000/customer/list");
+        _students = await Http.GetFromJsonAsync<StudentData[]>("http://localhost:5000/student/list");
 
-    public async void Delete(CustomerData customer)
+    public async void Delete(StudentData student)
     {
-        var result = await Http.DeleteAsync("http://localhost:5000/Customer/" + customer.Id);
+        var result = await Http.DeleteAsync("http://localhost:5000/Student/" + student.Id);
         if (result?.IsSuccessStatusCode ?? false)
         {
             _navigationManager.NavigateTo("list", true);

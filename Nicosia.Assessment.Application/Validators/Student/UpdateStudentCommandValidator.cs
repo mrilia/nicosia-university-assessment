@@ -25,7 +25,7 @@ namespace Nicosia.Assessment.Application.Validators.Student
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
 
             RuleFor(dto => dto)
-                .Must(CustomerNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201")
+                .Must(StudentNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201")
                 .Must(EmailNotExists).WithMessage(ResponseMessage.EmailExists).WithErrorCode("202");
 
             RuleFor(dto => dto.Email)
@@ -39,10 +39,10 @@ namespace Nicosia.Assessment.Application.Validators.Student
                 .Must(ValidPhoneNumberFormat).WithMessage(ResponseMessage.PhoneNumberNotValid).WithErrorCode("101");
         }
 
-        private bool EmailNotExists(UpdateStudentCommand customerToCheck)
+        private bool EmailNotExists(UpdateStudentCommand studentToCheck)
         {
-            if (_context.Students.Any(x => x.StudentId != customerToCheck.StudentId &&
-                                                x.Email.Replace(" ", "").ToLower() == customerToCheck.Email.Replace(" ", "").ToLower()))
+            if (_context.Students.Any(x => x.StudentId != studentToCheck.StudentId &&
+                                                x.Email.Replace(" ", "").ToLower() == studentToCheck.Email.Replace(" ", "").ToLower()))
                 return false;
 
             return true;
@@ -58,13 +58,13 @@ namespace Nicosia.Assessment.Application.Validators.Student
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);
         }
 
-        private bool CustomerNotExists(UpdateStudentCommand customerToCheck)
+        private bool StudentNotExists(UpdateStudentCommand studentToCheck)
         {
             if (_context.Students.Any(x =>
-                        x.StudentId != customerToCheck.StudentId &&
-                        x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower() &&
-                        x.DateOfBirth == customerToCheck.DateOfBirth))
+                        x.StudentId != studentToCheck.StudentId &&
+                        x.Firstname.Replace(" ", "").ToLower() == studentToCheck.Firstname.Replace(" ", "").ToLower() &&
+                        x.Lastname.Replace(" ", "").ToLower() == studentToCheck.Lastname.Replace(" ", "").ToLower() &&
+                        x.DateOfBirth == studentToCheck.DateOfBirth))
                 return false;
 
             return true;

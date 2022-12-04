@@ -2,7 +2,7 @@
 
 namespace Nicosia.Assessment.AcceptanceTests.Models
 {
-    public class GetStudentRequest
+    public class DeleteStudentRequest
     {
         [JsonPropertyName("studentId")]
         public Guid StudentId { get; set; }

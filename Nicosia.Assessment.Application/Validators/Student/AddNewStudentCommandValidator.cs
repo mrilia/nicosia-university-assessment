@@ -25,7 +25,7 @@ namespace Nicosia.Assessment.Application.Validators.Student
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
             
             RuleFor(dto => dto)
-                .Must(CustomerNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201");
+                .Must(StudentNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201");
 
             RuleFor(dto => dto.Email)
                 .NotEmpty().WithMessage(ResponseMessage.EmailIsRequired)
@@ -57,7 +57,7 @@ namespace Nicosia.Assessment.Application.Validators.Student
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);
         }
 
-        private bool CustomerNotExists(AddNewStudentCommand studentToCheck)
+        private bool StudentNotExists(AddNewStudentCommand studentToCheck)
         {
             if (_context.Students.Any(x =>
                         x.Firstname.Replace(" ", "").ToLower() == studentToCheck.Firstname.Replace(" ", "").ToLower() &&

@@ -14,15 +14,15 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {
     public class GetStudentQuery : IRequest<Result<StudentDto>>
     {
-        public Guid Id { get; set; }
+        public Guid StudentId { get; set; }
     }
 
-    public class GetCustomerQueryHandler : IRequestHandler<GetStudentQuery, Result<StudentDto>>
+    public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Result<StudentDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
 
-        public GetCustomerQueryHandler(IStudentContext context, IMapper mapper)
+        public GetStudentQueryHandler(IStudentContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -30,14 +30,14 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 
         public async Task<Result<StudentDto>> Handle(GetStudentQuery request, CancellationToken cancellationToken)
         {
-            var customer = await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.Id,
+            var student = await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.StudentId,
                 cancellationToken);
 
-            if (customer is null)
+            if (student is null)
                 return Result<StudentDto>.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.StudentNotFound)));
 
-            return Result<StudentDto>.SuccessFul(_mapper.Map<StudentDto>(customer));
+            return Result<StudentDto>.SuccessFul(_mapper.Map<StudentDto>(student));
         }
     }
 }

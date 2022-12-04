@@ -2,7 +2,7 @@
 
 namespace Nicosia.Assessment.AcceptanceTests.Models
 {
-    public class GetCustomerListRequest
+    public class GetStudentListRequest
     {
         [JsonPropertyName("email")]
         public string? Email { get; set; }
