@@ -4,6 +4,60 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.AddNew(Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse.AddNewCourseCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new Course
+            Sample Phone Number: 044 668 18 00
+            </summary>
+            <param name="addNewCourseCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create Course successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Course Info 
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Course info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If Course not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Courses 
+            </summary>
+            <param name="code"></param>
+            <param name="cancellationToken"></param>
+            <returns> Courses list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Delete Course
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If Course not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse.UpdateCourseCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Course
+            </summary>
+            <param name="updateCourseCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update Course successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.AddNew(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer.AddNewLecturerCommand,System.Threading.CancellationToken)">
             <summary>
             Add new lecturer

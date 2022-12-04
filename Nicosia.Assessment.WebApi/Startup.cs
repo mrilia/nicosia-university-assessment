@@ -6,9 +6,6 @@ using Nicosia.Assessment.WebApi.Installer;
 using Nicosia.Assessment.Application;
 using Nicosia.Assessment.Persistence;
 using Nicosia.Assessment.Persistence.Context;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Nicosia.Assessment.Security.Cryptography;
 
 namespace Nicosia.Assessment.WebApi
 {

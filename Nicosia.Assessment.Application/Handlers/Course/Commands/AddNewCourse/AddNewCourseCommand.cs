@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
 using Nicosia.Assessment.Application.Results;
 

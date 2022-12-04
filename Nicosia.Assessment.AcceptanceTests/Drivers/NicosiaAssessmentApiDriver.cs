@@ -1,7 +1,6 @@
 using FluentAssertions;
 using Nicosia.Assessment.AcceptanceTests.Models;
 using System.Net.Http.Json;
-using Nicosia.Assessment.Domain.Models.User;
 using TechTalk.SpecFlow.Assist;
 using Student = Nicosia.Assessment.AcceptanceTests.Models.Student;
 
