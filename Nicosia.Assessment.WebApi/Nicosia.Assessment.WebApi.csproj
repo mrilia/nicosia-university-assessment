@@ -39,7 +39,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Nicosia.Assessment.Application\Nicosia.Assessment.Application.csproj" />
 	  <ProjectReference Include="..\Nicosia.Assessment.Persistence\Nicosia.Assessment.Persistence.csproj" />
-	  <ProjectReference Include="..\Nicosia.Assessment.Security\Nicosia.Assessment.Security.csproj" />
 	  <ProjectReference Include="..\Nicosia.Assessment.Shared\Nicosia.Assessment.Shared.csproj" />
 	</ItemGroup>
 

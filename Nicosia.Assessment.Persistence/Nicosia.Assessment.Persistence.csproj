@@ -20,7 +20,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Nicosia.Assessment.Application\Nicosia.Assessment.Application.csproj" />
 		<ProjectReference Include="..\Nicosia.Assessment.Domain\Nicosia.Assessment.Domain.csproj" />
-		<ProjectReference Include="..\Nicosia.Assessment.Security\Nicosia.Assessment.Security.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
