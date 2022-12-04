@@ -451,3 +451,5 @@ $RECYCLE.BIN/
 /.vscode/
 *.feature.cs
 *.db
+/Nicosia.Assessment.WebApi/Database.db-shm
+/Nicosia.Assessment.WebApi/Database.db-wal
