@@ -53,11 +53,6 @@ namespace Nicosia.Assessment.Application.Validators.Lecturer
             return EmailValidator.IsValid(emailToCheck);
         }
 
-        private bool ValidBankAccountFormat(string bankAccountToCheck)
-        {
-            return BankAccountValidator.IsValid(bankAccountToCheck);
-        }
-
         private bool ValidPhoneNumberFormat(string phoneNumberToCheck)
         {
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);

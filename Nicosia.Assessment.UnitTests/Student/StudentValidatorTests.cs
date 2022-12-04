@@ -1,4 +1,5 @@
-﻿using FluentValidation.TestHelper;
+﻿using System;
+using FluentValidation.TestHelper;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Validators.Student;
 using Nicosia.Assessment.Persistence.Context;
@@ -19,7 +20,15 @@ namespace Nicosia.Assessment.AcceptanceTests.Student
         [Fact]
         public void When_Name_Is_Empty_ValidationFailed()
         {
-            var model = new AddNewStudentCommand();
+            var model = new AddNewStudentCommand()
+            {
+                Firstname = "",
+                Lastname = "",
+                DateOfBirth = new DateOnly(2001,11,11),
+                Email = "email@email.com",
+                PhoneNumber = "+989121231234",
+                Password = "password"
+            };
 
             var result = _validator.TestValidate(model);
 

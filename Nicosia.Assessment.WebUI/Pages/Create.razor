@@ -39,9 +39,9 @@
         <InputText class="form-control col-md-3" @bind-Value="_studentData.Email" />
     </div>
     <div class="form-group">
-        <label>Bank Account Number</label>
-        <ValidationMessage For="@(() => _studentData.BankAccountNumber)" />
-        <InputText class="form-control col-md-3" @bind-Value="_studentData.BankAccountNumber" />
+        <label>Password</label>
+        <ValidationMessage For="@(() => _studentData.Password)" />
+        <InputText type="password" class="form-control col-md-3" @bind-Value="_studentData.Password" />
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>

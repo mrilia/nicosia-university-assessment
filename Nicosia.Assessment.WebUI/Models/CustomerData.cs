@@ -24,6 +24,6 @@ namespace Nicosia.Assessment.Presentation.Front.Models
         public string Email { get; set; }
 
         [Required]
-        public string BankAccountNumber { get; set; }
+        public string Password { get; set; }
     }
 }
