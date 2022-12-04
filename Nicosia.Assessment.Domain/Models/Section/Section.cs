@@ -10,6 +10,8 @@ namespace Nicosia.Assessment.Domain.Models.Section
         public Guid SectionId { get; set; }
         public string Number { get; set; }
         public string Details { get; set; }
+        public Guid PeriodId { get; set; }
+        public Guid CourseId { get; set; }
 
         public virtual Period.Period Period { get; set; }
         public virtual Course.Course Course { get; set; }

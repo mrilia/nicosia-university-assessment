@@ -21,12 +21,12 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod
 
         public async Task<Result<PeriodDto>> Handle(AddNewPeriodCommand request, CancellationToken cancellationToken)
         {
-            var PeriodToAdd = _mapper.Map<Domain.Models.Period.Period>(request);
+            var periodToAdd = _mapper.Map<Domain.Models.Period.Period>(request);
 
-            await _context.Periods.AddAsync(PeriodToAdd, cancellationToken);
+            await _context.Periods.AddAsync(periodToAdd, cancellationToken);
             await _context.SaveAsync(cancellationToken);
 
-            return Result<PeriodDto>.SuccessFul(_mapper.Map<PeriodDto>(PeriodToAdd));
+            return Result<PeriodDto>.SuccessFul(_mapper.Map<PeriodDto>(periodToAdd));
         }
     }
 }

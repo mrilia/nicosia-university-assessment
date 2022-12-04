@@ -164,6 +164,59 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.AddNew(Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection.AddNewSectionCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add new Section
+            </summary>
+            <param name="addNewSectionCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create Section successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Section Info 
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <returns> Section info</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="404">If Section not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Sections 
+            </summary>
+            <param name="number"></param>
+            <param name="cancellationToken"></param>
+            <returns> Sections list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>
+            Delete Section
+            </summary>
+            <param name="id"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if delete successfully </response>
+            <response code="404">If Section not found</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Update(Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection.UpdateSectionCommand,System.Threading.CancellationToken)">
+            <summary>
+            Update  Section
+            </summary>
+            <param name="updateSectionCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="204">if update Section successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Add new student

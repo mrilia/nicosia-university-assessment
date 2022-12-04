@@ -30,14 +30,14 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
 
         public async Task<Result<PeriodDto>> Handle(GetPeriodQuery request, CancellationToken cancellationToken)
         {
-            var Period = await _context.Periods.SingleOrDefaultAsync(x => x.PeriodId == request.PeriodId,
+            var period = await _context.Periods.SingleOrDefaultAsync(x => x.PeriodId == request.PeriodId,
                 cancellationToken);
 
-            if (Period is null)
+            if (period is null)
                 return Result<PeriodDto>.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.PeriodNotFound)));
 
-            return Result<PeriodDto>.SuccessFul(_mapper.Map<PeriodDto>(Period));
+            return Result<PeriodDto>.SuccessFul(_mapper.Map<PeriodDto>(period));
         }
     }
 }

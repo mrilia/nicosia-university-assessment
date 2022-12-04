@@ -4,11 +4,13 @@ using System.Reflection;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Nicosia.Assessment.Application.AutoMapper;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Persistence.Context;
 using Nicosia.Assessment.WebApi.Middleware;
 
 namespace Nicosia.Assessment.WebApi.Installer
@@ -43,6 +45,7 @@ namespace Nicosia.Assessment.WebApi.Installer
                 mc.AddProfile(new LecturerMappingProfile());
                 mc.AddProfile(new CourseMappingProfile());
                 mc.AddProfile(new PeriodMappingProfile());
+                mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(),new SqliteDbContext()));
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);

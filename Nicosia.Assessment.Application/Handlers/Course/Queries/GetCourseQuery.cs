@@ -30,14 +30,14 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
 
         public async Task<Result<CourseDto>> Handle(GetCourseQuery request, CancellationToken cancellationToken)
         {
-            var Course = await _context.Courses.SingleOrDefaultAsync(x => x.CourseId == request.CourseId,
+            var course = await _context.Courses.SingleOrDefaultAsync(x => x.CourseId == request.CourseId,
                 cancellationToken);
 
-            if (Course is null)
+            if (course is null)
                 return Result<CourseDto>.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.CourseNotFound)));
 
-            return Result<CourseDto>.SuccessFul(_mapper.Map<CourseDto>(Course));
+            return Result<CourseDto>.SuccessFul(_mapper.Map<CourseDto>(course));
         }
     }
 }

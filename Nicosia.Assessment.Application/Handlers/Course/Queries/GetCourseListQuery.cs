@@ -29,14 +29,14 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
 
         public async Task<List<CourseDto>> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Models.Course.Course> Courses = _context.Courses;
+            IQueryable<Domain.Models.Course.Course> courses = _context.Courses;
 
             if (!string.IsNullOrWhiteSpace(request.Code))
             {
-                Courses = Courses.Where(x => x.Code.ToLower().Contains(request.Code.ToLower()));
+                courses = courses.Where(x => x.Code.ToLower().Contains(request.Code.ToLower()));
             }
 
-            return _mapper.Map<List<CourseDto>>(await Courses.ToListAsync(cancellationToken));
+            return _mapper.Map<List<CourseDto>>(await courses.ToListAsync(cancellationToken));
         }
     }
 }

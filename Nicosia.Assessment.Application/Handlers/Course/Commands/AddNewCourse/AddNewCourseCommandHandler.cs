@@ -21,12 +21,12 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse
 
         public async Task<Result<CourseDto>> Handle(AddNewCourseCommand request, CancellationToken cancellationToken)
         {
-            var CourseToAdd = _mapper.Map<Domain.Models.Course.Course>(request);
+            var courseToAdd = _mapper.Map<Domain.Models.Course.Course>(request);
 
-            await _context.Courses.AddAsync(CourseToAdd, cancellationToken);
+            await _context.Courses.AddAsync(courseToAdd, cancellationToken);
             await _context.SaveAsync(cancellationToken);
 
-            return Result<CourseDto>.SuccessFul(_mapper.Map<CourseDto>(CourseToAdd));
+            return Result<CourseDto>.SuccessFul(_mapper.Map<CourseDto>(courseToAdd));
         }
     }
 }

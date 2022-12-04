@@ -20,13 +20,13 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Commands.DeletePeriod
 
         public async Task<Result> Handle(DeletePeriodCommand request, CancellationToken cancellationToken)
         {
-            var Period = await GetPeriodAsync(request, cancellationToken);
+            var period = await GetPeriodAsync(request, cancellationToken);
 
-            if (Period is null)
+            if (period is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.PeriodNotFound)));
 
-            _context.Periods.Remove(Period);
+            _context.Periods.Remove(period);
 
             await _context.SaveAsync(cancellationToken);
 

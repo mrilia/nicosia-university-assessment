@@ -29,14 +29,14 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
 
         public async Task<List<PeriodDto>> Handle(GetPeriodListQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Models.Period.Period> Periods = _context.Periods;
+            IQueryable<Domain.Models.Period.Period> periods = _context.Periods;
 
             if (!string.IsNullOrWhiteSpace(request.Name))
             {
-                Periods = Periods.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
+                periods = periods.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
             }
 
-            return _mapper.Map<List<PeriodDto>>(await Periods.ToListAsync(cancellationToken));
+            return _mapper.Map<List<PeriodDto>>(await periods.ToListAsync(cancellationToken));
         }
     }
 }

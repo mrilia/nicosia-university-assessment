@@ -23,13 +23,13 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod
 
         public async Task<Result> Handle(UpdatePeriodCommand request, CancellationToken cancellationToken)
         {
-            var PeriodToUpdate = await GetPeriodAsync(request, cancellationToken);
+            var periodToUpdate = await GetPeriodAsync(request, cancellationToken);
 
-            if (PeriodToUpdate is null)
+            if (periodToUpdate is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.PeriodNotFound)));
 
-            _mapper.Map(request, PeriodToUpdate);
+            _mapper.Map(request, periodToUpdate);
 
             await _context.SaveAsync(cancellationToken);
 

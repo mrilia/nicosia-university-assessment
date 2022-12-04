@@ -20,13 +20,13 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse
 
         public async Task<Result> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
-            var Course = await GetCourseAsync(request, cancellationToken);
+            var course = await GetCourseAsync(request, cancellationToken);
 
-            if (Course is null)
+            if (course is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.CourseNotFound)));
 
-            _context.Courses.Remove(Course);
+            _context.Courses.Remove(course);
 
             await _context.SaveAsync(cancellationToken);
 

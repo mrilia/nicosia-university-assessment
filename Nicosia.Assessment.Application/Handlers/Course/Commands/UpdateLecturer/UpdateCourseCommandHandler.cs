@@ -23,13 +23,13 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse
 
         public async Task<Result> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
         {
-            var CourseToUpdate = await GetCourseAsync(request, cancellationToken);
+            var courseToUpdate = await GetCourseAsync(request, cancellationToken);
 
-            if (CourseToUpdate is null)
+            if (courseToUpdate is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.CourseNotFound)));
 
-            _mapper.Map(request, CourseToUpdate);
+            _mapper.Map(request, courseToUpdate);
 
             await _context.SaveAsync(cancellationToken);
 

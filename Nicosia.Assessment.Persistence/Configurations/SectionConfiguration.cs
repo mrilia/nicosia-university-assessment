@@ -10,8 +10,10 @@ namespace Nicosia.Assessment.Persistence.Configurations
         {
             builder.Property(e => e.SectionId).IsRequired().ValueGeneratedOnAdd();
             builder.HasKey(e => e.SectionId);
-            builder.Property(e => e.Number);
+            builder.Property(e => e.Number).IsRequired();
             builder.Property(e => e.Details);
+            builder.Property(e => e.CourseId).IsRequired();
+            builder.Property(e => e.PeriodId).IsRequired();
 
             builder.HasOne(e => e.Course)
                 .WithMany(e => e.Sections)
