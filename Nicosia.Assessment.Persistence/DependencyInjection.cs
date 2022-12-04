@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Persistence.Context;
+using Nicosia.Assessment.Security.Authorization;
 
 namespace Nicosia.Assessment.Persistence
 {
@@ -17,13 +18,11 @@ namespace Nicosia.Assessment.Persistence
                 options.EnableSensitiveDataLogging();
             });
 
-            services.AddScoped<IDbContext>(provider => provider.GetService<SqliteDbContext>());
-            //services.AddScoped<IStudentContext>(provider => provider.GetService<StudentContext>());
-            //services.AddScoped<IUserContext>(provider => provider.GetService<UserContext>());
-            //services.AddScoped<ILecturerContext>(provider => provider.GetService<LecturerContext>());
-            //services.AddScoped<ICourseContext>(provider => provider.GetService<CourseContext>());
-            //services.AddScoped<IPeriodContext>(provider => provider.GetService<PeriodContext>());
-            //services.AddScoped<ISectionContext>(provider => provider.GetService<SectionContext>());
+            services.AddScoped<IStudentContext>(provider => provider.GetService<SqliteDbContext>());
+            services.AddScoped<ILecturerContext>(provider => provider.GetService<SqliteDbContext>());
+            services.AddScoped<ICourseContext>(provider => provider.GetService<SqliteDbContext>());
+            services.AddScoped<IPeriodContext>(provider => provider.GetService<SqliteDbContext>());
+            services.AddScoped<ISectionContext>(provider => provider.GetService<SqliteDbContext>());
 
             return services;
         }

@@ -8,7 +8,13 @@ namespace Nicosia.Assessment.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-
+            builder.Property(e => e.StudentId).IsRequired().ValueGeneratedOnAdd();
+            builder.HasKey(e => e.StudentId);
+            builder.Property(e => e.Firstname).IsRequired();
+            builder.Property(e => e.Lastname).IsRequired();
+            builder.Property(e => e.Email).IsRequired();
+            builder.Property(e => e.PhoneNumber).IsRequired();
+            builder.Property(e => e.Password).IsRequired();
         }
     }
 }

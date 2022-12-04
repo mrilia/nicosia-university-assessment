@@ -1,17 +1,17 @@
-﻿using FluentValidation;
-using Nicosia.Assessment.Application.Interfaces;
+﻿using System.Linq;
+using FluentValidation;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Shared.Validators;
-using System.Linq;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
+using Nicosia.Assessment.Application.Interfaces;
 
 namespace Nicosia.Assessment.Application.Validators.Customer
 {
-    public class AddNewCustomerCommandValidator : AbstractValidator<AddNewCustomerCommand>
+    public class AddNewStudentCommandValidator : AbstractValidator<AddNewStudentCommand>
     {
-        private readonly IDbContext _context;
+        private readonly IStudentContext _context;
 
-        public AddNewCustomerCommandValidator(IDbContext context)
+        public AddNewStudentCommandValidator(IStudentContext context)
         {
             _context = context;
             //CascadeMode = CascadeMode.Stop;
@@ -71,11 +71,11 @@ namespace Nicosia.Assessment.Application.Validators.Customer
             return PhoneNumberValidator.IsValid(phoneNumberToCheck);
         }
 
-        private bool CustomerNotExists(AddNewCustomerCommand customerToCheck)
+        private bool CustomerNotExists(AddNewStudentCommand studentToCheck)
         {
             if (_context.Students.Any(x =>
-                        x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
-                        x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower()))
+                        x.Firstname.Replace(" ", "").ToLower() == studentToCheck.Firstname.Replace(" ", "").ToLower() &&
+                        x.Lastname.Replace(" ", "").ToLower() == studentToCheck.Lastname.Replace(" ", "").ToLower()))
                 return false;
 
             return true;

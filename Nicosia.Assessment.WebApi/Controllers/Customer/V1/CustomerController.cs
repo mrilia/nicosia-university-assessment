@@ -27,7 +27,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         /// Sample Phone Number: 044 668 18 00
         /// Sample Bank Account Number: NL91ABNA0417164300
         /// </summary>
-        /// <param name="addNewCustomerCommand"></param>
+        /// <param name="addNewStudentCommand"></param>
         /// <param name="cancellationToken"></param>
         /// <response code="201">if create customer successfully </response>
         /// <response code="400">If Validation Failed</response>
@@ -36,10 +36,10 @@ namespace Nicosia.Assessment.WebApi.Controllers.Customer.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost]
-        public async Task<IActionResult> AddNew(AddNewCustomerCommand addNewCustomerCommand,
+        public async Task<IActionResult> AddNew(AddNewStudentCommand addNewStudentCommand,
             CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(addNewCustomerCommand, cancellationToken);
+            var result = await _mediator.Send(addNewStudentCommand, cancellationToken);
 
             if (result.Success == false)
                 return result.ApiResult;

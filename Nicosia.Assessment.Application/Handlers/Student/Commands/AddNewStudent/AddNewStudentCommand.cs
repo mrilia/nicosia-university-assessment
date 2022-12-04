@@ -5,7 +5,7 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent
 {
-    public class AddNewCustomerCommand : IRequest<Result<StudentDto>>
+    public class AddNewStudentCommand : IRequest<Result<StudentDto>>
     {
         public string Firstname { get; set; }
         public string Lastname { get; set; }

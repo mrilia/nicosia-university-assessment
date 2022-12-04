@@ -13,7 +13,7 @@ namespace Nicosia.Assessment.Application.AutoMapper
             CreateMap<Student, StudentDto>()
                  //.ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => String.Format("{0:#(###) ###-####}", src.PhoneNumber)));
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
-            CreateMap<AddNewCustomerCommand, Student>()
+            CreateMap<AddNewStudentCommand, Student>()
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => ulong.Parse(src.PhoneNumber.Replace(" ", "").Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", ""))));
             CreateMap<UpdateStudentCommand, Student>()
                  .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => ulong.Parse(src.PhoneNumber.Replace(" ", "").Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", ""))));

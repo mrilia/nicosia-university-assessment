@@ -8,8 +8,8 @@ namespace Nicosia.Assessment.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Period> builder)
         {
-            builder.Property(e => e.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.HasKey(e => e.Id);
+            builder.Property(e => e.PeriodId).IsRequired().ValueGeneratedOnAdd();
+            builder.HasKey(e => e.PeriodId);
             builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.StartDate).IsRequired();
             builder.Property(e => e.EndDate).IsRequired();

@@ -30,7 +30,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 
         public async Task<Result<StudentDto>> Handle(GetStudentQuery request, CancellationToken cancellationToken)
         {
-            var customer = await _context.Students.SingleOrDefaultAsync(x => x.Id == request.Id,
+            var customer = await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.Id,
                 cancellationToken);
 
             if (customer is null)

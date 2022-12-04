@@ -50,7 +50,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
 
         private bool EmailNotExists(UpdateStudentCommand customerToCheck)
         {
-            if (_context.Students.Any(x => x.Id != customerToCheck.Id &&
+            if (_context.Students.Any(x => x.StudentId != customerToCheck.Id &&
                                                 x.Email.Replace(" ", "").ToLower() == customerToCheck.Email.Replace(" ", "").ToLower()))
                 return false;
 
@@ -75,7 +75,7 @@ namespace Nicosia.Assessment.Application.Validators.Customer
         private bool CustomerNotExists(UpdateStudentCommand customerToCheck)
         {
             if (_context.Students.Any(x =>
-                        x.Id != customerToCheck.Id &&
+                        x.StudentId != customerToCheck.Id &&
                         x.Firstname.Replace(" ", "").ToLower() == customerToCheck.Firstname.Replace(" ", "").ToLower() &&
                         x.Lastname.Replace(" ", "").ToLower() == customerToCheck.Lastname.Replace(" ", "").ToLower()))
                 return false;

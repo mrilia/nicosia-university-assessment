@@ -8,7 +8,7 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent
 {
-    public class AddNewCustomerCommandHandler : IRequestHandler<AddNewCustomerCommand, Result<StudentDto>>
+    public class AddNewCustomerCommandHandler : IRequestHandler<AddNewStudentCommand, Result<StudentDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
@@ -19,7 +19,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent
             _mapper = mapper;
         }
 
-        public async Task<Result<StudentDto>> Handle(AddNewCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Result<StudentDto>> Handle(AddNewStudentCommand request, CancellationToken cancellationToken)
         {
             var customerToAdd = _mapper.Map<Domain.Models.User.Student>(request);
 

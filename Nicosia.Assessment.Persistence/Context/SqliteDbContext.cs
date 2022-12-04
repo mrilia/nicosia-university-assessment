@@ -10,7 +10,7 @@ using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Persistence.Context
 {
-    public class SqliteDbContext : DbContext, IDbContext
+    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext
     {
         public SqliteDbContext()
         {
@@ -31,7 +31,6 @@ namespace Nicosia.Assessment.Persistence.Context
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Period> Periods { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Section> Sections { get; set; }

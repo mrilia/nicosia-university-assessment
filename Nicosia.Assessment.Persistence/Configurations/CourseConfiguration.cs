@@ -8,8 +8,8 @@ namespace Nicosia.Assessment.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Course> builder)
         {
-            builder.Property(e => e.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.HasKey(e => e.Id);
+            builder.Property(e => e.CourseId).IsRequired().ValueGeneratedOnAdd();
+            builder.HasKey(e => e.CourseId);
             builder.Property(e => e.Code).IsRequired();
             builder.Property(e => e.Title).IsRequired();
         }
