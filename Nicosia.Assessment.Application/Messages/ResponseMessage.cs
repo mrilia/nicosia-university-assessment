@@ -5,6 +5,7 @@ namespace Nicosia.Assessment.Application.Messages
     {
         public static string LecturerNotFound => "Lecturer not found!";
         public static string StudentNotFound => "Student not found!";
+        public static string CourseNotFound => "Course not found!";
         public static string EmailIsRequired => "Email is required";
         public static string PhoneNumberIsRequired => "Phone number is required";
         public static string PasswordIsRequired => "Password is required";
