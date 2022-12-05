@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin;
+using Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.DeleteAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
@@ -20,6 +23,37 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         public AdminController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        private void setTokenCookie(string token)
+        {
+            // append cookie with refresh token to the http response
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = DateTime.UtcNow.AddDays(7)
+            };
+            Response.Cookies.Append("refreshToken", token, cookieOptions);
+        }
+
+        private string IpAddress()
+        {
+            // get source ip address for the current request
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                return Request.Headers["X-Forwarded-For"];
+            else
+                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand,
+            CancellationToken cancellationToken)
+        {
+            authenticateAdminCommand.IpAdress = IpAddress();
+            var response = _mediator.Send(authenticateAdminCommand, cancellationToken).Result.Data;
+            setTokenCookie(response.RefreshToken);
+            return Ok(response);
         }
 
         /// <summary>
@@ -63,7 +97,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         [HttpGet("{id}", Name = "GetAdminInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetAdminQuery { AdminId = id }, cancellationToken);
+            var result = await _mediator.Send(new GetAdminByIdQuery { AdminId = id }, cancellationToken);
 
             return result.ApiResult;
         }

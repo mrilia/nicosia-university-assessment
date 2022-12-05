@@ -1,6 +1,6 @@
-﻿namespace Nicosia.Assessment.WebApi.Authorization.Helpers
+﻿namespace Nicosia.Assessment.Shared.Token.JWT.Models
 {
-    public class AppSettings
+    public class JwtSettings
     {
         public string Secret { get; set; }
 

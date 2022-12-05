@@ -8,6 +8,11 @@
 		<PackageReference Include="IbanNet" Version="5.7.1" />
 		<PackageReference Include="libphonenumber-csharp" Version="8.13.1" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="7.0.0" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Nicosia.Assessment.Domain\Nicosia.Assessment.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

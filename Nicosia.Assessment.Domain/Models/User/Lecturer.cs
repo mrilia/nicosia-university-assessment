@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nicosia.Assessment.Domain.Models.Security;
 
 namespace Nicosia.Assessment.Domain.Models.User
 {
@@ -15,6 +16,7 @@ namespace Nicosia.Assessment.Domain.Models.User
         public string SocialInsuranceNumber { get; set; }
 
         public virtual ICollection<Section.Section> Sections { get; set; } = null;
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = null;
 
     }
 }

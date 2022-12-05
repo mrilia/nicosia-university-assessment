@@ -11,7 +11,7 @@ using Nicosia.Assessment.Persistence.Seed;
 
 namespace Nicosia.Assessment.Persistence.Context
 {
-    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext
+    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext, IAdminContext
     {
         public SqliteDbContext()
         {

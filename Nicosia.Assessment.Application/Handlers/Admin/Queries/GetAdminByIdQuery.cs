@@ -12,23 +12,23 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
 {
-    public class GetAdminQuery : IRequest<Result<AdminDto>>
+    public class GetAdminByIdQuery : IRequest<Result<AdminDto>>
     {
         public Guid AdminId { get; set; }
     }
 
-    public class GetAdminQueryHandler : IRequestHandler<GetAdminQuery, Result<AdminDto>>
+    public class GetAdminByIdQueryHandler : IRequestHandler<GetAdminByIdQuery, Result<AdminDto>>
     {
         private readonly IAdminContext _context;
         private readonly IMapper _mapper;
 
-        public GetAdminQueryHandler(IAdminContext context, IMapper mapper)
+        public GetAdminByIdQueryHandler(IAdminContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<Result<AdminDto>> Handle(GetAdminQuery request, CancellationToken cancellationToken)
+        public async Task<Result<AdminDto>> Handle(GetAdminByIdQuery request, CancellationToken cancellationToken)
         {
             var admin = await _context.Admins.SingleOrDefaultAsync(x => x.AdminId == request.AdminId,
                 cancellationToken);

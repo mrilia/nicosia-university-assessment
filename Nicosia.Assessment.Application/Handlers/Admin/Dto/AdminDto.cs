@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Nicosia.Assessment.Domain.Models.Security;
 
 namespace Nicosia.Assessment.Application.Handlers.Admin.Dto
 {
@@ -10,5 +13,8 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Dto
         public DateOnly DateOfBirth { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = null;
     }
 }

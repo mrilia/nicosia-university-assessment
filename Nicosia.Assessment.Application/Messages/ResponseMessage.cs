@@ -8,8 +8,13 @@ namespace Nicosia.Assessment.Application.Messages
         public static string PeriodNotFound => "Period not found!";
         public static string SectionNotFound => "Section not found!";
         public static string AdminNotFound => "Admin not found!";
+        public static string TokenNotFound => "Token Is Not Active";
+        public static string TokenIsNotActive => "Token not found!";
         public static string CourseNotFound => "Course not found!";
         public static string EmailIsRequired => "Email is required";
+        public static string UsernameIsRequired => "Username is required";
+        public static string IpAdressIsRequired => "IpAdress is required";
+        public static string TokenIsRequired => "Token is required";
         public static string PhoneNumberIsRequired => "Phone number is required";
         public static string PasswordIsRequired => "Password is required";
         public static string FirstnameIsRequired => "Firstname is required";
@@ -32,5 +37,6 @@ namespace Nicosia.Assessment.Application.Messages
         public static string EmailExists => "Duplicate lecturer by Email address";
         public static string EmailNotValid => "Invalid Email address";
         public static string PhoneNumberNotValid => "Invalid Mobile Number";
+        public static string UsernamePasswordInvalid => "Invalid Username/Password";
     }
 }

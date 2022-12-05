@@ -1,14 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
 using System.Text.Json.Serialization;
 
-namespace Nicosia.Assessment.WebApi.Authorization.Entities
+namespace Nicosia.Assessment.Shared.Token.JWT.Models
 {
-    [Owned]
-    public class RefreshToken
+    public class JwtRefreshToken
     {
-        [Key]
         [JsonIgnore]
         public int Id { get; set; }
         public string Token { get; set; }

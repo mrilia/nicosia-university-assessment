@@ -16,6 +16,9 @@ namespace Nicosia.Assessment.Persistence.Configurations
             builder.Property(e => e.Email).IsRequired();
             builder.Property(e => e.PhoneNumber).IsRequired();
             builder.Property(e => e.Password).IsRequired();
+
+            builder.HasMany(e => e.RefreshTokens)
+                .WithOne(e => e.Student);
         }
     }
 }

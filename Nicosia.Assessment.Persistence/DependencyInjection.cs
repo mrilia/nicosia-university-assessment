@@ -17,6 +17,7 @@ namespace Nicosia.Assessment.Persistence
                 options.EnableSensitiveDataLogging();
             });
 
+            services.AddScoped<IAdminContext>(provider => provider.GetService<SqliteDbContext>());
             services.AddScoped<IStudentContext>(provider => provider.GetService<SqliteDbContext>());
             services.AddScoped<ILecturerContext>(provider => provider.GetService<SqliteDbContext>());
             services.AddScoped<ICourseContext>(provider => provider.GetService<SqliteDbContext>());
