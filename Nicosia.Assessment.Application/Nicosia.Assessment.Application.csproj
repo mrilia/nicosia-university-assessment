@@ -24,4 +24,9 @@
 		<ProjectReference Include="..\Nicosia.Assessment.Shared\Nicosia.Assessment.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Handlers\User\Dto\" />
+	  <Folder Include="Handlers\User\Queries\" />
+	</ItemGroup>
+
 </Project>

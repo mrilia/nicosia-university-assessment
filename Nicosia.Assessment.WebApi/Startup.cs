@@ -6,6 +6,8 @@ using Nicosia.Assessment.WebApi.Installer;
 using Nicosia.Assessment.Application;
 using Nicosia.Assessment.Persistence;
 using Nicosia.Assessment.Persistence.Context;
+using Nicosia.Assessment.WebApi.Authorization.Helpers;
+using Nicosia.Assessment.WebApi.Authorization;
 
 namespace Nicosia.Assessment.WebApi
 {
@@ -49,8 +51,12 @@ namespace Nicosia.Assessment.WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("MyPolicy");
-            //app.UseMiddleware<JwtMiddleware>();
 
+            // global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

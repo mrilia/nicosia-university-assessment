@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;

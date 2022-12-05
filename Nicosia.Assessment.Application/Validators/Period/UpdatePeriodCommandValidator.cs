@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using FluentValidation;
+﻿using FluentValidation;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;

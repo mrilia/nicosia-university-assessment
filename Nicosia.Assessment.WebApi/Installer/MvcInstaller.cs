@@ -4,14 +4,16 @@ using System.Reflection;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Nicosia.Assessment.Application.AutoMapper;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Persistence.Context;
+using Nicosia.Assessment.WebApi.Authorization.Services;
+using Nicosia.Assessment.WebApi.Authorization;
 using Nicosia.Assessment.WebApi.Middleware;
+using Nicosia.Assessment.WebApi.Authorization.Helpers;
 
 namespace Nicosia.Assessment.WebApi.Installer
 {
@@ -20,6 +22,14 @@ namespace Nicosia.Assessment.WebApi.Installer
     {
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
+
+            // configure strongly typed settings object
+            services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+
+            // configure DI for application services
+            services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IUserService, UserService>();
+
             services
                 .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
                 .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
@@ -27,9 +37,11 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddMemoryCache();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.SetIsOriginAllowed(origin => true)
+                       .AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader();
+                       .AllowAnyHeader()
+                       .AllowCredentials();
             }));
 
             services.AddFluentValidationAutoValidation();
@@ -45,7 +57,7 @@ namespace Nicosia.Assessment.WebApi.Installer
                 mc.AddProfile(new LecturerMappingProfile());
                 mc.AddProfile(new CourseMappingProfile());
                 mc.AddProfile(new PeriodMappingProfile());
-                mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(),new SqliteDbContext()));
+                mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(), new SqliteDbContext()));
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
