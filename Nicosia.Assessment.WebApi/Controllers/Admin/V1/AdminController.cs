@@ -25,35 +25,39 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
             _mediator = mediator;
         }
 
-        private void setTokenCookie(string token)
-        {
-            // append cookie with refresh token to the http response
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = DateTime.UtcNow.AddDays(7)
-            };
-            Response.Cookies.Append("refreshToken", token, cookieOptions);
-        }
-
-        private string IpAddress()
-        {
-            // get source ip address for the current request
-            if (Request.Headers.ContainsKey("X-Forwarded-For"))
-                return Request.Headers["X-Forwarded-For"];
-            else
-                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-        }
-
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand,
-            CancellationToken cancellationToken)
+        public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand, CancellationToken cancellationToken)
         {
             authenticateAdminCommand.IpAdress = IpAddress();
             var response = _mediator.Send(authenticateAdminCommand, cancellationToken).Result.Data;
-            setTokenCookie(response.RefreshToken);
+            SetTokenCookie(response.RefreshToken);
             return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("refresh-token")]
+        public IActionResult RefreshToken(RefreshAdminTokenCommand refreshAdminTokenCommand, CancellationToken cancellationToken)
+        {
+            refreshAdminTokenCommand.IpAdress = IpAddress();
+            refreshAdminTokenCommand.RefreshToken =
+                refreshAdminTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
+
+            var response = _mediator.Send(refreshAdminTokenCommand, cancellationToken).Result.Data; 
+            
+            SetTokenCookie(response.RefreshToken);
+            return Ok(response);
+        }
+
+        [HttpPost("revoke-token")]
+        public async Task<IActionResult> RevokeToken(RevokeAdminTokenCommand revokeAdminTokenCommand, CancellationToken cancellationToken)
+        {
+            // accept refresh token in request body or cookie
+            var token = revokeAdminTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
+
+            await _mediator.Send(revokeAdminTokenCommand, cancellationToken);
+
+            return Ok(new { message = "Token revoked" });
         }
 
         /// <summary>

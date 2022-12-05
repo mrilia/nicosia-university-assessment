@@ -30,8 +30,8 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate
 
         public async Task<Result> Handle(RevokeAdminTokenCommand request, CancellationToken cancellationToken)
         {
-            var adminDto = _mediator.Send(new GetAdminByRefreshTokenQuery() { RefreshToken = request.Token }, cancellationToken).Result.Data;
-            var refreshToken = adminDto.RefreshTokens.SingleOrDefault(s => s.Token == request.Token);
+            var adminDto = _mediator.Send(new GetAdminByRefreshTokenQuery() { RefreshToken = request.RefreshToken }, cancellationToken).Result.Data;
+            var refreshToken = adminDto.RefreshTokens.SingleOrDefault(s => s.Token == request.RefreshToken);
 
             // replace old refresh token with a new one (rotate token)
             RevokeRefreshToken(refreshToken, request.IpAdress, "Revoked without replacement");

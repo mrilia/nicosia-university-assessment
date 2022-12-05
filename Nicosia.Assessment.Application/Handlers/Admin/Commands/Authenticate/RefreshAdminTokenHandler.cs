@@ -32,13 +32,13 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate
 
         public async Task<Result<AuthenticateAdminResponse>> Handle(RefreshAdminTokenCommand request, CancellationToken cancellationToken)
         {
-            var adminDto = _mediator.Send(new GetAdminByRefreshTokenQuery() { RefreshToken = request.Token }, cancellationToken).Result.Data;
-            var refreshToken = adminDto.RefreshTokens.SingleOrDefault(s => s.Token == request.Token);
+            var adminDto = _mediator.Send(new GetAdminByRefreshTokenQuery() { RefreshToken = request.RefreshToken }, cancellationToken).Result.Data;
+            var refreshToken = adminDto.RefreshTokens.SingleOrDefault(s => s.Token == request.RefreshToken);
 
             if (refreshToken!.IsRevoked)
             {
                 // revoke all descendant tokens in case this token has been compromised
-                RevokeDescendantRefreshTokens(refreshToken, adminDto, request.IpAdress, $"Attempted reuse of revoked ancestor token: {request.Token}");
+                RevokeDescendantRefreshTokens(refreshToken, adminDto, request.IpAdress, $"Attempted reuse of revoked ancestor token: {request.RefreshToken}");
 
                 await _context.SaveAsync(cancellationToken);
             }
