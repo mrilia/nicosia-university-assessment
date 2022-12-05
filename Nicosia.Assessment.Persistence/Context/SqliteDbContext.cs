@@ -30,6 +30,7 @@ namespace Nicosia.Assessment.Persistence.Context
         }
 
 
+        public DbSet<Admin> Admins { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Lecturer> Lecturers { get; set; }
         public DbSet<Period> Periods { get; set; }

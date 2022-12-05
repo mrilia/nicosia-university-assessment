@@ -47,12 +47,18 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddFluentValidationAutoValidation();
             services.AddFluentValidationClientsideAdapters();
             services.AddValidatorsFromAssemblyContaining<IStudentContext>();
+            services.AddValidatorsFromAssemblyContaining<IAdminContext>();
+            services.AddValidatorsFromAssemblyContaining<ILecturerContext>();
+            services.AddValidatorsFromAssemblyContaining<ICourseContext>();
+            services.AddValidatorsFromAssemblyContaining<IPeriodContext>();
+            services.AddValidatorsFromAssemblyContaining<ISectionContext>();
 
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>());
 
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
+                mc.AddProfile(new AdminMappingProfile());
                 mc.AddProfile(new StudentMappingProfile());
                 mc.AddProfile(new LecturerMappingProfile());
                 mc.AddProfile(new CourseMappingProfile());

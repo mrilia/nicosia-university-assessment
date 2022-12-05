@@ -12,6 +12,20 @@ namespace Nicosia.Assessment.Persistence.Seed
 {
     internal class DbContextSeed
     {
+        private static readonly List<Admin> SampleAdmins = new List<Admin>()
+        {
+            new Admin
+            {
+                AdminId = Guid.NewGuid(),
+                Firstname = "Gunther",
+                Lastname = "Central Perk's Manager",
+                DateOfBirth = new DateOnly(1967,09,09),
+                Email = "Gunther.central.perk@mail.com",
+                PhoneNumber = "+989127891234",
+                Password = "10000.p2/Ke+kf2/wtMVFl0Xe6zg==.QAImMHZZpv+bAp9OfIP+mUvO1xBldk5dHla5e65fhAY="
+            }
+        };
+        
         private static readonly List<Student> SampleStudents = new List<Student>()
         {
             new Student
@@ -192,6 +206,7 @@ namespace Nicosia.Assessment.Persistence.Seed
 
         public async Task SeedMigrationAsync(SqliteDbContext context)
         {
+            CreateDefaultAdmins(context);
             CreateDefaultStudents(context);
             CreateDefaultLecturers(context);
             CreateDefaultPeriods(context);
@@ -201,6 +216,16 @@ namespace Nicosia.Assessment.Persistence.Seed
             await context.SaveChangesAsync();
         }
 
+        private static void CreateDefaultAdmins(SqliteDbContext context)
+        {
+            if (context.Set<Admin>().Any())
+            {
+                return;
+            }
+
+            context.Set<Admin>().AddRange(SampleAdmins);
+        }
+        
         private static void CreateDefaultStudents(SqliteDbContext context)
         {
             if (context.Set<Student>().Any())
