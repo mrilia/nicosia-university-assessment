@@ -12,12 +12,12 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
 {
-    public class GetLecturerQuery : IRequest<Result<LecturerDto>>
+    public class GetLecturerByIdQuery : IRequest<Result<LecturerDto>>
     {
         public Guid LecturerId { get; set; }
     }
 
-    public class GetLecturerQueryHandler : IRequestHandler<GetLecturerQuery, Result<LecturerDto>>
+    public class GetLecturerQueryHandler : IRequestHandler<GetLecturerByIdQuery, Result<LecturerDto>>
     {
         private readonly ILecturerContext _context;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<LecturerDto>> Handle(GetLecturerQuery request, CancellationToken cancellationToken)
+        public async Task<Result<LecturerDto>> Handle(GetLecturerByIdQuery request, CancellationToken cancellationToken)
         {
             var lecturer = await _context.Lecturers.SingleOrDefaultAsync(x => x.LecturerId == request.LecturerId,
                 cancellationToken);

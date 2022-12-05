@@ -63,7 +63,7 @@ namespace Nicosia.Assessment.Shared.Token.JWT
                     UserRole = userRole
                 };
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }

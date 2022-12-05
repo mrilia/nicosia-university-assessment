@@ -21,5 +21,25 @@ namespace Nicosia.Assessment.Shared.Token.JWT.Models
             JwtToken = jwtToken;
             RefreshToken = refreshToken;
         }
+
+        public AuthenticateResponse(Lecturer lecturer, string jwtToken, string refreshToken)
+        {
+            UserId = lecturer.LecturerId;
+            FirstName = lecturer.Firstname;
+            LastName = lecturer.Lastname;
+            Username = lecturer.Email;
+            JwtToken = jwtToken;
+            RefreshToken = refreshToken;
+        }
+
+        public AuthenticateResponse(Student student, string jwtToken, string refreshToken)
+        {
+            UserId = student.StudentId;
+            FirstName = student.Firstname;
+            LastName = student.Lastname;
+            Username = student.Email;
+            JwtToken = jwtToken;
+            RefreshToken = refreshToken;
+        }
     }
 }

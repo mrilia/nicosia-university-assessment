@@ -37,7 +37,7 @@ namespace Nicosia.Assessment.WebApi.Middleware
                         context.Items["User"] = _mediator.Send(new GetAdminByIdQuery { AdminId = jwtTokenValidationResult.UserId }).Result.Data;
                         break;
                     case "lecturer":
-                        context.Items["User"] = _mediator.Send(new GetLecturerQuery{ LecturerId = jwtTokenValidationResult.UserId }).Result.Data;
+                        context.Items["User"] = _mediator.Send(new GetLecturerByIdQuery{ LecturerId = jwtTokenValidationResult.UserId }).Result.Data;
                         break;
                     case "student":
                         context.Items["User"] = _mediator.Send(new GetStudentQuery() { StudentId = jwtTokenValidationResult.UserId }).Result.Data;
