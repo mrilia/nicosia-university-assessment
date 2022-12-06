@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using Nicosia.Assessment.Domain.Models.User;
 using Nicosia.Assessment.Shared.Token.JWT.Models;
 using Nicosia.Assessment.Shared.Token.JWT;
 using Microsoft.Extensions.Options;

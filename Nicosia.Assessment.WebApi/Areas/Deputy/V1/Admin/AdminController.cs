@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin;
-using Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.DeleteAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Admin.Queries;
 using Nicosia.Assessment.Application.Messages;
-using Nicosia.Assessment.Domain.Models.User;
+using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
+namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
 {
+    [Route("api/deputy/v1/[controller]")]
+    [NicosiaAuthorize("admin")]
     public class AdminController : BaseController
     {
         private readonly IMediator _mediator;
@@ -26,44 +27,10 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
             _mediator = mediator;
         }
 
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand, CancellationToken cancellationToken)
-        {
-            authenticateAdminCommand.IpAdress = IpAddress();
-            var response = _mediator.Send(authenticateAdminCommand, cancellationToken).Result.Data;
-            SetTokenCookie(response.RefreshToken);
-            return Ok(response);
-        }
-
-        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
-        [HttpPost("refresh-token")]
-        public IActionResult RefreshToken(RefreshAdminTokenCommand refreshAdminTokenCommand, CancellationToken cancellationToken)
-        {
-            refreshAdminTokenCommand.IpAdress = IpAddress();
-            refreshAdminTokenCommand.RefreshToken =
-                refreshAdminTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
-
-            var response = _mediator.Send(refreshAdminTokenCommand, cancellationToken).Result.Data; 
-            
-            SetTokenCookie(response.RefreshToken);
-            return Ok(response);
-        }
-
-        [HttpPost("revoke-token")]
-        public async Task<IActionResult> RevokeToken(RevokeAdminTokenCommand revokeAdminTokenCommand, CancellationToken cancellationToken)
-        {
-            // accept refresh token in request body or cookie
-            var token = revokeAdminTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
-
-            await _mediator.Send(revokeAdminTokenCommand, cancellationToken);
-
-            return Ok(new { message = "Token revoked" });
-        }
 
         /// <summary>
         /// Add new admin
-        /// Sample Phone Number: 044 668 18 00
+        /// Sample Phone Number: +989123123456
         /// </summary>
         /// <param name="addNewAdminCommand"></param>
         /// <param name="cancellationToken"></param>
@@ -73,6 +40,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         [ProducesResponseType(typeof(AdminDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewAdminCommand addNewAdminCommand,
             CancellationToken cancellationToken)
@@ -99,6 +67,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         [ProducesResponseType(typeof(AdminDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpGet("{id}", Name = "GetAdminInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -118,10 +87,10 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
-        [NicosiaAuthorizeAttribute("admin")]
         [ProducesResponseType(typeof(List<AdminDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpGet("list")]
         public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
             => Ok(await _mediator.Send(new GetAdminListQuery { Email = email }, cancellationToken));
@@ -140,6 +109,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         [ProducesResponseType(204)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
@@ -166,6 +136,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateAdminCommand updateAdminCommand,
             CancellationToken cancellationToken)

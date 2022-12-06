@@ -4,10 +4,10 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Admin.V1.AdminController.AddNew(Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin.AddNewAdminCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.AddNew(Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin.AddNewAdminCommand,System.Threading.CancellationToken)">
             <summary>
             Add new admin
-            Sample Phone Number: 044 668 18 00
+            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewAdminCommand"></param>
             <param name="cancellationToken"></param>
@@ -15,7 +15,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Admin.V1.AdminController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Admin Info 
             </summary>
@@ -26,7 +26,7 @@
             <response code="404">If admin not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Admin.V1.AdminController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Admins 
             </summary>
@@ -37,7 +37,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Admin.V1.AdminController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Admin
             </summary>
@@ -47,7 +47,7 @@
             <response code="404">If admin not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Admin.V1.AdminController.Update(Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin.UpdateAdminCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.Update(Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin.UpdateAdminCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Admin
             </summary>
@@ -58,7 +58,7 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.AddNew(Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse.AddNewCourseCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.AddNew(Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse.AddNewCourseCommand,System.Threading.CancellationToken)">
             <summary>
             Add new Course
             </summary>
@@ -68,7 +68,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Course Info 
             </summary>
@@ -79,7 +79,7 @@
             <response code="404">If Course not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Courses 
             </summary>
@@ -90,7 +90,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Course
             </summary>
@@ -100,7 +100,7 @@
             <response code="404">If Course not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Course.V1.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse.UpdateCourseCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse.UpdateCourseCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Course
             </summary>
@@ -111,10 +111,10 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.AddNew(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer.AddNewLecturerCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.AddNew(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer.AddNewLecturerCommand,System.Threading.CancellationToken)">
             <summary>
             Add new lecturer
-            Sample Phone Number: 044 668 18 00
+            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewLecturerCommand"></param>
             <param name="cancellationToken"></param>
@@ -122,7 +122,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Lecturer Info 
             </summary>
@@ -133,7 +133,7 @@
             <response code="404">If lecturer not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Lecturers 
             </summary>
@@ -144,7 +144,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Lecturer
             </summary>
@@ -154,7 +154,7 @@
             <response code="404">If lecturer not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Lecturer.V1.LecturerController.Update(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer.UpdateLecturerCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.Update(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer.UpdateLecturerCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Lecturer
             </summary>
@@ -165,7 +165,7 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.AddNew(Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod.AddNewPeriodCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.AddNew(Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod.AddNewPeriodCommand,System.Threading.CancellationToken)">
             <summary>
             Add new Period
             </summary>
@@ -175,7 +175,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Period Info 
             </summary>
@@ -186,7 +186,7 @@
             <response code="404">If Period not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Periods 
             </summary>
@@ -197,7 +197,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Period
             </summary>
@@ -207,7 +207,7 @@
             <response code="404">If Period not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Period.V1.PeriodController.Update(Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod.UpdatePeriodCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.Update(Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod.UpdatePeriodCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Period
             </summary>
@@ -218,7 +218,7 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.AddNew(Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection.AddNewSectionCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.AddNew(Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection.AddNewSectionCommand,System.Threading.CancellationToken)">
             <summary>
             Add new Section
             </summary>
@@ -228,7 +228,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Section Info 
             </summary>
@@ -239,7 +239,7 @@
             <response code="404">If Section not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Sections 
             </summary>
@@ -250,7 +250,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Section
             </summary>
@@ -260,7 +260,7 @@
             <response code="404">If Section not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Section.V1.SectionController.Update(Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection.UpdateSectionCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.Update(Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection.UpdateSectionCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Section
             </summary>
@@ -271,10 +271,10 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Add new student
-            Sample Phone Number: 044 668 18 00
+            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewStudentCommand"></param>
             <param name="cancellationToken"></param>
@@ -282,7 +282,7 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Get(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Student Info 
             </summary>
@@ -293,7 +293,7 @@
             <response code="404">If student not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.GetList(System.String,System.Threading.CancellationToken)">
             <summary>
             List Of Students 
             </summary>
@@ -304,7 +304,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Delete(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>
             Delete Student
             </summary>
@@ -314,7 +314,7 @@
             <response code="404">If student not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Controllers.Student.V1.StudentController.Update(Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent.UpdateStudentCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.Update(Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent.UpdateStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Student
             </summary>
@@ -323,6 +323,28 @@
             <response code="204">if update student successfully </response>
             <response code="400">If Validation Failed</response>
             <response code="404">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Lecturers 
+            </summary>
+            <param name="email"></param>
+            <param name="cancellationToken"></param>
+            <returns> Lecturers list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetList(System.String,System.Threading.CancellationToken)">
+            <summary>
+            List Of Students 
+            </summary>
+            <param name="email"></param>
+            <param name="cancellationToken"></param>
+            <returns> Students list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
         <member name="T:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware">

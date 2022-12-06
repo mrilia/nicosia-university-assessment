@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Moq;
-using Nicosia.Assessment.WebApi.Controllers.Student.V1;
+using Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student;
 
 namespace Nicosia.Assessment.AcceptanceTests
 {

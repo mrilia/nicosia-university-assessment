@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.DeleteLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.WebApi.Controllers;
+using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
+namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer
 {
+    [Route("api/deputy/v1/[controller]")]
+    [NicosiaAuthorize("admin")]
     public class LecturerController : BaseController
     {
         private readonly IMediator _mediator;
@@ -23,45 +26,10 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         {
             _mediator = mediator;
         }
-
-        [AllowAnonymousAttribute]
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate(AuthenticateLecturerCommand authenticateLecturerCommand, CancellationToken cancellationToken)
-        {
-            authenticateLecturerCommand.IpAdress = IpAddress();
-            var response = _mediator.Send(authenticateLecturerCommand, cancellationToken).Result.Data;
-            SetTokenCookie(response.RefreshToken);
-            return Ok(response);
-        }
-
-        [AllowAnonymousAttribute]
-        [HttpPost("refresh-token")]
-        public IActionResult RefreshToken(RefreshLecturerTokenCommand refreshLecturerTokenCommand, CancellationToken cancellationToken)
-        {
-            refreshLecturerTokenCommand.IpAdress = IpAddress();
-            refreshLecturerTokenCommand.RefreshToken =
-                refreshLecturerTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
-
-            var response = _mediator.Send(refreshLecturerTokenCommand, cancellationToken).Result.Data;
-
-            SetTokenCookie(response.RefreshToken);
-            return Ok(response);
-        }
-
-        [HttpPost("revoke-token")]
-        public async Task<IActionResult> RevokeToken(RevokeLecturerTokenCommand revokeLecturerTokenCommand, CancellationToken cancellationToken)
-        {
-            // accept refresh token in request body or cookie
-            var token = revokeLecturerTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
-
-            await _mediator.Send(revokeLecturerTokenCommand, cancellationToken);
-
-            return Ok(new { message = "Token revoked" });
-        }
-
+        
         /// <summary>
         /// Add new lecturer
-        /// Sample Phone Number: 044 668 18 00
+        /// Sample Phone Number: +989123123456
         /// </summary>
         /// <param name="addNewLecturerCommand"></param>
         /// <param name="cancellationToken"></param>
@@ -71,6 +39,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         [ProducesResponseType(typeof(LecturerDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewLecturerCommand addNewLecturerCommand,
             CancellationToken cancellationToken)
@@ -97,6 +66,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         [ProducesResponseType(typeof(LecturerDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpGet("{id}", Name = "GetLecturerInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -119,6 +89,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         [ProducesResponseType(typeof(List<LecturerDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpGet("list")]
         public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
             => Ok(await _mediator.Send(new GetLecturerListQuery { Email = email }, cancellationToken));
@@ -137,6 +108,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         [ProducesResponseType(204)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
@@ -163,6 +135,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateLecturerCommand updateLecturerCommand,
             CancellationToken cancellationToken)

@@ -98,6 +98,8 @@ namespace Nicosia.Assessment.WebApi.Installer
                 } });
 
                 options.CustomSchemaIds((Type x) => x.FullName);
+
+                options.EnableAnnotations();
             });
         }
     }

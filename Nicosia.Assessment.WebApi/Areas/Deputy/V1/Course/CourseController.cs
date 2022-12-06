@@ -10,9 +10,14 @@ using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
 using Nicosia.Assessment.Application.Handlers.Course.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.WebApi.Controllers;
+using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
+namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course
 {
+    [Route("api/deputy/v1/[controller]")]
+    [NicosiaAuthorize("admin")]
     public class CourseController : BaseController
     {
         private readonly IMediator _mediator;
@@ -33,6 +38,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
         [ProducesResponseType(typeof(CourseDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewCourseCommand addNewCourseCommand,
             CancellationToken cancellationToken)
@@ -59,6 +65,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
         [ProducesResponseType(typeof(CourseDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpGet("{id}", Name = "GetCourseInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -81,6 +88,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
         [ProducesResponseType(typeof(List<CourseDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpGet("list")]
         public async Task<IActionResult> GetList(string code, CancellationToken cancellationToken)
             => Ok(await _mediator.Send(new GetCourseListQuery { Code = code }, cancellationToken));
@@ -99,6 +107,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
         [ProducesResponseType(204)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
@@ -125,6 +134,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Course.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpPut]
         public async Task<IActionResult> Update(UpdateCourseCommand updateCourseCommand,
             CancellationToken cancellationToken)

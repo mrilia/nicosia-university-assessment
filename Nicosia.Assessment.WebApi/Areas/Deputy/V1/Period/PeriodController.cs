@@ -10,9 +10,14 @@ using Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Dto;
 using Nicosia.Assessment.Application.Handlers.Period.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.WebApi.Controllers;
+using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
-namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
+namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
 {
+    [Route("api/deputy/v1/[controller]")]
+    [NicosiaAuthorize("admin")]
     public class PeriodController : BaseController
     {
         private readonly IMediator _mediator;
@@ -33,6 +38,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(typeof(PeriodDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpPost]
         public async Task<IActionResult> AddNew(AddNewPeriodCommand addNewPeriodCommand,
             CancellationToken cancellationToken)
@@ -59,6 +65,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(typeof(PeriodDto), 200)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpGet("{id}", Name = "GetPeriodInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
@@ -81,6 +88,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(typeof(List<PeriodDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpGet("list")]
         public async Task<IActionResult> GetList(string name, CancellationToken cancellationToken)
             => Ok(await _mediator.Send(new GetPeriodListQuery { Name = name }, cancellationToken));
@@ -99,6 +107,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(204)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
         {
@@ -125,6 +134,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Period.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 404)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpPut]
         public async Task<IActionResult> Update(UpdatePeriodCommand updatePeriodCommand,
             CancellationToken cancellationToken)
