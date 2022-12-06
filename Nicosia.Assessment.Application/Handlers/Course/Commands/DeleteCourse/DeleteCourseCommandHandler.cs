@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,35 +7,33 @@ using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Results;
 
-namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer
+namespace Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse
 {
-    public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand, Result>
+    public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand, Result>
     {
         private readonly ICourseContext _context;
-        private readonly IMapper _mapper;
 
-        public UpdateCourseCommandHandler(ICourseContext context, IMapper mapper)
+        public DeleteCourseCommandHandler(ICourseContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
-        public async Task<Result> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
-            var courseToUpdate = await GetCourseAsync(request, cancellationToken);
+            var course = await GetCourseAsync(request, cancellationToken);
 
-            if (courseToUpdate is null)
+            if (course is null)
                 return Result.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.CourseNotFound)));
 
-            _mapper.Map(request, courseToUpdate);
+            _context.Courses.Remove(course);
 
             await _context.SaveAsync(cancellationToken);
 
             return Result.SuccessFul();
         }
 
-        private async Task<Domain.Models.Course.Course> GetCourseAsync(UpdateCourseCommand request, CancellationToken cancellationToken)
+        private async Task<Domain.Models.Course.Course> GetCourseAsync(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
             return await _context.Courses.SingleOrDefaultAsync(x => x.CourseId == request.CourseId, cancellationToken);
         }

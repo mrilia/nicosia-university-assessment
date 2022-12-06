@@ -4,12 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Nicosia.Assessment.Application.Handlers.Period.Dto;
+using Nicosia.Assessment.Application.Handlers.Period.Queries;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.DeletePeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Dto;
 using Nicosia.Assessment.Application.Handlers.Period.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
@@ -69,7 +72,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
         [HttpGet("{id}", Name = "GetPeriodInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetPeriodQuery { PeriodId = id }, cancellationToken);
+            var result = await _mediator.Send(new GetPeriodByIdQuery { PeriodId = id }, cancellationToken);
 
             return result.ApiResult;
         }
@@ -90,9 +93,14 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string name, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetPeriodListQuery { Name = name }, cancellationToken));
+        public async Task<IActionResult> GetList(GetPeriodListQuery getPeriodListQuery, CancellationToken cancellationToken)
+        {
+            var periods = await _mediator.Send(getPeriodListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getPeriodListQuery, periods.Count);
+            var result = new PaginationResponse<PeriodDto>(periods, periods.Count, nextPageUrl);
 
+            return Ok(result);
+        }
 
 
 

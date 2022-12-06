@@ -6,13 +6,22 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Period.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Period.Queries
 {
-    public class GetPeriodListQuery : IRequest<List<PeriodDto>>
+    public class GetPeriodListQuery : PaginationRequest,IRequest<List<PeriodDto>>
     {
         public string Name { get; set; }
+        public PeriodSort Sort { get; set; }
+
+    }
+    public enum PeriodSort
+    {
+        None,
+        ByNameAsc,
     }
 
 
@@ -36,7 +45,20 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
                 periods = periods.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));
             }
 
-            return _mapper.Map<List<PeriodDto>>(await periods.ToListAsync(cancellationToken));
+            periods = ApplySort(periods, request.Sort);
+
+            return _mapper.Map<List<PeriodDto>>(await periods.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+        }
+
+        private static IQueryable<Domain.Models.Period.Period> ApplySort(IQueryable<Domain.Models.Period.Period> query, PeriodSort sort)
+        {
+            query = sort switch
+            {
+                PeriodSort.ByNameAsc => query.OrderBy(r => r.Name),
+                _ => query
+            };
+
+            return query;
         }
     }
 }

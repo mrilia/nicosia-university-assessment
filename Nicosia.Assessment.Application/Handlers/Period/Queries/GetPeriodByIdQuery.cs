@@ -12,12 +12,12 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Period.Queries
 {
-    public class GetPeriodQuery : IRequest<Result<PeriodDto>>
+    public class GetPeriodByIdQuery : IRequest<Result<PeriodDto>>
     {
         public Guid PeriodId { get; set; }
     }
 
-    public class GetPeriodQueryHandler : IRequestHandler<GetPeriodQuery, Result<PeriodDto>>
+    public class GetPeriodQueryHandler : IRequestHandler<GetPeriodByIdQuery, Result<PeriodDto>>
     {
         private readonly IPeriodContext _context;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<PeriodDto>> Handle(GetPeriodQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PeriodDto>> Handle(GetPeriodByIdQuery request, CancellationToken cancellationToken)
         {
             var period = await _context.Periods.SingleOrDefaultAsync(x => x.PeriodId == request.PeriodId,
                 cancellationToken);

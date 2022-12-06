@@ -4,12 +4,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Nicosia.Assessment.Application.Handlers.Section.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.DeleteSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
@@ -69,7 +72,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
         [HttpGet("{id}", Name = "GetSectionInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetSectionQuery { SectionId = id }, cancellationToken);
+            var result = await _mediator.Send(new GetSectionByIdQuery { SectionId = id }, cancellationToken);
 
             return result.ApiResult;
         }
@@ -90,9 +93,14 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Sections Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string number, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetSectionListQuery { Number = number }, cancellationToken));
+        public async Task<IActionResult> GetList(GetSectionListQuery getSectionListQuery, CancellationToken cancellationToken)
+        {
+            var sections = await _mediator.Send(getSectionListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getSectionListQuery, sections.Count);
+            var result = new PaginationResponse<SectionDto>(sections, sections.Count, nextPageUrl);
 
+            return Ok(result);
+        }
 
 
 

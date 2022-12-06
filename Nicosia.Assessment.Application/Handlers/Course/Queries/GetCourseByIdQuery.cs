@@ -12,12 +12,12 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Course.Queries
 {
-    public class GetCourseQuery : IRequest<Result<CourseDto>>
+    public class GetCourseByIdQuery : IRequest<Result<CourseDto>>
     {
         public Guid CourseId { get; set; }
     }
 
-    public class GetCourseQueryHandler : IRequestHandler<GetCourseQuery, Result<CourseDto>>
+    public class GetCourseQueryHandler : IRequestHandler<GetCourseByIdQuery, Result<CourseDto>>
     {
         private readonly ICourseContext _context;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<CourseDto>> Handle(GetCourseQuery request, CancellationToken cancellationToken)
+        public async Task<Result<CourseDto>> Handle(GetCourseByIdQuery request, CancellationToken cancellationToken)
         {
             var course = await _context.Courses.SingleOrDefaultAsync(x => x.CourseId == request.CourseId,
                 cancellationToken);

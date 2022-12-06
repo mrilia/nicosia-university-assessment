@@ -12,12 +12,12 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Queries
 {
-    public class GetSectionQuery : IRequest<Result<SectionDto>>
+    public class GetSectionByIdQuery : IRequest<Result<SectionDto>>
     {
         public Guid SectionId { get; set; }
     }
 
-    public class GetSectionQueryHandler : IRequestHandler<GetSectionQuery, Result<SectionDto>>
+    public class GetSectionQueryHandler : IRequestHandler<GetSectionByIdQuery, Result<SectionDto>>
     {
         private readonly ISectionContext _context;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
             _mapper = mapper;
         }
 
-        public async Task<Result<SectionDto>> Handle(GetSectionQuery request, CancellationToken cancellationToken)
+        public async Task<Result<SectionDto>> Handle(GetSectionByIdQuery request, CancellationToken cancellationToken)
         {
             var section = await _context.Sections
                 .Include(i=>i.Period)

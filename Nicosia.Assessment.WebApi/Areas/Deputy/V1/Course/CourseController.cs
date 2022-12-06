@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse;
-using Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteLecturer;
-using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer;
+using Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse;
+using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
+using Nicosia.Assessment.Application.Handlers.Course.Dto;
+using Nicosia.Assessment.Application.Handlers.Course.Queries;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
 using Nicosia.Assessment.Application.Handlers.Course.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
@@ -69,7 +72,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course
         [HttpGet("{id}", Name = "GetCourseInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetCourseQuery { CourseId = id }, cancellationToken);
+            var result = await _mediator.Send(new GetCourseByIdQuery { CourseId = id }, cancellationToken);
 
             return result.ApiResult;
         }
@@ -90,9 +93,14 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Courses Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string code, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetCourseListQuery { Code = code }, cancellationToken));
+        public async Task<IActionResult> GetList(GetCourseListQuery getCourseListQuery, CancellationToken cancellationToken)
+        {
+            var courses = await _mediator.Send(getCourseListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getCourseListQuery, courses.Count);
+            var result = new PaginationResponse<CourseDto>(courses, courses.Count, nextPageUrl);
 
+            return Ok(result);
+        }
 
 
 

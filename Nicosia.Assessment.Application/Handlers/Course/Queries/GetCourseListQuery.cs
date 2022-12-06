@@ -6,13 +6,23 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Course.Queries
 {
-    public class GetCourseListQuery : IRequest<List<CourseDto>>
+    public class GetCourseListQuery : PaginationRequest, IRequest<List<CourseDto>>
     {
         public string Code { get; set; }
+        public CourseSort Sort { get; set; }
+
+    }
+    public enum CourseSort
+    {
+        None,
+        ByCodeAsc,
+        ByTitleAsc
     }
 
 
@@ -36,7 +46,21 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
                 courses = courses.Where(x => x.Code.ToLower().Contains(request.Code.ToLower()));
             }
 
-            return _mapper.Map<List<CourseDto>>(await courses.ToListAsync(cancellationToken));
+            courses = ApplySort(courses, request.Sort);
+
+            return _mapper.Map<List<CourseDto>>(await courses.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+        }
+
+        private static IQueryable<Domain.Models.Course.Course> ApplySort(IQueryable<Domain.Models.Course.Course> query, CourseSort sort)
+        {
+            query = sort switch
+            {
+                CourseSort.ByCodeAsc => query.OrderBy(r => r.Code),
+                CourseSort.ByTitleAsc => query.OrderBy(r => r.Title),
+                _ => query
+            };
+
+            return query;
         }
     }
 }

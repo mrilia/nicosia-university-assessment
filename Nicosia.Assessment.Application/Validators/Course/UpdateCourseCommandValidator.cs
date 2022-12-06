@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FluentValidation;
-using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer;
+using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 

@@ -79,7 +79,7 @@
             <response code="404">If Course not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.GetList(Nicosia.Assessment.Application.Handlers.Course.Queries.GetCourseListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Courses 
             </summary>
@@ -100,7 +100,7 @@
             <response code="404">If Course not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer.UpdateCourseCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse.UpdateCourseCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Course
             </summary>
@@ -186,7 +186,7 @@
             <response code="404">If Period not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period.PeriodController.GetList(Nicosia.Assessment.Application.Handlers.Period.Queries.GetPeriodListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Periods 
             </summary>
@@ -239,7 +239,7 @@
             <response code="404">If Section not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.GetList(Nicosia.Assessment.Application.Handlers.Section.Queries.GetSectionListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Sections 
             </summary>
