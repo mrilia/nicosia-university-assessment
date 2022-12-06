@@ -50,7 +50,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
             return _mapper.Map<List<LecturerDto>>(await lecturers.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
         }
 
-        private static IQueryable<Domain.Models.User.Lecturer> ApplySort(IQueryable<Domain.Models.User.Lecturer> query, LecturerSort sort)
+        private static IQueryable<Domain.Models.User.Lecturer> ApplySort(IQueryable<Domain.Models.User.Lecturer> query, LecturerSort sort = LecturerSort.None)
         {
             query = sort switch
             {

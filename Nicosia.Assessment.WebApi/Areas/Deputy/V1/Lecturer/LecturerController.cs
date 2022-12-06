@@ -92,7 +92,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Lecturers Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(GetLecturerListQuery getLecturerListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetList([FromQuery] GetLecturerListQuery getLecturerListQuery, CancellationToken cancellationToken)
         {
             var lecturers = await _mediator.Send(getLecturerListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getLecturerListQuery, lecturers.Count);

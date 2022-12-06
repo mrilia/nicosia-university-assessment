@@ -6,7 +6,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Period.Dto;
-using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
 
@@ -50,7 +49,7 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
             return _mapper.Map<List<PeriodDto>>(await periods.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
         }
 
-        private static IQueryable<Domain.Models.Period.Period> ApplySort(IQueryable<Domain.Models.Period.Period> query, PeriodSort sort)
+        private static IQueryable<Domain.Models.Period.Period> ApplySort(IQueryable<Domain.Models.Period.Period> query, PeriodSort sort = PeriodSort.None)
         {
             query = sort switch
             {

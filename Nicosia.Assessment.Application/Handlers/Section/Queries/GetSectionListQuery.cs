@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
-using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Queries
 {
@@ -54,7 +52,7 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
         }
 
 
-        private static IQueryable<Domain.Models.Section.Section> ApplySort(IQueryable<Domain.Models.Section.Section> query, SectionSort sort)
+        private static IQueryable<Domain.Models.Section.Section> ApplySort(IQueryable<Domain.Models.Section.Section> query, SectionSort sort = SectionSort.None)
         {
             query = sort switch
             {

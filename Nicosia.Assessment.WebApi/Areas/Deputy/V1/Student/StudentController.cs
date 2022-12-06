@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -92,11 +93,11 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] { "Deputy: Students Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetList([FromQuery] GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
         {
             var students = await _mediator.Send(getStudentListQuery, cancellationToken);
-            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.Count);
-            var result = new PaginationResponse<StudentDto>(students, students.Count, nextPageUrl);
+            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.TotalCount);
+            var result = new PaginationResponse<StudentDto>(students.Items, students.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

@@ -6,6 +6,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
+using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
 
@@ -50,7 +51,7 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
             return _mapper.Map<List<AdminDto>>(await admins.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
         }
 
-        private static IQueryable<Domain.Models.User.Admin> ApplySort(IQueryable<Domain.Models.User.Admin> query, AdminSort sort)
+        private static IQueryable<Domain.Models.User.Admin> ApplySort(IQueryable<Domain.Models.User.Admin> query, AdminSort sort = AdminSort.None)
         {
             query = sort switch
             {

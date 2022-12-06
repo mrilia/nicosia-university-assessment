@@ -93,7 +93,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(GetAdminListQuery getAdminListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetList([FromQuery] GetAdminListQuery getAdminListQuery, CancellationToken cancellationToken)
         {
             var admins = await _mediator.Send(getAdminListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getAdminListQuery, admins.Count);

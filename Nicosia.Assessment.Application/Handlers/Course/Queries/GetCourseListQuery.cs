@@ -6,7 +6,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
-using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
 
@@ -51,7 +50,7 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
             return _mapper.Map<List<CourseDto>>(await courses.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
         }
 
-        private static IQueryable<Domain.Models.Course.Course> ApplySort(IQueryable<Domain.Models.Course.Course> query, CourseSort sort)
+        private static IQueryable<Domain.Models.Course.Course> ApplySort(IQueryable<Domain.Models.Course.Course> query, CourseSort sort = CourseSort.None)
         {
             query = sort switch
             {

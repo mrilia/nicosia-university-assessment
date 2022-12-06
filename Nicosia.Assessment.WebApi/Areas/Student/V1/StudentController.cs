@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -35,12 +36,12 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(List<StudentDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
-        [HttpPost("list")]
-        public async Task<IActionResult> GetList(GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
+        [HttpGet("list")]
+        public async Task<IActionResult> GetList([FromQuery] GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
         {
             var students = await _mediator.Send(getStudentListQuery, cancellationToken);
-            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.Count);
-            var result = new PaginationResponse<StudentDto>(students, students.Count, nextPageUrl);
+            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.TotalCount);
+            var result = new PaginationResponse<StudentDto>(students.Items, students.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

@@ -9,8 +9,6 @@ using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.DeleteSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
-using Nicosia.Assessment.Application.Handlers.Section.Dto;
-using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
@@ -93,7 +91,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Sections Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(GetSectionListQuery getSectionListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetList([FromQuery] GetSectionListQuery getSectionListQuery, CancellationToken cancellationToken)
         {
             var sections = await _mediator.Send(getSectionListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getSectionListQuery, sections.Count);

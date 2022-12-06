@@ -9,8 +9,6 @@ using Nicosia.Assessment.Application.Handlers.Period.Queries;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.AddNewPeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.DeletePeriod;
 using Nicosia.Assessment.Application.Handlers.Period.Commands.UpdatePeriod;
-using Nicosia.Assessment.Application.Handlers.Period.Dto;
-using Nicosia.Assessment.Application.Handlers.Period.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
@@ -93,7 +91,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Periods Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(GetPeriodListQuery getPeriodListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetList([FromQuery] GetPeriodListQuery getPeriodListQuery, CancellationToken cancellationToken)
         {
             var periods = await _mediator.Send(getPeriodListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getPeriodListQuery, periods.Count);

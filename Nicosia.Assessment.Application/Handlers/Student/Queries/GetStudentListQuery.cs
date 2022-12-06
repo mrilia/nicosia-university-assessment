@@ -8,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {
-    public class GetStudentListQuery : PaginationRequest, IRequest<List<StudentDto>>
+    public class GetStudentListQuery : PaginationRequest, IRequest<CollectionItems<StudentDto>>
     {
         public string Email { get; set; }
+
         public StudentSort Sort { get; set; }
 
     }
@@ -24,7 +26,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
         ByDateOfBirthAsc
     }
 
-    public class GetStudentListQueryHandler : IRequestHandler<GetStudentListQuery, List<StudentDto>>
+    public class GetStudentListQueryHandler : IRequestHandler<GetStudentListQuery, CollectionItems<StudentDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
@@ -35,7 +37,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<StudentDto>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<StudentDto>> Handle(GetStudentListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.User.Student> students = _context.Students;
 
@@ -45,11 +47,14 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
             }
 
             students = ApplySort(students, request.Sort);
+            var totalCount = await students.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<StudentDto>>(await students.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<StudentDto>>(await students.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<StudentDto>(result, totalCount);
         }
 
-        private static IQueryable<Domain.Models.User.Student> ApplySort(IQueryable<Domain.Models.User.Student> query, StudentSort sort)
+        private static IQueryable<Domain.Models.User.Student> ApplySort(IQueryable<Domain.Models.User.Student> query, StudentSort sort = StudentSort.None)
         {
             query = sort switch
             {
