@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate;
@@ -13,6 +12,8 @@ using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Admin.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Domain.Models.User;
+using Nicosia.Assessment.WebApi.Filters;
 
 namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
 {
@@ -25,7 +26,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
             _mediator = mediator;
         }
 
-        [AllowAnonymous]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand, CancellationToken cancellationToken)
         {
@@ -35,7 +36,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
             return Ok(response);
         }
 
-        [AllowAnonymous]
+        [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken(RefreshAdminTokenCommand refreshAdminTokenCommand, CancellationToken cancellationToken)
         {
@@ -117,6 +118,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Admin.V1
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
+        [NicosiaAuthorizeAttribute("admin")]
         [ProducesResponseType(typeof(List<AdminDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]

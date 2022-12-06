@@ -4,7 +4,7 @@ using Nicosia.Assessment.Domain.Models.Period;
 
 namespace Nicosia.Assessment.Persistence.Configurations
 {
-    internal class PeriodConfiguration : IEntityTypeConfiguration<Period>
+    public class PeriodConfiguration : IEntityTypeConfiguration<Period>
     {
         public void Configure(EntityTypeBuilder<Period> builder)
         {

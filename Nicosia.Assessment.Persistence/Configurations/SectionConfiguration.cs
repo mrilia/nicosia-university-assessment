@@ -4,7 +4,7 @@ using Nicosia.Assessment.Domain.Models.Section;
 
 namespace Nicosia.Assessment.Persistence.Configurations
 {
-    internal class SectionConfiguration : IEntityTypeConfiguration<Section>
+    public class SectionConfiguration : IEntityTypeConfiguration<Section>
     {
         public void Configure(EntityTypeBuilder<Section> builder)
         {

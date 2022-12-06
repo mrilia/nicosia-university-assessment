@@ -1,6 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 using MediatR;
-using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate

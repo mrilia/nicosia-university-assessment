@@ -4,7 +4,7 @@ using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Persistence.Configurations
 {
-    internal class AdminConfiguration : IEntityTypeConfiguration<Admin>
+    public class AdminConfiguration : IEntityTypeConfiguration<Admin>
     {
         public void Configure(EntityTypeBuilder<Admin> builder)
         {

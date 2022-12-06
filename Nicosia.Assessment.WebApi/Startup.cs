@@ -53,7 +53,7 @@ namespace Nicosia.Assessment.WebApi
 
             // custom jwt auth middleware
             app.UseMiddleware<JwtMiddleware>();
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
-using Nicosia.Assessment.Domain.Models.Security;
 
 namespace Nicosia.Assessment.Application.Validators.Lecturer
 {

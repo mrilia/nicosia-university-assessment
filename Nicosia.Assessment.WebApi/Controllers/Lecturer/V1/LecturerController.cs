@@ -24,7 +24,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
             _mediator = mediator;
         }
 
-        [AllowAnonymous]
+        [AllowAnonymousAttribute]
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateLecturerCommand authenticateLecturerCommand, CancellationToken cancellationToken)
         {
@@ -34,7 +34,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Lecturer.V1
             return Ok(response);
         }
 
-        [AllowAnonymous]
+        [AllowAnonymousAttribute]
         [HttpPost("refresh-token")]
         public IActionResult RefreshToken(RefreshLecturerTokenCommand refreshLecturerTokenCommand, CancellationToken cancellationToken)
         {

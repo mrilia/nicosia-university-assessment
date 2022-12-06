@@ -4,7 +4,7 @@ using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Persistence.Configurations
 {
-    internal class LecturerConfiguration : IEntityTypeConfiguration<Lecturer>
+    public class LecturerConfiguration : IEntityTypeConfiguration<Lecturer>
     {
         public void Configure(EntityTypeBuilder<Lecturer> builder)
         {

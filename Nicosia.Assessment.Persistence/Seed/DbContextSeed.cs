@@ -10,7 +10,7 @@ using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Persistence.Seed
 {
-    internal class DbContextSeed
+    public class DbContextSeed
     {
         private static readonly List<Admin> SampleAdmins = new List<Admin>()
         {

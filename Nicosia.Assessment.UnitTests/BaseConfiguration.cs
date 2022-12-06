@@ -13,13 +13,13 @@ namespace Nicosia.Assessment.AcceptanceTests
             _mediator = new Mock<IMediator>().Object;
         }
 
-        internal BaseConfiguration WithMediatorService(IMediator mediator)
+        public BaseConfiguration WithMediatorService(IMediator mediator)
         {
             _mediator = mediator;
             return this;
         }
 
-        internal StudentController BuildStudentController() => new(_mediator);
+        public StudentController BuildStudentController() => new(_mediator);
 
     }
 }

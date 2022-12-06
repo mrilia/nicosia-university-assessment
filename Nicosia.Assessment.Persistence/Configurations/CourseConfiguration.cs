@@ -4,7 +4,7 @@ using Nicosia.Assessment.Domain.Models.Course;
 
 namespace Nicosia.Assessment.Persistence.Configurations
 {
-    internal class CourserConfiguration : IEntityTypeConfiguration<Course>
+    public class CourserConfiguration : IEntityTypeConfiguration<Course>
     {
         public void Configure(EntityTypeBuilder<Course> builder)
         {
