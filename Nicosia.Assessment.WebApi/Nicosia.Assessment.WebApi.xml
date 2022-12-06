@@ -26,7 +26,7 @@
             <response code="404">If admin not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.GetList(Nicosia.Assessment.Application.Handlers.Admin.Queries.GetAdminListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Admins 
             </summary>
@@ -133,7 +133,7 @@
             <response code="404">If lecturer not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.GetList(Nicosia.Assessment.Application.Handlers.Lecturer.Queries.GetLecturerListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Lecturers 
             </summary>
@@ -293,7 +293,7 @@
             <response code="404">If student not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.GetList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetStudentListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Students 
             </summary>

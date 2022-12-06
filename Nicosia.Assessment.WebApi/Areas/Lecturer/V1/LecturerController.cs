@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer;
-using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.DeleteLecturer;
-using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Queries;
 using Nicosia.Assessment.Application.Messages;

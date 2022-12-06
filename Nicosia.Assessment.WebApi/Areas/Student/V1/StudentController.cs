@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
-using Nicosia.Assessment.Application.Handlers.Student.Commands.DeleteStudent;
-using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
 
 namespace Nicosia.Assessment.WebApi.Areas.Student.V1
 {

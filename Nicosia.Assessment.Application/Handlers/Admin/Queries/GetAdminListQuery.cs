@@ -7,12 +7,21 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
 {
-    public class GetAdminListQuery : IRequest<List<AdminDto>>
+    public class GetAdminListQuery : PaginationRequest, IRequest<List<AdminDto>>
     {
         public string Email { get; set; }
+        public AdminSort Sort { get; set; }
+
+    }
+    public enum AdminSort
+    {
+        None,
+        ByNameAsc,
+        ByDateOfBirthAsc
     }
 
 
@@ -36,7 +45,21 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
                 admins = admins.Where(x => x.Email.ToLower().Contains(request.Email.ToLower()));
             }
 
-            return _mapper.Map<List<AdminDto>>(await admins.ToListAsync(cancellationToken));
+            admins = ApplySort(admins, request.Sort);
+
+            return _mapper.Map<List<AdminDto>>(await admins.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+        }
+
+        private static IQueryable<Domain.Models.User.Admin> ApplySort(IQueryable<Domain.Models.User.Admin> query, AdminSort sort)
+        {
+            query = sort switch
+            {
+                AdminSort.ByNameAsc => query.OrderBy(r => r.Lastname).ThenBy(r => r.Firstname),
+                AdminSort.ByDateOfBirthAsc => query.OrderBy(r => r.DateOfBirth),
+                _ => query
+            };
+
+            return query;
         }
     }
 }

@@ -10,6 +10,7 @@ using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Admin.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
@@ -92,9 +93,14 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] {"Deputy: Admin Users Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetAdminListQuery { Email = email }, cancellationToken));
+        public async Task<IActionResult> GetList(GetAdminListQuery getAdminListQuery, CancellationToken cancellationToken)
+        {
+            var admins = await _mediator.Send(getAdminListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getAdminListQuery, admins.Count);
+            var result = new PaginationResponse<AdminDto>(admins, admins.Count, nextPageUrl);
 
+            return Ok(result);
+        }
 
 
 

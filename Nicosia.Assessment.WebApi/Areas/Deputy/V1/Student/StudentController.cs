@@ -10,6 +10,7 @@ using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
@@ -91,9 +92,14 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [SwaggerOperation(Tags = new[] { "Deputy: Students Operations" })]
         [HttpGet("list")]
-        public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetStudentListQuery { Email = email }, cancellationToken));
+        public async Task<IActionResult> GetList(GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
+        {
+            var students = await _mediator.Send(getStudentListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.Count);
+            var result = new PaginationResponse<StudentDto>(students, students.Count, nextPageUrl);
 
+            return Ok(result);
+        }
 
 
 
