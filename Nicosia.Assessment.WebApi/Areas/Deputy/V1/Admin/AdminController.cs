@@ -9,6 +9,7 @@ using Nicosia.Assessment.Application.Handlers.Admin.Commands.DeleteAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Admin.Queries;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
@@ -96,8 +97,8 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
         public async Task<IActionResult> GetList([FromQuery] GetAdminListQuery getAdminListQuery, CancellationToken cancellationToken)
         {
             var admins = await _mediator.Send(getAdminListQuery, cancellationToken);
-            var nextPageUrl = GetNextPageUrl(getAdminListQuery, admins.Count);
-            var result = new PaginationResponse<AdminDto>(admins, admins.Count, nextPageUrl);
+            var nextPageUrl = GetNextPageUrl(getAdminListQuery, admins.TotalCount);
+            var result = new PaginationResponse<AdminDto>(admins.Items, admins.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

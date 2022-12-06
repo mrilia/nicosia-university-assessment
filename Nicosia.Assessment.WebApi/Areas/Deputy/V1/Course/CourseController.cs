@@ -9,6 +9,7 @@ using Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
 using Nicosia.Assessment.Application.Handlers.Course.Queries;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
@@ -94,8 +95,8 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course
         public async Task<IActionResult> GetList(GetCourseListQuery getCourseListQuery, CancellationToken cancellationToken)
         {
             var courses = await _mediator.Send(getCourseListQuery, cancellationToken);
-            var nextPageUrl = GetNextPageUrl(getCourseListQuery, courses.Count);
-            var result = new PaginationResponse<CourseDto>(courses, courses.Count, nextPageUrl);
+            var nextPageUrl = GetNextPageUrl(getCourseListQuery, courses.TotalCount);
+            var result = new PaginationResponse<CourseDto>(courses.Items, courses.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

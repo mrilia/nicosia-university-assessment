@@ -11,7 +11,7 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
 {
-    public class GetLecturerListQuery : PaginationRequest, IRequest<List<LecturerDto>>
+    public class GetLecturerListQuery : PaginationRequest, IRequest<CollectionItems<LecturerDto>>
     {
         public string Email { get; set; }
         public LecturerSort Sort { get; set; }
@@ -25,7 +25,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
     }
 
 
-    public class GetLecturerListQueryHandler : IRequestHandler<GetLecturerListQuery, List<LecturerDto>>
+    public class GetLecturerListQueryHandler : IRequestHandler<GetLecturerListQuery, CollectionItems<LecturerDto>>
     {
         private readonly ILecturerContext _context;
         private readonly IMapper _mapper;
@@ -36,7 +36,7 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<LecturerDto>> Handle(GetLecturerListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<LecturerDto>> Handle(GetLecturerListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.User.Lecturer> lecturers = _context.Lecturers;
 
@@ -46,8 +46,11 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Queries
             }
 
             lecturers = ApplySort(lecturers, request.Sort);
+            var totalCount = await lecturers.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<LecturerDto>>(await lecturers.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<LecturerDto>>(await lecturers.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<LecturerDto>(result, totalCount);
         }
 
         private static IQueryable<Domain.Models.User.Lecturer> ApplySort(IQueryable<Domain.Models.User.Lecturer> query, LecturerSort sort = LecturerSort.None)

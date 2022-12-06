@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {

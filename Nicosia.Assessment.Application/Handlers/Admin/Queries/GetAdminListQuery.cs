@@ -6,13 +6,12 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
-using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
 {
-    public class GetAdminListQuery : PaginationRequest, IRequest<List<AdminDto>>
+    public class GetAdminListQuery : PaginationRequest, IRequest<CollectionItems<AdminDto>>
     {
         public string Email { get; set; }
         public AdminSort Sort { get; set; }
@@ -26,7 +25,7 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
     }
 
 
-    public class GetAdminListQueryHandler : IRequestHandler<GetAdminListQuery, List<AdminDto>>
+    public class GetAdminListQueryHandler : IRequestHandler<GetAdminListQuery, CollectionItems<AdminDto>>
     {
         private readonly IAdminContext _context;
         private readonly IMapper _mapper;
@@ -37,7 +36,7 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<AdminDto>> Handle(GetAdminListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<AdminDto>> Handle(GetAdminListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.User.Admin> admins = _context.Admins;
 
@@ -47,8 +46,11 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
             }
 
             admins = ApplySort(admins, request.Sort);
+            var totalCount = await admins.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<AdminDto>>(await admins.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<AdminDto>>(await admins.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<AdminDto>(result, totalCount);
         }
 
         private static IQueryable<Domain.Models.User.Admin> ApplySort(IQueryable<Domain.Models.User.Admin> query, AdminSort sort = AdminSort.None)

@@ -11,7 +11,7 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Course.Queries
 {
-    public class GetCourseListQuery : PaginationRequest, IRequest<List<CourseDto>>
+    public class GetCourseListQuery : PaginationRequest, IRequest<CollectionItems<CourseDto>>
     {
         public string Code { get; set; }
         public CourseSort Sort { get; set; }
@@ -25,7 +25,7 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
     }
 
 
-    public class GetCourseListQueryHandler : IRequestHandler<GetCourseListQuery, List<CourseDto>>
+    public class GetCourseListQueryHandler : IRequestHandler<GetCourseListQuery, CollectionItems<CourseDto>>
     {
         private readonly ICourseContext _context;
         private readonly IMapper _mapper;
@@ -36,7 +36,7 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<CourseDto>> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<CourseDto>> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.Course.Course> courses = _context.Courses;
 
@@ -46,8 +46,11 @@ namespace Nicosia.Assessment.Application.Handlers.Course.Queries
             }
 
             courses = ApplySort(courses, request.Sort);
+            var totalCount = await courses.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<CourseDto>>(await courses.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<CourseDto>>(await courses.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<CourseDto>(result, totalCount);
         }
 
         private static IQueryable<Domain.Models.Course.Course> ApplySort(IQueryable<Domain.Models.Course.Course> query, CourseSort sort = CourseSort.None)

@@ -11,7 +11,7 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Queries
 {
-    public class GetSectionListQuery : PaginationRequest, IRequest<List<SectionDto>>
+    public class GetSectionListQuery : PaginationRequest, IRequest<CollectionItems<SectionDto>>
     {
         public string Number { get; set; }
         public SectionSort Sort { get; set; }
@@ -24,7 +24,7 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
     }
 
 
-    public class GetSectionListQueryHandler : IRequestHandler<GetSectionListQuery, List<SectionDto>>
+    public class GetSectionListQueryHandler : IRequestHandler<GetSectionListQuery, CollectionItems<SectionDto>>
     {
         private readonly ISectionContext _context;
         private readonly IMapper _mapper;
@@ -35,7 +35,7 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<SectionDto>> Handle(GetSectionListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<SectionDto>> Handle(GetSectionListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.Section.Section> sections = _context.Sections
                                                                             .Include(i => i.Course)
@@ -47,8 +47,11 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
             }
 
             sections = ApplySort(sections, request.Sort);
+            var totalCount = await sections.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<SectionDto>>(await sections.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<SectionDto>>(await sections.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<SectionDto>(result, totalCount);
         }
 
 

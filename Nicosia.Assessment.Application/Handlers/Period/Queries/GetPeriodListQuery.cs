@@ -11,7 +11,7 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Period.Queries
 {
-    public class GetPeriodListQuery : PaginationRequest,IRequest<List<PeriodDto>>
+    public class GetPeriodListQuery : PaginationRequest,IRequest<CollectionItems<PeriodDto>>
     {
         public string Name { get; set; }
         public PeriodSort Sort { get; set; }
@@ -24,7 +24,7 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
     }
 
 
-    public class GetPeriodListQueryHandler : IRequestHandler<GetPeriodListQuery, List<PeriodDto>>
+    public class GetPeriodListQueryHandler : IRequestHandler<GetPeriodListQuery, CollectionItems<PeriodDto>>
     {
         private readonly IPeriodContext _context;
         private readonly IMapper _mapper;
@@ -35,7 +35,7 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<PeriodDto>> Handle(GetPeriodListQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<PeriodDto>> Handle(GetPeriodListQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.Period.Period> periods = _context.Periods;
 
@@ -45,8 +45,11 @@ namespace Nicosia.Assessment.Application.Handlers.Period.Queries
             }
 
             periods = ApplySort(periods, request.Sort);
+            var totalCount = await periods.LongCountAsync(cancellationToken: cancellationToken);
 
-            return _mapper.Map<List<PeriodDto>>(await periods.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<PeriodDto>>(await periods.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+
+            return new CollectionItems<PeriodDto>(result, totalCount);
         }
 
         private static IQueryable<Domain.Models.Period.Period> ApplySort(IQueryable<Domain.Models.Period.Period> query, PeriodSort sort = PeriodSort.None)

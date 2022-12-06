@@ -14,6 +14,7 @@ using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
 {
@@ -94,8 +95,8 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
         public async Task<IActionResult> GetList([FromQuery] GetPeriodListQuery getPeriodListQuery, CancellationToken cancellationToken)
         {
             var periods = await _mediator.Send(getPeriodListQuery, cancellationToken);
-            var nextPageUrl = GetNextPageUrl(getPeriodListQuery, periods.Count);
-            var result = new PaginationResponse<PeriodDto>(periods, periods.Count, nextPageUrl);
+            var nextPageUrl = GetNextPageUrl(getPeriodListQuery, periods.TotalCount);
+            var result = new PaginationResponse<PeriodDto>(periods.Items, periods.TotalCount, nextPageUrl);
 
             return Ok(result);
         }
