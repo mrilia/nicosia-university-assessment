@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -12,25 +12,25 @@ using Nicosia.Assessment.Application.Results;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {
-    public class GetStudentQuery : IRequest<Result<StudentDto>>
+    public class GetStudentByRefreshTokenQuery : IRequest<Result<StudentDto>>
     {
-        public Guid StudentId { get; set; }
+        public string RefreshToken { get; set; }
     }
 
-    public class GetStudentQueryHandler : IRequestHandler<GetStudentQuery, Result<StudentDto>>
+    public class GetStudentByRefreshTokenHandler : IRequestHandler<GetStudentByRefreshTokenQuery, Result<StudentDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
 
-        public GetStudentQueryHandler(IStudentContext context, IMapper mapper)
+        public GetStudentByRefreshTokenHandler(IStudentContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<Result<StudentDto>> Handle(GetStudentQuery request, CancellationToken cancellationToken)
+        public async Task<Result<StudentDto>> Handle(GetStudentByRefreshTokenQuery request, CancellationToken cancellationToken)
         {
-            var student = await _context.Students.SingleOrDefaultAsync(x => x.StudentId == request.StudentId,
+            var student = await _context.Students.SingleOrDefaultAsync(x => x.RefreshTokens.Any(s=>s.Token == request.RefreshToken),
                 cancellationToken);
 
             if (student is null)

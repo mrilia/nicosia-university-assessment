@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.Authenticate;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.DeleteStudent;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
@@ -20,6 +22,41 @@ namespace Nicosia.Assessment.WebApi.Controllers.Student.V1
         public StudentController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [AllowAnonymous]
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(AuthenticateStudentCommand authenticateStudentCommand, CancellationToken cancellationToken)
+        {
+            authenticateStudentCommand.IpAdress = IpAddress();
+            var response = _mediator.Send(authenticateStudentCommand, cancellationToken).Result.Data;
+            SetTokenCookie(response.RefreshToken);
+            return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("refresh-token")]
+        public IActionResult RefreshToken(RefreshStudentTokenCommand refreshStudentTokenCommand, CancellationToken cancellationToken)
+        {
+            refreshStudentTokenCommand.IpAdress = IpAddress();
+            refreshStudentTokenCommand.RefreshToken =
+                refreshStudentTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
+
+            var response = _mediator.Send(refreshStudentTokenCommand, cancellationToken).Result.Data;
+
+            SetTokenCookie(response.RefreshToken);
+            return Ok(response);
+        }
+
+        [HttpPost("revoke-token")]
+        public async Task<IActionResult> RevokeToken(RevokeStudentTokenCommand revokeStudentTokenCommand, CancellationToken cancellationToken)
+        {
+            // accept refresh token in request body or cookie
+            var token = revokeStudentTokenCommand.RefreshToken ?? Request.Cookies["refreshToken"];
+
+            await _mediator.Send(revokeStudentTokenCommand, cancellationToken);
+
+            return Ok(new { message = "Token revoked" });
         }
 
         /// <summary>
@@ -63,7 +100,7 @@ namespace Nicosia.Assessment.WebApi.Controllers.Student.V1
         [HttpGet("{id}", Name = "GetStudentInfo")]
         public async Task<IActionResult> Get(Guid id, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(new GetStudentQuery { StudentId = id }, cancellationToken);
+            var result = await _mediator.Send(new GetStudentByIdQuery { StudentId = id }, cancellationToken);
 
             return result.ApiResult;
         }

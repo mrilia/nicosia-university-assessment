@@ -40,7 +40,7 @@ namespace Nicosia.Assessment.WebApi.Middleware
                         context.Items["User"] = _mediator.Send(new GetLecturerByIdQuery{ LecturerId = jwtTokenValidationResult.UserId }).Result.Data;
                         break;
                     case "student":
-                        context.Items["User"] = _mediator.Send(new GetStudentQuery() { StudentId = jwtTokenValidationResult.UserId }).Result.Data;
+                        context.Items["User"] = _mediator.Send(new GetStudentByIdQuery() { StudentId = jwtTokenValidationResult.UserId }).Result.Data;
                         break;
                 }
                 // attach user to context on successful jwt validation

@@ -20,7 +20,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Student
         {
             var mockData = new Mock<IMediator>();
 
-            mockData.Setup(x => x.Send(It.IsAny<GetStudentQuery>(), It.IsAny<CancellationToken>()))
+            mockData.Setup(x => x.Send(It.IsAny<GetStudentByIdQuery>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(
                     Result<StudentDto>.Failed(new NotFoundObjectResult(new ApiMessage(ResponseMessage.StudentNotFound))));
 
