@@ -1,4 +1,4 @@
-﻿namespace Nicosia.Assessment.WebApi.Models;
+﻿namespace Nicosia.Assessment.Application.Models;
 
 public enum MessageType
 {

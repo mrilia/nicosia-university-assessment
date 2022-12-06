@@ -100,7 +100,7 @@
             <response code="404">If Course not found</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse.UpdateCourseCommand,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course.CourseController.Update(Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer.UpdateCourseCommand,System.Threading.CancellationToken)">
             <summary>
             Update  Course
             </summary>
@@ -336,7 +336,7 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetStudentListQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Students 
             </summary>

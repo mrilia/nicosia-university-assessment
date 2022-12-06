@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Nicosia.Assessment.Presentation.Front.Models
+namespace Nicosia.Assessment.WebUI.Models
 {
     public class CreateStudent
     {

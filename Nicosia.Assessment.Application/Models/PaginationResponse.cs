@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Nicosia.Assessment.WebApi.Models;
+namespace Nicosia.Assessment.Application.Models;
 
 public class PaginationResponse<T> : Response<CollectionResponse<T>>
 {

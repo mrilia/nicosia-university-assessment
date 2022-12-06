@@ -8,7 +8,7 @@ using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Results;
 
-namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse
+namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer
 {
     public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand, Result>
     {

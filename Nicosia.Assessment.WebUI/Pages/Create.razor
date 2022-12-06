@@ -1,11 +1,11 @@
 ﻿@page "/create/{id:long}"
 @page "/create"
+@using Nicosia.Assessment.WebUI.Models
 
 <h1 class="bg-info text-white">@Title</h1>
 <h2 class="p-2">@Message</h2>
 
 <hr />
-@using Nicosia.Assessment.Presentation.Front.Models
 @inject HttpClient Http
 @inject NavigationManager _navigationManager
 

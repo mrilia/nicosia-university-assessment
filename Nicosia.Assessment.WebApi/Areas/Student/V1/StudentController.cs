@@ -10,13 +10,14 @@ using Nicosia.Assessment.Application.Handlers.Student.Commands.UpdateStudent;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
+using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 
 namespace Nicosia.Assessment.WebApi.Areas.Student.V1
 {
     [Route("api/student/v1/[controller]")]
-    [NicosiaAuthorize("student")]
+    //[NicosiaAuthorize("student")]
     public class StudentController : BaseController
     {
         private readonly IMediator _mediator;
@@ -25,7 +26,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         {
             _mediator = mediator;
         }
-        
+
 
         /// <summary>
         /// List Of Students 
@@ -39,9 +40,15 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(List<StudentDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
-        [HttpGet("list")]
-        public async Task<IActionResult> GetList(string email, CancellationToken cancellationToken)
-            => Ok(await _mediator.Send(new GetStudentListQuery { Email = email }, cancellationToken));
+        [HttpPost("list")]
+        public async Task<IActionResult> GetList(GetStudentListQuery getStudentListQuery, CancellationToken cancellationToken)
+        {
+            var students = await _mediator.Send(getStudentListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.Count);
+            var result = new PaginationResponse<StudentDto>(students, students.Count, nextPageUrl);
+
+            return Ok(result);
+        }
 
         
     }

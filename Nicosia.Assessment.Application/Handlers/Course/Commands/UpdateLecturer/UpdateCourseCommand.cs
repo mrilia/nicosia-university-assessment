@@ -2,7 +2,7 @@
 using MediatR;
 using Nicosia.Assessment.Application.Results;
 
-namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse
+namespace Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateLecturer
 {
     public class UpdateCourseCommand : IRequest<Result>
     {

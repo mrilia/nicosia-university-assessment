@@ -1,8 +1,7 @@
-﻿namespace Nicosia.Assessment.WebApi.Models;
+﻿namespace Nicosia.Assessment.Application.Models;
 
 public class PaginationRequest
 {
-    public string Keyword { get; set; }
     public int Offset { get; set; } = 0;
     public int Count { get; set; } = 20;
 
@@ -10,7 +9,6 @@ public class PaginationRequest
     {
         return new PaginationFilter
         {
-            Keyword = Keyword,
             Offset = Offset,
             Count = Count
         };
@@ -20,7 +18,6 @@ public class PaginationRequest
     {
         return new T
         {
-            Keyword = Keyword,
             Offset = Offset,
             Count = Count
         };

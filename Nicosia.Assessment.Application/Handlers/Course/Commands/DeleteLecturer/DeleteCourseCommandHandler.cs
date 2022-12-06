@@ -7,7 +7,7 @@ using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Results;
 
-namespace Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse
+namespace Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteLecturer
 {
     public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand, Result>
     {

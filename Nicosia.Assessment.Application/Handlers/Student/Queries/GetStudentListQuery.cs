@@ -7,14 +7,23 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Application.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {
-    public class GetStudentListQuery : IRequest<List<StudentDto>>
+    public class GetStudentListQuery : PaginationRequest, IRequest<List<StudentDto>>
     {
         public string Email { get; set; }
-    }
+        public StudentSort Sort { get; set; }
 
+    }
+    public enum StudentSort
+    {
+        None,
+        ByNameAsc,
+        ByDateOfBirthAsc
+    }
 
     public class GetStudentListQueryHandler : IRequestHandler<GetStudentListQuery, List<StudentDto>>
     {
@@ -36,7 +45,21 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
                 students = students.Where(x => x.Email.ToLower().Contains(request.Email.ToLower()));
             }
 
-            return _mapper.Map<List<StudentDto>>(await students.ToListAsync(cancellationToken));
+            students = ApplySort(students, request.Sort);
+
+            return _mapper.Map<List<StudentDto>>(await students.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+        }
+
+        private static IQueryable<Domain.Models.User.Student> ApplySort(IQueryable<Domain.Models.User.Student> query, StudentSort sort)
+        {
+            query = sort switch
+            {
+                StudentSort.ByNameAsc => query.OrderBy(r => r.Lastname).ThenBy(r => r.Firstname),
+                StudentSort.ByDateOfBirthAsc => query.OrderBy(r => r.DateOfBirth),
+                _ => query
+            };
+
+            return query;
         }
     }
 }
