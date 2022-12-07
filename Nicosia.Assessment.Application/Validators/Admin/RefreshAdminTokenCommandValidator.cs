@@ -23,8 +23,13 @@ namespace Nicosia.Assessment.Application.Validators.Admin
             RuleFor(dto => dto)
                 .Must(TokenExists).WithMessage(ResponseMessage.TokenNotFound)
                 .Must(TokenBeActive).WithMessage(ResponseMessage.TokenIsNotActive);
+
+            RuleFor(dto => dto.IpAdress)
+                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
+                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
+
         }
-        
+
         private bool TokenExists(RefreshAdminTokenCommand tokenToCheck)
         {
             return _context.Admins.Any(x => x.RefreshTokens.Any(s => s.Token == tokenToCheck.RefreshToken));

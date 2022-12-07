@@ -23,8 +23,12 @@ namespace Nicosia.Assessment.Application.Validators.Lecturer
             RuleFor(dto => dto)
                 .Must(TokenExists).WithMessage(ResponseMessage.TokenNotFound)
                 .Must(TokenBeActive).WithMessage(ResponseMessage.TokenIsNotActive);
+
+            RuleFor(dto => dto.IpAdress)
+                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
+                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
         }
-        
+
         private bool TokenExists(RefreshLecturerTokenCommand tokenToCheck)
         {
             return _context.Lecturers.Any(x => x.RefreshTokens.Any(s => s.Token == tokenToCheck.RefreshToken));

@@ -25,6 +25,10 @@ namespace Nicosia.Assessment.Application.Validators.Admin
                 .NotEmpty().WithMessage(ResponseMessage.PasswordIsRequired)
                 .NotNull().WithMessage(ResponseMessage.PasswordIsRequired);
             
+            RuleFor(dto => dto.IpAdress)
+                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
+                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
+            
             RuleFor(dto => dto)
                 .Must(AdminExists).WithMessage(ResponseMessage.UsernamePasswordInvalid);
         }
