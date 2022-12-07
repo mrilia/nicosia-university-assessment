@@ -24,19 +24,19 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection
         {
             try
             {
-var sectionToAdd = _mapper.Map<Domain.Models.Section.Section>(request);
+                var sectionToAdd = _mapper.Map<Domain.Models.Section.Section>(request);
 
-            await _context.Sections.AddAsync(sectionToAdd, cancellationToken);
-            await _context.SaveAsync(cancellationToken);
+                await _context.Sections.AddAsync(sectionToAdd, cancellationToken);
+                await _context.SaveAsync(cancellationToken);
 
-            return Result<SectionDto>.SuccessFul(_mapper.Map<SectionDto>(sectionToAdd));
+                return Result<SectionDto>.SuccessFul(_mapper.Map<SectionDto>(sectionToAdd));
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-            
+
         }
     }
 }

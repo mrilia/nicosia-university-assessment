@@ -14,7 +14,6 @@ using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
 {

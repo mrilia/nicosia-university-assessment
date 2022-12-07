@@ -24,6 +24,10 @@ namespace Nicosia.Assessment.Application.Validators.Student
                 .NotEmpty().WithMessage(ResponseMessage.LastnameIsRequired)
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
 
+            RuleFor(dto => dto.DateOfBirth)
+                .NotEmpty().WithMessage(ResponseMessage.DateOfBirthIsRequired)
+                .NotNull().WithMessage(ResponseMessage.DateOfBirthIsRequired);
+
             RuleFor(dto => dto)
                 .Must(StudentNotExists).WithMessage(ResponseMessage.StudentExists).WithErrorCode("201")
                 .Must(EmailNotExists).WithMessage(ResponseMessage.EmailExists).WithErrorCode("202");

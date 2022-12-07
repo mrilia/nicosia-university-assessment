@@ -9,7 +9,6 @@ using Nicosia.Assessment.Application.Handlers.Course.Commands.DeleteCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
 using Nicosia.Assessment.Application.Handlers.Course.Queries;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;

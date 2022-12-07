@@ -1,9 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using AutoMapper;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Domain.Models.Section;
+using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.AutoMapper
 {
@@ -11,6 +14,7 @@ namespace Nicosia.Assessment.Application.AutoMapper
     {
         private readonly IPeriodContext _periodContext;
         private readonly ICourseContext _courseContext;
+
         public SectionMappingProfile(IPeriodContext periodContext, ICourseContext courseContext)
         {
             _periodContext = periodContext;
@@ -26,6 +30,8 @@ namespace Nicosia.Assessment.Application.AutoMapper
 
             CreateMap<AddNewSectionCommand, Section>();
             CreateMap<UpdateSectionCommand, Section>();
+            CreateMap<Section, ClassDto>();
         }
     }
 }
+

@@ -9,7 +9,6 @@ using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.DeleteLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Queries;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;

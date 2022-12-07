@@ -9,7 +9,6 @@ using Nicosia.Assessment.Application.Handlers.Admin.Commands.DeleteAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.UpdateAdmin;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Admin.Queries;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;

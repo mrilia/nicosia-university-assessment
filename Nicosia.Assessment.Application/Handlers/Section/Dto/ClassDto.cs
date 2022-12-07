@@ -3,14 +3,11 @@ using System.Collections.Generic;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Dto
 {
-    public class SectionDto
+    public class ClassDto
     {
         public Guid SectionId { get; set; }
         public string Number { get; set; }
         public string Details { get; set; }
-
-        public Guid PeriodId { get; set; }
-        public Guid CourseId { get; set; }
 
         public virtual Domain.Models.Period.Period Period { get; set; }
         public virtual Domain.Models.Course.Course Course { get; set; }

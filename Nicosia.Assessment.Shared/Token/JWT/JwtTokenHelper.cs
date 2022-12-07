@@ -13,7 +13,7 @@ namespace Nicosia.Assessment.Shared.Token.JWT
     {
         public static string GenerateJwtToken(Guid userId, string userRole, string secretKey)
         {
-            // generate token that is valid for 15 minutes
+            // generate token that is valid for 30 minutes
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -23,7 +23,7 @@ namespace Nicosia.Assessment.Shared.Token.JWT
                     new Claim("userId", userId.ToString()),
                     new Claim("userRole", userRole.ToLower().Trim()),
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(15),
+                Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)
             };

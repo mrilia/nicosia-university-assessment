@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
+using Nicosia.Assessment.Application.Handlers.Section.Commands.AddStudentToClass;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.DeleteSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
+using Nicosia.Assessment.Application.Handlers.Section.Commands.WithdrawStudentToClass;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
 {
@@ -152,6 +153,57 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
                 return result.ApiResult;
 
             return NoContent();
+        }
+
+
+        /// <summary>
+        /// Add student to class
+        /// </summary>
+        /// <param name="addStudentToClassCommand"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if add student to class successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(ClassDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] { "Deputy: Sections Operations" })]
+        [HttpPost("add-student")]
+        public async Task<IActionResult> AddStudentToClass(AddStudentToClassCommand addStudentToClassCommand,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(addStudentToClassCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return result.ApiResult;
+        }
+
+
+
+        /// <summary>
+        /// Join student to class
+        /// </summary>
+        /// <param name="withdrawStudentToClassCommand"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if withdraw student to class successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(ClassDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] { "Deputy: Sections Operations" })]
+        [HttpPost("withdraw-student")]
+        public async Task<IActionResult> WithdrawStudentToClass(WithdrawStudentFromClassCommand withdrawStudentToClassCommand,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(withdrawStudentToClassCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return result.ApiResult;
         }
     }
 }

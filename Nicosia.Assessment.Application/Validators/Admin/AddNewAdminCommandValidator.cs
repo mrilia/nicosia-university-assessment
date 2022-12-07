@@ -24,6 +24,10 @@ namespace Nicosia.Assessment.Application.Validators.Admin
                 .NotEmpty().WithMessage(ResponseMessage.LastnameIsRequired)
                 .NotNull().WithMessage(ResponseMessage.LastnameIsRequired);
             
+            RuleFor(dto => dto.DateOfBirth)
+                .NotEmpty().WithMessage(ResponseMessage.DateOfBirthIsRequired)
+                .NotNull().WithMessage(ResponseMessage.DateOfBirthIsRequired);
+            
             RuleFor(dto => dto)
                 .Must(AdminNotExists).WithMessage(ResponseMessage.AdminExists).WithErrorCode("201");
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -20,6 +21,13 @@ namespace Nicosia.Assessment.WebApi.Installer
     {
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
+            services.AddControllers()
+                .AddJsonOptions(options => {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                    // In addition, you can limit the depth
+                    //options.JsonSerializerOptions.MaxDepth = 1;
+                });
+
             // configure strongly typed settings object
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             
