@@ -33,6 +33,8 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
             var section = await _context.Sections
                 .Include(i=>i.Period)
                 .Include(i=>i.Course)
+                .Include(i=>i.Lecturers)
+                .Include(i=>i.Students)
                 .SingleOrDefaultAsync(x => x.SectionId == request.SectionId,
                 cancellationToken);
 
@@ -40,7 +42,26 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
                 return Result<SectionDto>.Failed(new BadRequestObjectResult
                 (new ApiMessage(ResponseMessage.SectionNotFound)));
 
+            RemoveUselessChildrenFromResult(section);
+
             return Result<SectionDto>.SuccessFul(_mapper.Map<SectionDto>(section));
+        }
+
+        //todo: refctor to put this cod into auto mapper
+        private void RemoveUselessChildrenFromResult(Domain.Models.Section.Section section)
+        {
+            section!.Course!.Sections = null;
+            section!.Period!.Sections = null;
+
+            foreach (var student in section!.Students)
+            {
+                student!.Sections = null;
+            }
+
+            foreach (var lecturer in section!.Lecturers)
+            {
+                lecturer!.Sections = null;
+            }
         }
     }
 }
