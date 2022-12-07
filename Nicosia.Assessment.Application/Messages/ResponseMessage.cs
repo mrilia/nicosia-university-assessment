@@ -6,6 +6,7 @@ namespace Nicosia.Assessment.Application.Messages
         public static string LecturerNotFound => "Lecturer not found!";
         public static string StudentNotFound => "Student not found!";
         public static string StudentIdIsRequired=> "Student id is required";
+        public static string LecturerIdIsRequired => "Lecturer id is required";
         public static string PeriodNotFound => "Period not found!";
         public static string SectionNotFound => "Section not found!";
         public static string AdminNotFound => "Admin not found!";
@@ -41,5 +42,7 @@ namespace Nicosia.Assessment.Application.Messages
         public static string UsernamePasswordInvalid => "Invalid Username/Password";
         public static string StudentNotAddedBeforeToClass => "Student not registered before in this class!";
         public static string StudentAddedBeforToClass => "Student is registered in this class already!";
+        public static string LecturerNotAddedBeforeToClass => "Lecturer not registered before in this class!";
+        public static string LecturerAddedBeforToClass => "Lecturer is registered in this class already!";
     }
 }

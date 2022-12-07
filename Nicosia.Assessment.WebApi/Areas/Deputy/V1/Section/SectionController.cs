@@ -4,12 +4,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Nicosia.Assessment.Application.Handlers.Section.Commands.AddLecturerToClass;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddStudentToClass;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.DeleteSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
+using Nicosia.Assessment.Application.Handlers.Section.Commands.WithdrawLecturerToClass;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.WithdrawStudentToClass;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
@@ -199,6 +201,58 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
             CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(withdrawStudentToClassCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return result.ApiResult;
+        }
+
+
+
+        /// <summary>
+        /// Add lecturer to class
+        /// </summary>
+        /// <param name="addLecturerToClassCommand"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if add lecturer to class successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(ClassDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] { "Deputy: Sections Operations" })]
+        [HttpPost("add-lecturer")]
+        public async Task<IActionResult> AddLecturerToClass(AddLecturerToClassCommand addLecturerToClassCommand,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(addLecturerToClassCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return result.ApiResult;
+        }
+
+
+
+        /// <summary>
+        /// Join lecturer to class
+        /// </summary>
+        /// <param name="withdrawLecturerToClassCommand"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if withdraw lecturer to class successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(ClassDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [SwaggerOperation(Tags = new[] { "Deputy: Sections Operations" })]
+        [HttpPost("withdraw-lecturer")]
+        public async Task<IActionResult> WithdrawLecturerToClass(WithdrawLecturerFromClassCommand withdrawLecturerToClassCommand,
+            CancellationToken cancellationToken)
+        {
+            var result = await _mediator.Send(withdrawLecturerToClassCommand, cancellationToken);
 
             if (result.Success == false)
                 return result.ApiResult;

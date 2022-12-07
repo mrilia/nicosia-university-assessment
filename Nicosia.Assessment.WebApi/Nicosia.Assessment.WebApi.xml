@@ -291,6 +291,26 @@
             <response code="400">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.AddLecturerToClass(Nicosia.Assessment.Application.Handlers.Section.Commands.AddLecturerToClass.AddLecturerToClassCommand,System.Threading.CancellationToken)">
+            <summary>
+            Add lecturer to class
+            </summary>
+            <param name="addLecturerToClassCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if add lecturer to class successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section.SectionController.WithdrawLecturerToClass(Nicosia.Assessment.Application.Handlers.Section.Commands.WithdrawLecturerToClass.WithdrawLecturerFromClassCommand,System.Threading.CancellationToken)">
+            <summary>
+            Join lecturer to class
+            </summary>
+            <param name="withdrawLecturerToClassCommand"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if withdraw lecturer to class successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Add new student

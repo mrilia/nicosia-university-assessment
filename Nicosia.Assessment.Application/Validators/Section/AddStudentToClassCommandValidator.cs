@@ -53,7 +53,7 @@ namespace Nicosia.Assessment.Application.Validators.Section
 
         private bool StudentExists(List<Guid> studentIdsToCheck)
         {
-            return studentIdsToCheck!.Any(a => _studentContext.Students.Any(x => x.StudentId == a));
+            return studentIdsToCheck?.Any(a => _studentContext.Students.Any(x => x.StudentId == a)) ?? false;
         }
 
         private bool SectionExists(Guid sectionIdToCheck)

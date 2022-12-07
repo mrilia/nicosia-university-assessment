@@ -31,7 +31,7 @@ namespace Nicosia.Assessment.Application.Validators.Section
                 .NotNull().WithMessage(ResponseMessage.StudentIdIsRequired)
                 .NotEmpty().WithMessage(ResponseMessage.StudentIdIsRequired)
                 .Must(StudentExists).WithMessage(ResponseMessage.StudentNotFound);
-            
+
             RuleFor(dto => dto)
                 .Must(StudentAddedBeforeToThisClass).WithMessage(ResponseMessage.StudentNotAddedBeforeToClass);
         }
@@ -53,7 +53,7 @@ namespace Nicosia.Assessment.Application.Validators.Section
 
         private bool StudentExists(List<Guid> studentIdToCheck)
         {
-            return studentIdToCheck!.Any(a => _studentContext.Students.Any(x => x.StudentId == a));
+            return studentIdToCheck?.Any(a => _studentContext.Students.Any(x => x.StudentId == a)) ?? false;
         }
 
         private bool SectionExists(Guid sectionIdToCheck)
