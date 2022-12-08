@@ -19,6 +19,9 @@ namespace Nicosia.Assessment.Persistence.Configurations
 
             builder.HasMany(e => e.RefreshTokens)
                 .WithOne(e => e.Student);
+
+            builder.HasMany(e => e.ApprovalRequests)
+                .WithOne(e => e.Student);
         }
     }
 }

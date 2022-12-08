@@ -26,7 +26,6 @@ namespace Nicosia.Assessment.Persistence.Configurations
             builder.HasMany(e => e.Lecturers)
                 .WithMany(e => e.Sections);
 
-
             builder.HasMany(e => e.Students)
                 .WithMany(e => e.Sections);
         }
