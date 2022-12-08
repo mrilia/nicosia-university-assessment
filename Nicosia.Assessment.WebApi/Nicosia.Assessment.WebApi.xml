@@ -4,6 +4,17 @@
         <name>Nicosia.Assessment.WebApi</name>
     </assembly>
     <members>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Class.V1.ClassController.GetClassList(Nicosia.Assessment.Application.Handlers.Section.Queries.GetClassListQuery,System.Threading.CancellationToken)">
+            <summary>
+            List Of Classes 
+            </summary>
+            <param name="getClassListQuery"></param>
+            <param name="cancellationToken"></param>
+            <returns> Class list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.AddNew(Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin.AddNewAdminCommand,System.Threading.CancellationToken)">
             <summary>
             Add new admin

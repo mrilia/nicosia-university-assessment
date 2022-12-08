@@ -4,13 +4,8 @@ using System.Text.Json.Serialization;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Dto
 {
-    public class ClassReportDto
+    public class ClassReportDto : ChildlessClassDto
     {
-        [JsonIgnore]
-        public Guid SectionId { get; set; }
-        public string Number { get; set; }
-        public string Details { get; set; }
-        
         public virtual ChildlessPeriodDto Period { get; set; }
         public virtual ChildlessCourseDto Course { get; set; }
 

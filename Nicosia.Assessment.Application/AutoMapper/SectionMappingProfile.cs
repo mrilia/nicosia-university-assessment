@@ -2,6 +2,7 @@
 using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Domain.Models.Section;
 
@@ -29,7 +30,13 @@ namespace Nicosia.Assessment.Application.AutoMapper
             CreateMap<UpdateSectionCommand, Section>();
             CreateMap<Section, ClassDto>();
 
+            CreateMap<GetClassListQuery, GetAllClassListForLecturerQuery>();
+            CreateMap<GetClassListQuery, GetAllClassListForStudentQuery>();
+
             CreateMap<Section, ClassReportDto>();
+            CreateMap<Section, ChildlessClassDto>();
+            CreateMap<Section, ClassReportWithStatisticsDto>()
+                .ForMember(x=>x.StudentCount, opt=>opt.MapFrom(src=>src.Students!.Count));
 
         }
     }
