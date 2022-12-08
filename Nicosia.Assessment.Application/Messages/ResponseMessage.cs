@@ -46,6 +46,7 @@
         public static string RequestAddedBefore => "Messaging request exists!";
         public static string StudentIsNotMemberOfClass => "Student Is Not Member Of Class!";
         public static string RequestApprovedBefore => "Request Has Been Approved Before";
+        public static string RequestRejectdBefore => "Request Has Been Rejected Before";
         public static string LecturerDoesNotLeadClass => "Lecturer Does Not Lead The Class";
         public static string ApprovalRequestNotFound => "Approval Request Not Found";
         public static string ApprovalRequestIdIsRequired => "Approval Request Id Is Required";

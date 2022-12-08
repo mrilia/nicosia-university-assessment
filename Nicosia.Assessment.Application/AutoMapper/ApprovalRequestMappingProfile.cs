@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.ApproveMessagingRequest;
+using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.RejectMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
@@ -24,6 +24,13 @@ namespace Nicosia.Assessment.Application.AutoMapper
             
             CreateMap<ApprovalRequest, ApproveRequestDto>();
             CreateMap<ApproveMessagingRequest, ApproveMessagingRequestCommand>()
+                .ForMember(x => x.LecturerId, opt => opt.MapFrom(src => src!.GetLecturerId()))
+                .ForMember(x => x.SectionId,
+                    opt => opt.MapFrom(src =>
+                        approvalRequestContext.ApprovalRequests!.Find(src.ApprovalRequestId)!.SectionId));
+        
+            CreateMap<ApprovalRequest, RejectRequestDto>();
+            CreateMap<RejectMessagingRequest, RejectMessagingRequestCommand>()
                 .ForMember(x => x.LecturerId, opt => opt.MapFrom(src => src!.GetLecturerId()))
                 .ForMember(x => x.SectionId,
                     opt => opt.MapFrom(src =>

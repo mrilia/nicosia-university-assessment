@@ -38,7 +38,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         /// <response code="201">if create Messaging Request successfully </response>
         /// <response code="400">If Validation Failed</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(AdminDto), 201)]
+        [ProducesResponseType(typeof(ApprovalRequestDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost("request-approval")]

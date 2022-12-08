@@ -6,10 +6,10 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.ApproveMessagingRequest;
+using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.RejectMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
-using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
@@ -99,7 +99,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         /// <response code="201">if create Messaging Request successfully </response>
         /// <response code="400">If Validation Failed</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(AdminDto), 201)]
+        [ProducesResponseType(typeof(ApproveRequestDto), 201)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost("approve-request")]
@@ -116,6 +116,39 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
             var approveMessagingRequestCommand = _mapper.Map<ApproveMessagingRequestCommand>(approveMessagingRequest);
 
             var result = await _mediator.Send(approveMessagingRequestCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return NoContent();
+        }
+
+        
+        /// <summary>
+        /// Reject Messaging Request
+        /// </summary>
+        /// <param name="rejectMessagingRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if create Messaging Request successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(RejectRequestDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpPost("reject-request")]
+        public async Task<IActionResult> AddNew(RejectMessagingRequest rejectMessagingRequest,
+            CancellationToken cancellationToken)
+        {
+            var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
+
+            if (currentLecturer == null)
+                throw new AuthenticationException("No claim found!");
+
+            rejectMessagingRequest.SetLecturerId(currentLecturer.LecturerId);
+
+            var rejectMessagingRequestCommand = _mapper.Map<RejectMessagingRequestCommand>(rejectMessagingRequest);
+
+            var result = await _mediator.Send(rejectMessagingRequestCommand, cancellationToken);
 
             if (result.Success == false)
                 return result.ApiResult;
