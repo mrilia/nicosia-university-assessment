@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
@@ -38,7 +40,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("student-list")]
-        public async Task<IActionResult> GetList([FromQuery] GetStudentListForLecturerQuery getStudentListQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetStudentList([FromQuery] GetStudentListForLecturerQuery getStudentListQuery, CancellationToken cancellationToken)
         {
             var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
 
@@ -50,6 +52,36 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
             var students = await _mediator.Send(getStudentListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.TotalCount);
             var result = new PaginationResponse<StudentForLecturerDto>(students.Items, students.TotalCount, nextPageUrl);
+
+            return Ok(result);
+        }
+
+
+        /// <summary>
+        /// List Of Classes 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> Class list</returns>
+        /// <response code="200">if every thing is ok </response>
+        /// <response code="400">If page or limit is overFlow</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(PaginationResponse<ClassForLecturerDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("class-list")]
+        public async Task<IActionResult> GetClassList([FromQuery] GetClassListForLecturerQuery getClassListQuery, CancellationToken cancellationToken)
+        {
+            var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
+
+            if (currentLecturer == null)
+                throw new AuthenticationException("No claim found!");
+
+            getClassListQuery.SetLecturerId(currentLecturer.LecturerId);
+
+            var students = await _mediator.Send(getClassListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getClassListQuery, students.TotalCount);
+            var result = new PaginationResponse<ClassForLecturerDto>(students.Items, students.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

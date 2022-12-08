@@ -26,11 +26,11 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
 
 
         /// <summary>
-        /// List Of Students 
+        /// List Of Classmates
         /// </summary>
         /// <param name="email"></param>
         /// <param name="cancellationToken"></param>
-        /// <returns> Lecturers list</returns>
+        /// <returns> Classmate list</returns>
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
@@ -38,7 +38,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("classmate")]
-        public async Task<IActionResult> GetList([FromQuery] GetClassmateQuery getClassmateQuery, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetClassmateList([FromQuery] GetClassmateQuery getClassmateQuery, CancellationToken cancellationToken)
         {
             var currentStudent = HttpContext.Items["User"]! as StudentDto;
 

@@ -365,7 +365,7 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetStudentListForLecturerQuery,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetStudentList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetStudentListForLecturerQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Students 
             </summary>
@@ -376,13 +376,24 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetClassmateQuery,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetClassList(Nicosia.Assessment.Application.Handlers.Section.Queries.GetClassListForLecturerQuery,System.Threading.CancellationToken)">
             <summary>
-            List Of Students 
+            List Of Classes 
             </summary>
             <param name="email"></param>
             <param name="cancellationToken"></param>
-            <returns> Lecturers list</returns>
+            <returns> Class list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetClassmateList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetClassmateQuery,System.Threading.CancellationToken)">
+            <summary>
+            List Of Classmates
+            </summary>
+            <param name="email"></param>
+            <param name="cancellationToken"></param>
+            <returns> Classmate list</returns>
             <response code="200">if every thing is ok </response>
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>

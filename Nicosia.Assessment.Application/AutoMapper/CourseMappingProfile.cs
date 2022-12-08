@@ -2,6 +2,7 @@
 using Nicosia.Assessment.Application.Handlers.Course.Commands.AddNewCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Commands.UpdateCourse;
 using Nicosia.Assessment.Application.Handlers.Course.Dto;
+using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Domain.Models.Course;
 
 namespace Nicosia.Assessment.Application.AutoMapper
@@ -13,6 +14,8 @@ namespace Nicosia.Assessment.Application.AutoMapper
             CreateMap<Course, CourseDto>();
             CreateMap<AddNewCourseCommand, Course>();
             CreateMap<UpdateCourseCommand, Course>();
+            CreateMap<Course, ChildlessCourseDto>();
+
         }
     }
 }
