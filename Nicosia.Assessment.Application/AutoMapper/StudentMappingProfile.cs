@@ -19,6 +19,7 @@ namespace Nicosia.Assessment.Application.AutoMapper
                 .ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber));
 
             CreateMap<StudentDto, Student>();
+            CreateMap<Student, StudentForLecturerDto>();
 
             CreateMap<AddNewStudentCommand, Student>()
                 //.ForMember(x => x.PhoneNumber, opt => opt.MapFrom(src => ulong.Parse(src.PhoneNumber.Replace(" ", "").Replace("+", "").Replace("-", "").Replace("(", "").Replace(")", ""))));

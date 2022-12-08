@@ -12,7 +12,7 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Student.Queries
 {
-    public class GetStudentListForLecturerQuery : PaginationRequest, IRequest<CollectionItems<StudentDto>>
+    public class GetStudentListForLecturerQuery : PaginationRequest, IRequest<CollectionItems<StudentForLecturerDto>>
     {
         public void SetLecturerId(Guid lecturerId)
         {
@@ -30,7 +30,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
         public StudentSort Sort { get; set; }
     }
 
-    public class GetStudentListForLecturerQueryHandler : IRequestHandler<GetStudentListForLecturerQuery, CollectionItems<StudentDto>>
+    public class GetStudentListForLecturerQueryHandler : IRequestHandler<GetStudentListForLecturerQuery, CollectionItems<StudentForLecturerDto>>
     {
         private readonly IStudentContext _context;
         private readonly IMapper _mapper;
@@ -41,7 +41,7 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
             _mapper = mapper;
         }
 
-        public async Task<CollectionItems<StudentDto>> Handle(GetStudentListForLecturerQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<StudentForLecturerDto>> Handle(GetStudentListForLecturerQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.User.Student> students = _context.Students.Where(i => i.Sections.Any(a => a.Lecturers.Any(l => l.LecturerId == request.GetLecturerId()))).Distinct();
 
@@ -53,9 +53,9 @@ namespace Nicosia.Assessment.Application.Handlers.Student.Queries
             students = ApplySort(students, request.Sort);
             var totalCount = await students.LongCountAsync(cancellationToken: cancellationToken);
 
-            var result = _mapper.Map<List<StudentDto>>(await students.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
+            var result = _mapper.Map<List<StudentForLecturerDto>>(await students.Skip(request.Offset).Take(request.Count).ToListAsync(cancellationToken));
 
-            return new CollectionItems<StudentDto>(result, totalCount);
+            return new CollectionItems<StudentForLecturerDto>(result, totalCount);
         }
 
         private static IQueryable<Domain.Models.User.Student> ApplySort(IQueryable<Domain.Models.User.Student> query, StudentSort sort = StudentSort.None)

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Security.Authentication;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -51,7 +50,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
 
             var students = await _mediator.Send(getStudentListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.TotalCount);
-            var result = new PaginationResponse<StudentDto>(students.Items, students.TotalCount, nextPageUrl);
+            var result = new PaginationResponse<StudentForLecturerDto>(students.Items, students.TotalCount, nextPageUrl);
 
             return Ok(result);
         }
