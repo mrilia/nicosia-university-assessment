@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -17,6 +18,8 @@ namespace Nicosia.Assessment.Application.Handlers.Admin.Queries
         public AdminSort Sort { get; set; }
 
     }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum AdminSort
     {
         None,

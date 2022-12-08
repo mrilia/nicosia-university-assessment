@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Domain.Models.ApprovalRequests
 {
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ApprovalRequestStatus
     {
         Waiting,

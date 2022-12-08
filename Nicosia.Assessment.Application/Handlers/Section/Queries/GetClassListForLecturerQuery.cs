@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -29,6 +30,8 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
         public bool OnlyMyClasses { get; set; }
         public ClassSort Sort { get; set; }
     }
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ClassSort
     {
         None,
