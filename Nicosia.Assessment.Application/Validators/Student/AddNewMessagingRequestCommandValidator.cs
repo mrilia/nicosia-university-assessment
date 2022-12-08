@@ -3,10 +3,8 @@ using System.Linq;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest;
-using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Application.Messages;
-using Nicosia.Assessment.Shared.Validators;
 
 namespace Nicosia.Assessment.Application.Validators.Student
 {
@@ -45,9 +43,9 @@ namespace Nicosia.Assessment.Application.Validators.Student
             return !_approvalRequestContext.ApprovalRequests.Any(a => a.StudentId == request.StudentId && a.SectionId == request.SectionId);
         }
 
-        private bool StudentExists(Guid sectionId)
+        private bool StudentExists(Guid studentId)
         {
-            return _studentContext.Students.Any(a => a.StudentId == sectionId);
+            return _studentContext.Students.Any(a => a.StudentId == studentId);
         }
 
         private bool SectionExists(Guid sectionId)

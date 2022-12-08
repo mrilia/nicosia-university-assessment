@@ -1,11 +1,15 @@
 ﻿using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Nicosia.Assessment.Application.Handlers.Admin.Dto;
+using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.ApproveMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
@@ -20,10 +24,11 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
     public class LecturerController : BaseController
     {
         private readonly IMediator _mediator;
-
-        public LecturerController(IMediator mediator)
+        private readonly IMapper _mapper;
+        public LecturerController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
 
@@ -85,5 +90,39 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
 
             return Ok(result);
         }
+
+        /// <summary>
+        /// Approve Messaging Request
+        /// </summary>
+        /// <param name="approveMessagingRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if create Messaging Request successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(AdminDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpPost("approve-request")]
+        public async Task<IActionResult> AddNew(ApproveMessagingRequest approveMessagingRequest,
+            CancellationToken cancellationToken)
+        {
+            var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
+
+            if (currentLecturer == null)
+                throw new AuthenticationException("No claim found!");
+
+            approveMessagingRequest.SetLecturerId(currentLecturer.LecturerId);
+
+            var approveMessagingRequestCommand = _mapper.Map<ApproveMessagingRequestCommand>(approveMessagingRequest);
+
+            var result = await _mediator.Send(approveMessagingRequestCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return NoContent();
+        }
+
+
     }
 }

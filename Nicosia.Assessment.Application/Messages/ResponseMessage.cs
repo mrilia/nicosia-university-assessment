@@ -1,5 +1,4 @@
-﻿
-namespace Nicosia.Assessment.Application.Messages
+﻿namespace Nicosia.Assessment.Application.Messages
 {
     public static class ResponseMessage
     {
@@ -46,5 +45,9 @@ namespace Nicosia.Assessment.Application.Messages
         public static string LecturerAddedBeforToClass => "Lecturer is registered in this class already!";
         public static string RequestAddedBefore => "Messaging request exists!";
         public static string StudentIsNotMemberOfClass => "Student Is Not Member Of Class!";
+        public static string RequestApprovedBefore => "Request Has Been Approved Before";
+        public static string LecturerDoesNotLeadClass => "Lecturer Does Not Lead The Class";
+        public static string ApprovalRequestNotFound => "Approval Request Not Found";
+        public static string ApprovalRequestIdIsRequired => "Approval Request Id Is Required";
     }
 }
