@@ -12,44 +12,36 @@ using Nicosia.Assessment.Application.Models;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Queries
 {
-    public class GetClassListForLecturerQuery : PaginationRequest, IRequest<CollectionItems<ClassReportDto>>
+    public class GetClassListForStudentQuery : PaginationRequest, IRequest<CollectionItems<ClassReportDto>>
     {
-        public void SetLecturerId(Guid lecturerId)
+        public void SetStudentId(Guid studentId)
         {
-            _lecturerId = lecturerId;
+            _studentId = studentId;
         }
         
-        public Guid GetLecturerId()
+        public Guid GetStudentId()
         {
-            return _lecturerId;
+            return _studentId;
         }
-
-        private Guid _lecturerId { get; set; }
+        private Guid _studentId { get; set; }
         public string Period { get; set; }
         public bool OnlyMyClasses { get; set; }
         public ClassSort Sort { get; set; }
     }
-    public enum ClassSort
-    {
-        None,
-        ByClassNumberAsc,
-        ByPeriodNameAsc,
-        ByPeriodStartDateAsc,
-    }
 
 
-    public class GetClassListForLecturerQueryHandler : IRequestHandler<GetClassListForLecturerQuery, CollectionItems<ClassReportDto>>
+    public class GetClassListForStudentQueryHandler : IRequestHandler<GetClassListForStudentQuery, CollectionItems<ClassReportDto>>
     {
         private readonly ISectionContext _context;
         private readonly IMapper _mapper;
 
-        public GetClassListForLecturerQueryHandler(ISectionContext context, IMapper mapper)
+        public GetClassListForStudentQueryHandler(ISectionContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<CollectionItems<ClassReportDto>> Handle(GetClassListForLecturerQuery request, CancellationToken cancellationToken)
+        public async Task<CollectionItems<ClassReportDto>> Handle(GetClassListForStudentQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Models.Section.Section> sections = _context.Sections
                                                                         .Include(i=>i.Period)
@@ -58,7 +50,7 @@ namespace Nicosia.Assessment.Application.Handlers.Section.Queries
 
             if (request.OnlyMyClasses)
             {
-                sections = sections.Where(x => x.Lecturers!.Any(l=>l.LecturerId == request.GetLecturerId()));
+                sections = sections.Where(x => x.Students!.Any(l=>l.StudentId == request.GetStudentId()));
             }
 
             if (!string.IsNullOrWhiteSpace(request.Period))

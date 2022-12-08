@@ -81,7 +81,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student
         /// <summary>
         /// List Of Students 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="getStudentListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Students list</returns>
         /// <response code="200">if every thing is ok </response>

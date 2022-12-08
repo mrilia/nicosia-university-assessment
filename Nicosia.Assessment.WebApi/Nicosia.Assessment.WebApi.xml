@@ -30,7 +30,7 @@
             <summary>
             List Of Admins 
             </summary>
-            <param name="email"></param>
+            <param name="getAdminListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Admins list</returns>
             <response code="200">if every thing is ok </response>
@@ -83,7 +83,7 @@
             <summary>
             List Of Courses 
             </summary>
-            <param name="code"></param>
+            <param name="getCourseListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Courses list</returns>
             <response code="200">if every thing is ok </response>
@@ -137,7 +137,7 @@
             <summary>
             List Of Lecturers 
             </summary>
-            <param name="email"></param>
+            <param name="getLecturerListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Lecturers list</returns>
             <response code="200">if every thing is ok </response>
@@ -190,7 +190,7 @@
             <summary>
             List Of Periods 
             </summary>
-            <param name="name"></param>
+            <param name="getPeriodListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Periods list</returns>
             <response code="200">if every thing is ok </response>
@@ -243,7 +243,7 @@
             <summary>
             List Of Sections 
             </summary>
-            <param name="number"></param>
+            <param name="getSectionListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Sections list</returns>
             <response code="200">if every thing is ok </response>
@@ -337,7 +337,7 @@
             <summary>
             List Of Students 
             </summary>
-            <param name="email"></param>
+            <param name="getStudentListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Students list</returns>
             <response code="200">if every thing is ok </response>
@@ -369,7 +369,7 @@
             <summary>
             List Of Students 
             </summary>
-            <param name="email"></param>
+            <param name="getStudentListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Lecturers list</returns>
             <response code="200">if every thing is ok </response>
@@ -380,7 +380,7 @@
             <summary>
             List Of Classes 
             </summary>
-            <param name="email"></param>
+            <param name="getClassListQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Class list</returns>
             <response code="200">if every thing is ok </response>
@@ -391,9 +391,20 @@
             <summary>
             List Of Classmates
             </summary>
-            <param name="email"></param>
+            <param name="getClassmateQuery"></param>
             <param name="cancellationToken"></param>
             <returns> Classmate list</returns>
+            <response code="200">if every thing is ok </response>
+            <response code="400">If page or limit is overFlow</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetClassList(Nicosia.Assessment.Application.Handlers.Section.Queries.GetClassListForStudentQuery,System.Threading.CancellationToken)">
+            <summary>
+            List Of Classes 
+            </summary>
+            <param name="getClassListQuery"></param>
+            <param name="cancellationToken"></param>
+            <returns> Class list</returns>
             <response code="200">if every thing is ok </response>
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>

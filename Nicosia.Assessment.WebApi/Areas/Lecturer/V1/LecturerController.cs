@@ -30,7 +30,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         /// <summary>
         /// List Of Students 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="getStudentListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Lecturers list</returns>
         /// <response code="200">if every thing is ok </response>
@@ -60,13 +60,13 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         /// <summary>
         /// List Of Classes 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="getClassListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Class list</returns>
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(PaginationResponse<ClassForLecturerDto>), 200)]
+        [ProducesResponseType(typeof(PaginationResponse<ClassReportDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("class-list")]
@@ -81,7 +81,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
 
             var students = await _mediator.Send(getClassListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getClassListQuery, students.TotalCount);
-            var result = new PaginationResponse<ClassForLecturerDto>(students.Items, students.TotalCount, nextPageUrl);
+            var result = new PaginationResponse<ClassReportDto>(students.Items, students.TotalCount, nextPageUrl);
 
             return Ok(result);
         }

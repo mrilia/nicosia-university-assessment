@@ -80,7 +80,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Period
         /// <summary>
         /// List Of Periods 
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="getPeriodListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Periods list</returns>
         /// <response code="200">if every thing is ok </response>

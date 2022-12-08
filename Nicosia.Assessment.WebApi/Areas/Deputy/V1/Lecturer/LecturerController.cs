@@ -81,7 +81,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer
         /// <summary>
         /// List Of Lecturers 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="getLecturerListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Lecturers list</returns>
         /// <response code="200">if every thing is ok </response>

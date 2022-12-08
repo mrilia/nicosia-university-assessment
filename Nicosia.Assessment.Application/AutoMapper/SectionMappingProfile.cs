@@ -29,7 +29,7 @@ namespace Nicosia.Assessment.Application.AutoMapper
             CreateMap<UpdateSectionCommand, Section>();
             CreateMap<Section, ClassDto>();
 
-            CreateMap<Section, ClassForLecturerDto>();
+            CreateMap<Section, ClassReportDto>();
 
         }
     }

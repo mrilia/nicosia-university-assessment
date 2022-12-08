@@ -82,7 +82,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
         /// <summary>
         /// List Of Admins 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="getAdminListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Admins list</returns>
         /// <response code="200">if every thing is ok </response>

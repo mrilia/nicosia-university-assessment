@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Nicosia.Assessment.Domain.Models.Course;
-using Nicosia.Assessment.Domain.Models.Period;
-using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.Handlers.Section.Dto
 {
-    public class ClassForLecturerDto
+    public class ClassReportDto
     {
         [JsonIgnore]
         public Guid SectionId { get; set; }

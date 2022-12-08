@@ -84,7 +84,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section
         /// <summary>
         /// List Of Sections 
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="getSectionListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Sections list</returns>
         /// <response code="200">if every thing is ok </response>

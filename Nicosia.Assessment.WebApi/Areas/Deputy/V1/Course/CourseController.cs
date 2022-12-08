@@ -80,7 +80,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Course
         /// <summary>
         /// List Of Courses 
         /// </summary>
-        /// <param name="code"></param>
+        /// <param name="getCourseListQuery"></param>
         /// <param name="cancellationToken"></param>
         /// <returns> Courses list</returns>
         /// <response code="200">if every thing is ok </response>
