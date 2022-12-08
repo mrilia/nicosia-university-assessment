@@ -63,6 +63,7 @@ namespace Nicosia.Assessment.WebApi.Installer
                 mc.AddProfile(new LecturerMappingProfile());
                 mc.AddProfile(new CourseMappingProfile());
                 mc.AddProfile(new PeriodMappingProfile());
+                mc.AddProfile(new ApprovalRequestMappingProfile());
                 mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(), new SqliteDbContext()));
             });
             IMapper mapper = mappingConfig.CreateMapper();

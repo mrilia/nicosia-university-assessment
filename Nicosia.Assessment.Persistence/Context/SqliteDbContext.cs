@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Nicosia.Assessment.Application.Interfaces;
+using Nicosia.Assessment.Domain.Models.ApprovalRequests;
 using Nicosia.Assessment.Domain.Models.Course;
 using Nicosia.Assessment.Domain.Models.Period;
 using Nicosia.Assessment.Domain.Models.Section;
@@ -11,7 +12,7 @@ using Nicosia.Assessment.Persistence.Seed;
 
 namespace Nicosia.Assessment.Persistence.Context
 {
-    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext, IAdminContext
+    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext, IAdminContext, IApprovalRequestContext
     {
         public SqliteDbContext()
         {
@@ -36,6 +37,7 @@ namespace Nicosia.Assessment.Persistence.Context
         public DbSet<Period> Periods { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Section> Sections { get; set; }
+        public DbSet<ApprovalRequest> ApprovalRequests { get; set; }
 
         public Task SaveAsync(CancellationToken cancellationToken) =>
             base.SaveChangesAsync(cancellationToken);

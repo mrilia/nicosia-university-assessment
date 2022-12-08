@@ -23,6 +23,7 @@ namespace Nicosia.Assessment.Persistence
             services.AddScoped<ICourseContext>(provider => provider.GetService<SqliteDbContext>());
             services.AddScoped<IPeriodContext>(provider => provider.GetService<SqliteDbContext>());
             services.AddScoped<ISectionContext>(provider => provider.GetService<SqliteDbContext>());
+            services.AddScoped<IApprovalRequestContext>(provider => provider.GetService<SqliteDbContext>());
 
             return services;
         }

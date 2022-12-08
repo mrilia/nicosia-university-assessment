@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nicosia.Assessment.Persistence.Context;
 
@@ -10,9 +11,11 @@ using Nicosia.Assessment.Persistence.Context;
 namespace Nicosia.Assessment.Persistence.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221208200203_nullable lecturerid in approval requests")]
+    partial class nullablelectureridinapprovalrequests
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -44,7 +47,7 @@ namespace Nicosia.Assessment.Persistence.Migrations
                     b.Property<DateTime>("LastChange")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("LecturerId")
+                    b.Property<Guid>("LecturerId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("SectionId")
@@ -325,7 +328,9 @@ namespace Nicosia.Assessment.Persistence.Migrations
                 {
                     b.HasOne("Nicosia.Assessment.Domain.Models.User.Lecturer", "Lecturer")
                         .WithMany("ApprovalRequests")
-                        .HasForeignKey("LecturerId");
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Nicosia.Assessment.Domain.Models.Section.Section", "Section")
                         .WithMany()

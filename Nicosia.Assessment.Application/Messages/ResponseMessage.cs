@@ -44,5 +44,7 @@ namespace Nicosia.Assessment.Application.Messages
         public static string StudentAddedBeforToClass => "Student is registered in this class already!";
         public static string LecturerNotAddedBeforeToClass => "Lecturer not registered before in this class!";
         public static string LecturerAddedBeforToClass => "Lecturer is registered in this class already!";
+        public static string RequestAddedBefore => "Messaging request exists!";
+        public static string StudentIsNotMemberOfClass => "Student Is Not Member Of Class!";
     }
 }

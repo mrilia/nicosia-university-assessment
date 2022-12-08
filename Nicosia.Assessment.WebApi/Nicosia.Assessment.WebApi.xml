@@ -398,6 +398,16 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest.AddNewMessagingRequest,System.Threading.CancellationToken)">
+            <summary>
+            Add new Messaging Request
+            </summary>
+            <param name="addNewMessagingRequest"></param>
+            <param name="cancellationToken"></param>
+            <response code="201">if create Messaging Request successfully </response>
+            <response code="400">If Validation Failed</response>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="M:Nicosia.Assessment.WebApi.Areas.Student.V1.StudentController.GetClassmateList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetClassmateQuery,System.Threading.CancellationToken)">
             <summary>
             List Of Classmates

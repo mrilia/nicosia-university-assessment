@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Domain.Models.ApprovalRequests
@@ -18,11 +17,11 @@ namespace Nicosia.Assessment.Domain.Models.ApprovalRequests
         public Guid StudentId { get; set; }
         public Guid SectionId { get; set; }
         public DateTime LastChange { get; set; }
-        public Guid LecturerId { get; set; }
+        public Guid? LecturerId { get; set; }
 
         public virtual Student Student { get; set; }
-        public virtual Lecturer Lecturer { get; set; }
-        public virtual Section.Section Course { get; set; }
+        public virtual Lecturer? Lecturer { get; set; }
+        public virtual Section.Section Section { get; set; }
 
     }
 }

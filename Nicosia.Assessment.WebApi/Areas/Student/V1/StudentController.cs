@@ -1,17 +1,22 @@
-﻿using System.Security.Authentication;
+﻿using System;
+using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
+using Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin;
+using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
+using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Student.V1
 {
@@ -20,10 +25,44 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
     public class StudentController : BaseController
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
 
-        public StudentController(IMediator mediator)
+        public StudentController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
+        }
+
+        /// <summary>
+        /// Add new Messaging Request
+        /// </summary>
+        /// <param name="addNewMessagingRequest"></param>
+        /// <param name="cancellationToken"></param>
+        /// <response code="201">if create Messaging Request successfully </response>
+        /// <response code="400">If Validation Failed</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(AdminDto), 201)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpPost("request-approval")]
+        public async Task<IActionResult> AddNew(AddNewMessagingRequest addNewMessagingRequest,
+            CancellationToken cancellationToken)
+        {
+            var currentStudent = HttpContext.Items["User"]! as StudentDto;
+
+            if (currentStudent == null)
+                throw new AuthenticationException("No claim found!");
+
+            addNewMessagingRequest.SetStudentId(currentStudent.StudentId);
+
+            var addNewMessagingRequestCommand = _mapper.Map<AddNewMessagingRequestCommand>(addNewMessagingRequest);
+
+            var result = await _mediator.Send(addNewMessagingRequestCommand, cancellationToken);
+
+            if (result.Success == false)
+                return result.ApiResult;
+
+            return NoContent();
         }
 
 
@@ -73,7 +112,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [HttpGet("class-list")]
         public async Task<IActionResult> GetClassList([FromQuery] GetClassListForStudentQuery getClassListQuery, CancellationToken cancellationToken)
         {
-            var currentStudent= HttpContext.Items["User"]! as StudentDto;
+            var currentStudent = HttpContext.Items["User"]! as StudentDto;
 
             if (currentStudent == null)
                 throw new AuthenticationException("No claim found!");
