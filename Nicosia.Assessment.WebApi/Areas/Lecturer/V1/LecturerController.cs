@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Security.Authentication;
+﻿using System.Security.Authentication;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -35,18 +34,18 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         /// <response code="200">if every thing is ok </response>
         /// <response code="400">If page or limit is overFlow</response>
         /// <response code="500">If an unexpected error happen</response>
-        [ProducesResponseType(typeof(List<LecturerDto>), 200)]
+        [ProducesResponseType(typeof(PaginationResponse<StudentForLecturerDto>), 200)]
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("student-list")]
         public async Task<IActionResult> GetList([FromQuery] GetStudentListForLecturerQuery getStudentListQuery, CancellationToken cancellationToken)
         {
-            var lecturer = HttpContext.Items["User"]! as LecturerDto;
+            var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
 
-            if (lecturer == null)
+            if (currentLecturer == null)
                 throw new AuthenticationException("No claim found!");
 
-            getStudentListQuery.SetLecturerId(lecturer.LecturerId);
+            getStudentListQuery.SetLecturerId(currentLecturer.LecturerId);
 
             var students = await _mediator.Send(getStudentListQuery, cancellationToken);
             var nextPageUrl = GetNextPageUrl(getStudentListQuery, students.TotalCount);
@@ -54,8 +53,5 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
 
             return Ok(result);
         }
-
-
-
     }
 }
