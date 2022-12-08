@@ -19,15 +19,10 @@ namespace Nicosia.Assessment.Application.Validators.Admin
             RuleFor(dto => dto.RefreshToken)
                 .NotEmpty().WithMessage(ResponseMessage.TokenIsRequired).WithErrorCode("888")
                 .NotNull().WithMessage(ResponseMessage.TokenIsRequired).WithErrorCode("999");
-            
+
             RuleFor(dto => dto)
                 .Must(TokenExists).WithMessage(ResponseMessage.TokenNotFound)
                 .Must(TokenBeActive).WithMessage(ResponseMessage.TokenIsNotActive);
-
-            RuleFor(dto => dto.IpAdress)
-                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
-                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
-
         }
 
         private bool TokenExists(RefreshAdminTokenCommand tokenToCheck)
@@ -37,9 +32,9 @@ namespace Nicosia.Assessment.Application.Validators.Admin
 
         private bool TokenBeActive(RefreshAdminTokenCommand tokenToCheck)
         {
-            var admin =  _context.Admins
-                .Include(i=>i.RefreshTokens)
-                .SingleOrDefault(x => x.RefreshTokens.Any(s =>s.Token == tokenToCheck.RefreshToken));
+            var admin = _context.Admins
+                .Include(i => i.RefreshTokens)
+                .SingleOrDefault(x => x.RefreshTokens.Any(s => s.Token == tokenToCheck.RefreshToken));
             if (admin is null)
             {
                 return false;

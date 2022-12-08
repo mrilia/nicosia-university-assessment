@@ -23,10 +23,6 @@ namespace Nicosia.Assessment.Application.Validators.Student
             RuleFor(dto => dto)
                 .Must(TokenExists).WithMessage(ResponseMessage.TokenNotFound)
                 .Must(TokenBeActive).WithMessage(ResponseMessage.TokenIsNotActive);
-
-            RuleFor(dto => dto.IpAdress)
-                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
-                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
         }
 
         private bool TokenExists(RefreshStudentTokenCommand tokenToCheck)

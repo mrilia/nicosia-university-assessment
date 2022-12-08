@@ -365,9 +365,9 @@
             <response code="404">If Validation Failed</response>
             <response code="500">If an unexpected error happen</response>
         </member>
-        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetList(System.String,System.Threading.CancellationToken)">
+        <member name="M:Nicosia.Assessment.WebApi.Areas.Lecturer.V1.LecturerController.GetList(Nicosia.Assessment.Application.Handlers.Student.Queries.GetStudentListForLecturerQuery,System.Threading.CancellationToken)">
             <summary>
-            List Of Lecturers 
+            List Of Students 
             </summary>
             <param name="email"></param>
             <param name="cancellationToken"></param>

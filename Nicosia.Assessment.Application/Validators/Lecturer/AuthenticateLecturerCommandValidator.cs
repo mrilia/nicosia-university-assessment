@@ -25,10 +25,6 @@ namespace Nicosia.Assessment.Application.Validators.Lecturer
                 .NotEmpty().WithMessage(ResponseMessage.PasswordIsRequired)
                 .NotNull().WithMessage(ResponseMessage.PasswordIsRequired);
 
-            RuleFor(dto => dto.IpAdress)
-                .NotEmpty().WithMessage(ResponseMessage.IpAdressIsRequired)
-                .NotNull().WithMessage(ResponseMessage.IpAdressIsRequired);
-
             RuleFor(dto => dto)
                 .Must(LecturerExists).WithMessage(ResponseMessage.UsernamePasswordInvalid);
         }
