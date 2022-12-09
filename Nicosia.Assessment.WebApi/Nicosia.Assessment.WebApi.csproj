@@ -49,5 +49,8 @@
 		<None Update="key.snk.pfx">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Nicosia.Assessment.WebApi.xml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>
