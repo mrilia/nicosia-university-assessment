@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ./Nicosia.Assessment.WebApi/Nicosia.Assessment.WebApi.csproj ./Nicosia.Assessment.WebApi/
 COPY ./Nicosia.Assessment.Shared/Nicosia.Assessment.Shared.csproj ./Nicosia.Assessment.Shared/
-COPY ./Nicosia.Assessment.WebUI/Nicosia.Assessment.WebUI.csproj ./Nicosia.Assessment.WebUI/
+#COPY ./Nicosia.Assessment.WebUI/Nicosia.Assessment.WebUI.csproj ./Nicosia.Assessment.WebUI/
 COPY ./Nicosia.Assessment.Security/Nicosia.Assessment.Security.csproj ./Nicosia.Assessment.Security/
 COPY ./Nicosia.Assessment.Application/Nicosia.Assessment.Application.csproj ./Nicosia.Assessment.Application/
 COPY ./Nicosia.Assessment.Domain/Nicosia.Assessment.Domain.csproj ./Nicosia.Assessment.Domain/
