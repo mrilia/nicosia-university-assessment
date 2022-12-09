@@ -10,6 +10,7 @@ using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Class.V1
 {
@@ -40,6 +41,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Class.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("all-classes-list")]
         [AllowAnonymous]
+        [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
         public async Task<IActionResult> GetClassList([FromQuery] GetClassListQuery getClassListQuery, CancellationToken cancellationToken)
         {
             var currentLecturer = HttpContext.Items["User"]! as LecturerDto;

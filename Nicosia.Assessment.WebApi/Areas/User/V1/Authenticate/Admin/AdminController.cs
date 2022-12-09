@@ -20,7 +20,7 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost("authenticate")]
-        [SwaggerOperation(Tags = new[] { "Authentication Admin" })]
+        [SwaggerOperation(Tags = new[] { "Authentication Admin", "Major Assessment Endpoints" })]
         public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand, CancellationToken cancellationToken)
         {
             authenticateAdminCommand.IpAdress = IpAddress();

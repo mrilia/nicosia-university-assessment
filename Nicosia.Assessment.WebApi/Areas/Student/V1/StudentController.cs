@@ -14,6 +14,7 @@ using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Student.V1
 {
@@ -42,6 +43,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost("request-approval")]
+        [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
         public async Task<IActionResult> AddNew(AddNewMessagingRequest addNewMessagingRequest,
             CancellationToken cancellationToken)
         {
@@ -76,6 +78,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("classmate")]
+        [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
         public async Task<IActionResult> GetClassmateList([FromQuery] GetClassmateQuery getClassmateQuery, CancellationToken cancellationToken)
         {
             var currentStudent = HttpContext.Items["User"]! as StudentDto;
@@ -107,6 +110,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Student.V1
         [ProducesResponseType(typeof(ApiMessage), 400)]
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("class-list")]
+        [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
         public async Task<IActionResult> GetClassList([FromQuery] GetClassListForStudentQuery getClassListQuery, CancellationToken cancellationToken)
         {
             var currentStudent = HttpContext.Items["User"]! as StudentDto;

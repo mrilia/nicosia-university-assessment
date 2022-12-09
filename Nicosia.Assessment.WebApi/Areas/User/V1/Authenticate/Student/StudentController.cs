@@ -21,7 +21,7 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Student
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        [SwaggerOperation(Tags = new[] { "Authentication Student" })]
+        [SwaggerOperation(Tags = new[] { "Authentication Student", "Major Assessment Endpoints" })]
         public IActionResult Authenticate(AuthenticateStudentCommand authenticateStudentCommand, CancellationToken cancellationToken)
         {
             authenticateStudentCommand.IpAdress = IpAddress();
