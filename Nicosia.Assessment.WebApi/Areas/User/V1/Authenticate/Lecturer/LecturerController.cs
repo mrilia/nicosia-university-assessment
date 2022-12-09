@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate;
 using Nicosia.Assessment.WebApi.Controllers;
+using Nicosia.Assessment.WebApi.Filters.Swagger.DocumentFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer
@@ -19,10 +20,13 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Authenticate Lecturer user
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         [SwaggerOperation(Tags = new[] { "Authentication Lecturer", "Major Assessment Endpoints"})]
-
+        [SwaggerOperationOrder(1)]
         public IActionResult Authenticate(AuthenticateLecturerCommand authenticateLecturerCommand, CancellationToken cancellationToken)
         {
             authenticateLecturerCommand.IpAdress = IpAddress();
@@ -31,6 +35,9 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer
             return Ok(response);
         }
 
+        /// <summary>
+        /// Refresh Token For Lecturer user
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("refresh-token")]
         [SwaggerOperation(Tags = new[] { "Authentication Lecturer" })]
@@ -46,6 +53,9 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer
             return Ok(response);
         }
 
+        /// <summary>
+        /// Revoke Token For Lecturer user
+        /// </summary>
         [HttpPost("revoke-token")]
         [SwaggerOperation(Tags = new[] { "Authentication Lecturer" })]
         public async Task<IActionResult> RevokeToken(RevokeLecturerTokenCommand revokeLecturerTokenCommand, CancellationToken cancellationToken)

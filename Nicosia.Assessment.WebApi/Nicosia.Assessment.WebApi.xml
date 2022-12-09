@@ -458,6 +458,51 @@
             <response code="400">If page or limit is overFlow</response>
             <response code="500">If an unexpected error happen</response>
         </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin.AuthenticateController.Authenticate(Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate.AuthenticateAdminCommand,System.Threading.CancellationToken)">
+            <summary>
+            Authenticate Admin user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin.AuthenticateController.RefreshToken(Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate.RefreshAdminTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Refresh Token For Admin user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin.AuthenticateController.RevokeToken(Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate.RevokeAdminTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Revoke Token For Admin user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer.AuthenticateController.Authenticate(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate.AuthenticateLecturerCommand,System.Threading.CancellationToken)">
+            <summary>
+            Authenticate Lecturer user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer.AuthenticateController.RefreshToken(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate.RefreshLecturerTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Refresh Token For Lecturer user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Lecturer.AuthenticateController.RevokeToken(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.Authenticate.RevokeLecturerTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Revoke Token For Lecturer user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Student.AuthenticateController.Authenticate(Nicosia.Assessment.Application.Handlers.Student.Commands.Authenticate.AuthenticateStudentCommand,System.Threading.CancellationToken)">
+            <summary>
+            Authenticate Student user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Student.AuthenticateController.RefreshToken(Nicosia.Assessment.Application.Handlers.Student.Commands.Authenticate.RefreshStudentTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Refresh Token For Student user
+            </summary>
+        </member>
+        <member name="M:Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Student.AuthenticateController.RevokeToken(Nicosia.Assessment.Application.Handlers.Student.Commands.Authenticate.RevokeStudentTokenCommand,System.Threading.CancellationToken)">
+            <summary>
+            Revoke Token For Student user
+            </summary>
+        </member>
         <member name="T:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware">
             <summary>
              OnExceptionMiddleware , Produce Custom message during Internal Server Exception

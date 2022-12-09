@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Admin.Commands.Authenticate;
 using Nicosia.Assessment.WebApi.Controllers;
+using Nicosia.Assessment.WebApi.Filters.Swagger.DocumentFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin
@@ -18,9 +19,13 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Authenticate Admin user
+        /// </summary>
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost("authenticate")]
         [SwaggerOperation(Tags = new[] { "Authentication Admin", "Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(1)]
         public IActionResult Authenticate(AuthenticateAdminCommand authenticateAdminCommand, CancellationToken cancellationToken)
         {
             authenticateAdminCommand.IpAdress = IpAddress();
@@ -29,6 +34,9 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin
             return Ok(response);
         }
 
+        /// <summary>
+        /// Refresh Token For Admin user
+        /// </summary>
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         [HttpPost("refresh-token")]
         [SwaggerOperation(Tags = new[] { "Authentication Admin" })]
@@ -44,6 +52,9 @@ namespace Nicosia.Assessment.WebApi.Areas.User.V1.Authenticate.Admin
             return Ok(response);
         }
 
+        /// <summary>
+        /// Revoke Token For Admin user
+        /// </summary>
         [HttpPost("revoke-token")]
         [SwaggerOperation(Tags = new[] { "Authentication Admin" })]
         public async Task<IActionResult> RevokeToken(RevokeAdminTokenCommand revokeAdminTokenCommand, CancellationToken cancellationToken)

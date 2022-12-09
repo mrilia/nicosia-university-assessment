@@ -75,6 +75,7 @@ namespace Nicosia.Assessment.WebApi.Installer
             {
                 options.UseDateOnlyTimeOnlyStringConverters();
 
+
                 options.DocumentFilter<OrderTagsDocumentFilter>();
 
                 options.SchemaFilter<AdminSchemaFilter>();

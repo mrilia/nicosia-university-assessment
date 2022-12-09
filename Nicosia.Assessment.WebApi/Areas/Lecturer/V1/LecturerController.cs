@@ -16,6 +16,7 @@ using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
 using Nicosia.Assessment.WebApi.Filters.AuthFilters;
+using Nicosia.Assessment.WebApi.Filters.Swagger.DocumentFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
@@ -47,6 +48,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("student-list")]
         [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(2)]
         public async Task<IActionResult> GetStudentList([FromQuery] GetStudentListForLecturerQuery getStudentListQuery, CancellationToken cancellationToken)
         {
             var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
@@ -78,6 +80,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("class-list")]
         [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(2)]
         public async Task<IActionResult> GetClassList([FromQuery] GetClassListForLecturerQuery getClassListQuery, CancellationToken cancellationToken)
         {
             var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
@@ -107,6 +110,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost("approve-request")]
         [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(2)]
         public async Task<IActionResult> AddNew(ApproveMessagingRequest approveMessagingRequest,
             CancellationToken cancellationToken)
         {
@@ -141,6 +145,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpPost("reject-request")]
         [SwaggerOperation(Tags = new[] {"Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(2)]
         public async Task<IActionResult> AddNew(RejectMessagingRequest rejectMessagingRequest,
             CancellationToken cancellationToken)
         {
@@ -176,6 +181,7 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
         [ProducesResponseType(typeof(ApiMessage), 500)]
         [HttpGet("messaging-request-list")]
         [SwaggerOperation(Tags = new[] { "Major Assessment Endpoints" })]
+        [SwaggerOperationOrder(2)]
         public async Task<IActionResult> GetMessagingRequestList([FromQuery] GetMessagingRequestListQuery getMessagingRequestListQuery, CancellationToken cancellationToken)
         {
             var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
