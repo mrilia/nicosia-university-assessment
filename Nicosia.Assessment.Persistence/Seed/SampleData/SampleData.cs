@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Nicosia.Assessment.Domain.Models.Course;
 using Nicosia.Assessment.Domain.Models.Period;
-using Nicosia.Assessment.Domain.Models.Section;
 using Nicosia.Assessment.Domain.Models.User;
-using Nicosia.Assessment.Persistence.Context;
 
 namespace Nicosia.Assessment.Persistence.Seed.SampleData
 {

@@ -14,6 +14,12 @@ namespace Nicosia.Assessment.AcceptanceTests.StepDefinitions
             _nicosiaAssessmentApiDriver = nicosiaAssessmentApiDriver;
         }
 
+        [When(@"user login with following details")]
+        public void WhenUserLoginWithFollowingDetails(Table table)
+        {
+            _nicosiaAssessmentApiDriver.Login(table);
+        }
+
         [When(@"user creates a student with the following details")]
         public async Task WhenUserCreatesAStudentWithTheFollowingDetails(Table table)
         {
@@ -31,8 +37,8 @@ namespace Nicosia.Assessment.AcceptanceTests.StepDefinitions
 
        
 
-        [Then(@"system must respond with error code of ""([^""]*)""")]
-        public void ThenSystemMustRespondWithErrorCodeOf(string errorCode)
+        [Then(@"system must respond with code of ""([^""]*)""")]
+        public void ThenSystemMustRespondWithCodeOf(string errorCode)
         {
             _nicosiaAssessmentApiDriver.CheckTheErrorCode(errorCode);
         }

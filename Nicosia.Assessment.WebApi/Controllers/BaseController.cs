@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using System;
@@ -10,7 +9,7 @@ using Nicosia.Assessment.Application.Models;
 namespace Nicosia.Assessment.WebApi.Controllers
 {
     [Route("[Controller]")]
-    [EnableCors]
+    //[EnableCors]
     [ApiController]
     public class BaseController : Controller
     {

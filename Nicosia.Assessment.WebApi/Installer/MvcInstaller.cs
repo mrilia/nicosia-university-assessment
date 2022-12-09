@@ -41,10 +41,9 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddMemoryCache();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
-                builder.SetIsOriginAllowed(origin => true)
+                builder.AllowAnyOrigin()
                        .AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowCredentials();
+                       .AllowAnyHeader();
             }));
 
             services.AddFluentValidationAutoValidation();

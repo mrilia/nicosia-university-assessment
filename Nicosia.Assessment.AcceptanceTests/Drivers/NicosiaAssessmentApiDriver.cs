@@ -1,8 +1,10 @@
+using System.Net.Http.Headers;
 using FluentAssertions;
 using Nicosia.Assessment.AcceptanceTests.Models;
 using System.Net.Http.Json;
+using Nicosia.Assessment.AcceptanceTests.Models.PaginationResponse;
 using TechTalk.SpecFlow.Assist;
-using Student = Nicosia.Assessment.AcceptanceTests.Models.Student;
+using System.Net.Http.Formatting;
 
 namespace Nicosia.Assessment.AcceptanceTests.Drivers
 {
@@ -15,17 +17,50 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
         {
             _httpClient = httpClient;
             _scenarioContext = scenarioContext;
+
+            _scenarioContext["Responses"] = new List<HttpResponseMessage>();
+
+            _httpClient.DefaultRequestHeaders
+                .Accept
+                .Add(new MediaTypeWithQualityHeaderValue("*/*"));
+
+            _httpClient.DefaultRequestHeaders.Clear();
+            _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Content-Type", "application/json;");
+
+            _scenarioContext.TryGetValue("authenticationInfo", out AuthenticateStudentResponse authenticationResponse);
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Authorization", authenticationResponse?.JwtToken);
+
         }
 
+        public void Login(Table table)
+        {
+                var authenticateStudentRequests = table.CreateSet<AuthenticateStudentRequest>();
+                var responses = new List<HttpResponseMessage>();
+
+                var authenticateStudentRequest = authenticateStudentRequests.FirstOrDefault();
+                
+                var response = _httpClient.PostAsJsonAsync("api/user/v1/Authenticate/Admin/authenticate", authenticateStudentRequest).Result;
+                var authenticationResponse = response.Content.ReadFromJsonAsync<AuthenticateStudentResponse>().Result;
+
+                responses.Add(response);
+
+                _httpClient.DefaultRequestHeaders.Authorization =
+                    new AuthenticationHeaderValue("Authorization", authenticationResponse?.JwtToken);
+
+                _scenarioContext["authenticationInfo"] = authenticationResponse;
+                _scenarioContext["Responses"] = responses;
+            
+        }
         public async Task CreateStudents(Table table)
         {
-            var creatStudentRequests = table.CreateSet<CreateStudentRequest>();
+            var createStudentRequests = table.CreateSet<CreateStudentRequest>();
             var createdStudents = new List<Models.Student>();
             var responses = new List<HttpResponseMessage>();
 
-            foreach (var createStudentRequest in creatStudentRequests)
+            foreach (var createStudentRequest in createStudentRequests)
             {
-                var response = await _httpClient.PostAsJsonAsync("student", createStudentRequest);
+                var response = await _httpClient.PostAsJsonAsync("api/deputy/v1/Student", createStudentRequest);
                 var responseStudent = await response.Content.ReadFromJsonAsync<Student>();
 
                 responses.Add(response);
@@ -51,11 +86,11 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
                 Email = email
             };
 
-            var response = await _httpClient.GetAsync($"student/list?email={query.Email}");
+            var response = await _httpClient.GetAsync($"api/deputy/v1/Student/list?email={query.Email}");
 
-            List<Student>? fetchedStudents = await response.Content.ReadFromJsonAsync<List<Student>>();
+            PaginationResponse<Student>? fetchedStudents = await response.Content.ReadFromJsonAsync<PaginationResponse<Student>>();
 
-            return fetchedStudents!;
+            return fetchedStudents!.Data.Items.ToList();
         }
 
 
@@ -81,10 +116,11 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
                 Lastname = $"{studentBeforUpdate.Lastname}",
                 Email = newEmail,
                 DateOfBirth = studentBeforUpdate.DateOfBirth,
-                PhoneNumber = $"+{studentBeforUpdate.PhoneNumber}"
+                PhoneNumber = $"{studentBeforUpdate.PhoneNumber}",
+                Password = "P@s$w0rD",
             };
 
-            var response = _httpClient.PutAsJsonAsync("student", studentToUpdate).Result;
+            var response = _httpClient.PutAsJsonAsync("api/deputy/v1/Student",studentToUpdate).Result;
 
             _scenarioContext["Responses"] = new List<HttpResponseMessage>() { response };
         }
@@ -93,7 +129,7 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
         {
             var studentToDelete = await GetStudentByEmail(email);
 
-            var response = _httpClient.DeleteAsync($"student/{studentToDelete?.First().StudentId}").Result;
+            var response = _httpClient.DeleteAsync($"api/deputy/v1/Student/{studentToDelete?.First().StudentId}").Result;
 
             _scenarioContext["Responses"] = new List<HttpResponseMessage>() { response };
         }
@@ -105,6 +141,16 @@ namespace Nicosia.Assessment.AcceptanceTests.Drivers
             foreach (var response in responses)
             {
                 response.Content.ReadAsStringAsync().Result.ToLower().Should().Contain(message.ToLower());
+            }
+        }
+
+
+        public class NoCharSetJsonMediaTypeFormatter : JsonMediaTypeFormatter
+        {
+            public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+            {
+                base.SetDefaultContentHeaders(type, headers, mediaType);
+                headers.ContentType.CharSet = "";
             }
         }
     }

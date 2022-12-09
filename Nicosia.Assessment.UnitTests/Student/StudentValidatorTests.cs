@@ -1,5 +1,4 @@
 ﻿using System;
-using Castle.Core.Configuration;
 using FluentValidation.TestHelper;
 using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent;
 using Nicosia.Assessment.Application.Validators.Student;
