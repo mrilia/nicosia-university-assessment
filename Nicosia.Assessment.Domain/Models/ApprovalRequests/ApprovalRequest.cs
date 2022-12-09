@@ -7,6 +7,7 @@ namespace Nicosia.Assessment.Domain.Models.ApprovalRequests
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ApprovalRequestStatus
     {
+        None,
         Waiting,
         Approved,
         Rejected

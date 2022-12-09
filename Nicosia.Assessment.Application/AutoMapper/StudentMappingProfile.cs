@@ -33,6 +33,7 @@ namespace Nicosia.Assessment.Application.AutoMapper
             CreateMap<JwtRefreshToken, RefreshToken>();
 
             CreateMap<AuthenticateResponse, AuthenticateStudentResponse>();
+            CreateMap<Student, ChildlessStudentDto>();
         }
     }
 }

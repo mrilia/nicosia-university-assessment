@@ -4,6 +4,7 @@ using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.UpdateLecturer;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
+using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Domain.Models.Security;
 using Nicosia.Assessment.Domain.Models.User;
 using Nicosia.Assessment.Shared.Encryption;

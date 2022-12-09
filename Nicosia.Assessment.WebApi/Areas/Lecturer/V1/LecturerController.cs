@@ -8,6 +8,7 @@ using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.ApproveMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.RejectMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
+using Nicosia.Assessment.Application.Handlers.Lecturer.Queries;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
@@ -159,6 +160,37 @@ namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
                 return result.ApiResult;
 
             return NoContent();
+        }
+
+
+        /// <summary>
+        /// List Of Messaging Requests 
+        /// </summary>
+        /// <param name="getMessagingRequestListQuery"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns> Messaging Requests list</returns>
+        /// <response code="200">if every thing is ok </response>
+        /// <response code="400">If page or limit is overFlow</response>
+        /// <response code="500">If an unexpected error happen</response>
+        [ProducesResponseType(typeof(PaginationResponse<MessagingRequestDto>), 200)]
+        [ProducesResponseType(typeof(ApiMessage), 400)]
+        [ProducesResponseType(typeof(ApiMessage), 500)]
+        [HttpGet("messaging-request-list")]
+        [SwaggerOperation(Tags = new[] { "Major Assessment Endpoints" })]
+        public async Task<IActionResult> GetMessagingRequestList([FromQuery] GetMessagingRequestListQuery getMessagingRequestListQuery, CancellationToken cancellationToken)
+        {
+            var currentLecturer = HttpContext.Items["User"]! as LecturerDto;
+
+            if (currentLecturer == null)
+                throw new AuthenticationException("No claim found!");
+
+            getMessagingRequestListQuery.SetLecturerId(currentLecturer.LecturerId);
+
+            var requests = await _mediator.Send(getMessagingRequestListQuery, cancellationToken);
+            var nextPageUrl = GetNextPageUrl(getMessagingRequestListQuery, requests.TotalCount);
+            var result = new PaginationResponse<MessagingRequestDto>(requests.Items, requests.TotalCount, nextPageUrl);
+
+            return Ok(result);
         }
 
 

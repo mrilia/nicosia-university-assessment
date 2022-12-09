@@ -6,6 +6,7 @@ using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRe
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Domain.Models.ApprovalRequests;
+using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.AutoMapper
 {
@@ -35,6 +36,9 @@ namespace Nicosia.Assessment.Application.AutoMapper
                 .ForMember(x => x.SectionId,
                     opt => opt.MapFrom(src =>
                         approvalRequestContext.ApprovalRequests!.Find(src.ApprovalRequestId)!.SectionId));
+
+            CreateMap<ApprovalRequest, MessagingRequestDto>();
+
         }
     }
 }
