@@ -12,13 +12,13 @@ using Nicosia.Assessment.Persistence.Seed;
 
 namespace Nicosia.Assessment.Persistence.Context
 {
-    public class SqliteDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext, IAdminContext, IApprovalRequestContext
+    public class PostgresDbContext : DbContext, IBaseContext, ILecturerContext, IStudentContext, ICourseContext, IPeriodContext, ISectionContext, IAdminContext, IApprovalRequestContext
     {
-        public SqliteDbContext()
+        public PostgresDbContext()
         {
         }
 
-        public SqliteDbContext(DbContextOptions options) : base(options)
+        public PostgresDbContext(DbContextOptions options) : base(options)
         {
         }
 
@@ -26,7 +26,7 @@ namespace Nicosia.Assessment.Persistence.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite(@"Data Source=Database.db");
+                optionsBuilder.UseSqlite(@"Server=localhost;Database=NicosiaAssessmentDb;Port=5432;User Id=postgres;Password=1234;");
             }
         }
 
@@ -44,7 +44,7 @@ namespace Nicosia.Assessment.Persistence.Context
 
         public Task SeedDefaultData()
         {
-            return new SqliteDbContextSeed().SeedMigrationAsync(this);
+            return new PostgresDbContextSeed().SeedMigrationAsync(this);
         }
 
         public Task CloseConnection() =>
@@ -58,6 +58,6 @@ namespace Nicosia.Assessment.Persistence.Context
             base.SaveChanges();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqliteDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PostgresDbContext).Assembly);
     }
 }

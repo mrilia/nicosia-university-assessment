@@ -1,5 +1,4 @@
-﻿using Nicosia.Assessment.Persistence.Context;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,12 +6,13 @@ using Nicosia.Assessment.Domain.Models.Course;
 using Nicosia.Assessment.Domain.Models.Period;
 using Nicosia.Assessment.Domain.Models.Section;
 using Nicosia.Assessment.Domain.Models.User;
+using Nicosia.Assessment.Persistence.Context;
 
-namespace Nicosia.Assessment.Persistence.Seed
+namespace Nicosia.Assessment.Persistence.Seed.SampleData
 {
-    public class DbContextSeed
+    public static class SampleData
     {
-        private static readonly List<Admin> SampleAdmins = new List<Admin>()
+         public static readonly List<Admin> SampleAdmins = new List<Admin>()
         {
             new Admin
             {
@@ -25,8 +25,8 @@ namespace Nicosia.Assessment.Persistence.Seed
                 Password = "10000.vznADJbGGjSZnAtjxzwJoQ==.BmaFFqalz7ki+H3tg2np0OlteWGAReB32u30zVha7p4="
             }
         };
-        
-        private static readonly List<Student> SampleStudents = new List<Student>()
+
+         public static readonly List<Student> SampleStudents = new List<Student>()
         {
             new Student
             {
@@ -120,7 +120,7 @@ namespace Nicosia.Assessment.Persistence.Seed
             }
         };
 
-        private static readonly List<Lecturer> SampleLecturers = new List<Lecturer>()
+         public static readonly List<Lecturer> SampleLecturers = new List<Lecturer>()
         {
             new Lecturer
             {
@@ -164,7 +164,7 @@ namespace Nicosia.Assessment.Persistence.Seed
             }
         };
 
-        private static readonly List<Period> SamplePeriods = new List<Period>()
+         public static readonly List<Period> SamplePeriods = new List<Period>()
         {
             new Period
             {
@@ -182,7 +182,7 @@ namespace Nicosia.Assessment.Persistence.Seed
             }
         };
 
-        private static readonly List<Course> SampleCourses = new List<Course>()
+         public static readonly List<Course> SampleCourses = new List<Course>()
         {
             new Course
             {
@@ -203,113 +203,5 @@ namespace Nicosia.Assessment.Persistence.Seed
                 Title = "Everything About Dinosaurs!",
             },
         };
-
-        public async Task SeedMigrationAsync(SqliteDbContext context)
-        {
-            CreateDefaultAdmins(context);
-            CreateDefaultStudents(context);
-            CreateDefaultLecturers(context);
-            CreateDefaultPeriods(context);
-            CreateDefaultCourses(context);
-            CreateDefaultSections(context);
-
-            await context.SaveChangesAsync();
-        }
-
-        private static void CreateDefaultAdmins(SqliteDbContext context)
-        {
-            if (context.Set<Admin>().Any())
-            {
-                return;
-            }
-
-            context.Set<Admin>().AddRange(SampleAdmins);
-        }
-        
-        private static void CreateDefaultStudents(SqliteDbContext context)
-        {
-            if (context.Set<Student>().Any())
-            {
-                return;
-            }
-
-            context.Set<Student>().AddRange(SampleStudents);
-        }
-
-        private static void CreateDefaultLecturers(SqliteDbContext context)
-        {
-            if (context.Set<Lecturer>().Any())
-            {
-                return;
-            }
-
-            context.Set<Lecturer>().AddRange(SampleLecturers);
-        }
-
-        private static void CreateDefaultPeriods(SqliteDbContext context)
-        {
-            if (context.Set<Period>().Any())
-            {
-                return;
-            }
-
-            context.Set<Period>().AddRange(SamplePeriods);
-        }
-
-        private static void CreateDefaultCourses(SqliteDbContext context)
-        {
-            if (context.Set<Course>().Any())
-            {
-                return;
-            }
-
-            context.Set<Course>().AddRange(SampleCourses);
-        }
-
-        private static void CreateDefaultSections(SqliteDbContext context)
-        {
-            if (context.Set<Section>().Any())
-            {
-                return;
-            }
-
-            context.Set<Section>().AddRange(new List<Section>()
-            {
-                new Section
-                {
-                    SectionId = Guid.NewGuid(),
-                    Number = "Sec-010",
-                    Details = "Engineering Inst. 1st Floor. Room 3.",
-
-                    Course = SampleCourses.First(),
-                    Period = SamplePeriods.First(),
-                    Lecturers = SampleLecturers.Take(1).ToList(),
-                    Students = SampleStudents.Take(3).ToList()
-                },
-                new Section
-                {
-                    SectionId = Guid.NewGuid(),
-                    Number = "Sec-008",
-                    Details = "Language Inst. 3rd Floor. Room 3.",
-
-                    Course = SampleCourses.Skip(1).Take(1).First(),
-                    Period = SamplePeriods.First(),
-                    Lecturers = SampleLecturers.Skip(1).Take(2).ToList(),
-                    Students = SampleStudents.Skip(2).Take(4).ToList()
-                },
-                new Section
-                {
-                    SectionId = Guid.NewGuid(),
-                    Number = "Sec-014",
-                    Details = "History Inst. 2nd Floor, Grand Hall.",
-
-                    Course = SampleCourses.Skip(2).Take(1).First(),
-                    Period = SamplePeriods.Skip(1).Take(1).First(),
-                    Lecturers = SampleLecturers.Skip(2).Take(2).ToList(),
-                    Students = SampleStudents.Skip(3).Take(4).ToList()
-                },
-            });
-        }
-
     }
 }

@@ -34,17 +34,28 @@ namespace Nicosia.Assessment.WebApi
         {
             // if (env.IsDevelopment())
             // {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nicosia.Assessment.WebApi v1"));
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nicosia.Assessment.WebApi v1"));
             // }
+
+            var useSqlite = bool.Parse(Configuration["UseSqliteAsDatabaseEngine"]!);
+            var usePostgres = bool.Parse(Configuration["UsePostgresAsDatabaseEngine"]!);
 
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope())
             {
-                var dbContext = serviceScope?.ServiceProvider.GetRequiredService<SqliteDbContext>();
-                dbContext?.Database.EnsureCreated();
-
-                dbContext?.SeedDefaultData().Wait();
+                if (useSqlite)
+                {
+                    var dbContext = serviceScope?.ServiceProvider.GetRequiredService<SqliteDbContext>();
+                    dbContext?.Database.EnsureCreated();
+                    dbContext?.SeedDefaultData().Wait();
+                }
+                else if (usePostgres)
+                {
+                    var dbContext = serviceScope?.ServiceProvider.GetRequiredService<PostgresDbContext>();
+                    dbContext?.Database.EnsureCreated();
+                    dbContext?.SeedDefaultData().Wait();
+                }
             }
 
             app.UseHttpsRedirection();

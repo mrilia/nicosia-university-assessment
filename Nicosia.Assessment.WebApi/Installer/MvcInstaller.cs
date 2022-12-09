@@ -24,7 +24,8 @@ namespace Nicosia.Assessment.WebApi.Installer
         public void InstallServices(IConfiguration configuration, IServiceCollection services)
         {
             services.AddControllers()
-                .AddJsonOptions(options => {
+                .AddJsonOptions(options =>
+                {
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                     // In addition, you can limit the depth
                     //options.JsonSerializerOptions.MaxDepth = 1;
@@ -32,7 +33,7 @@ namespace Nicosia.Assessment.WebApi.Installer
 
             // configure strongly typed settings object
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
-            
+
             services
                 .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
                 .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
@@ -58,18 +59,40 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddControllers(opt => opt.Filters.Add<OnExceptionMiddleware>());
 
 
-            var mappingConfig = new MapperConfiguration(mc =>
+            var useSqlite = bool.Parse(configuration["UseSqliteAsDatabaseEngine"]!);
+            var usePostgres = bool.Parse(configuration["UsePostgresAsDatabaseEngine"]!);
+
+            if (useSqlite)
             {
-                mc.AddProfile(new AdminMappingProfile());
-                mc.AddProfile(new StudentMappingProfile());
-                mc.AddProfile(new LecturerMappingProfile());
-                mc.AddProfile(new CourseMappingProfile());
-                mc.AddProfile(new PeriodMappingProfile());
-                mc.AddProfile(new ApprovalRequestMappingProfile(new SqliteDbContext()));
-                mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(), new SqliteDbContext()));
-            });
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+                var mappingConfig = new MapperConfiguration(mc =>
+                {
+                    mc.AddProfile(new AdminMappingProfile());
+                    mc.AddProfile(new StudentMappingProfile());
+                    mc.AddProfile(new LecturerMappingProfile());
+                    mc.AddProfile(new CourseMappingProfile());
+                    mc.AddProfile(new PeriodMappingProfile());
+                    mc.AddProfile(new ApprovalRequestMappingProfile(new SqliteDbContext()));
+                    mc.AddProfile(new SectionMappingProfile(new SqliteDbContext(), new SqliteDbContext()));
+                });
+                IMapper mapper = mappingConfig.CreateMapper();
+                services.AddSingleton(mapper);
+            }
+            else if (usePostgres)
+            {
+                var mappingConfig = new MapperConfiguration(mc =>
+                {
+                    mc.AddProfile(new AdminMappingProfile());
+                    mc.AddProfile(new StudentMappingProfile());
+                    mc.AddProfile(new LecturerMappingProfile());
+                    mc.AddProfile(new CourseMappingProfile());
+                    mc.AddProfile(new PeriodMappingProfile());
+                    mc.AddProfile(new ApprovalRequestMappingProfile(new PostgresDbContext()));
+                    mc.AddProfile(new SectionMappingProfile(new PostgresDbContext(), new PostgresDbContext()));
+                });
+                IMapper mapper = mappingConfig.CreateMapper();
+                services.AddSingleton(mapper);
+            }
+
 
             services.AddSwaggerGen(options =>
             {
