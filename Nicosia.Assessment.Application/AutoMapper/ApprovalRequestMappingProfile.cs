@@ -6,7 +6,6 @@ using Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewMessagingRe
 using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Domain.Models.ApprovalRequests;
-using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.AutoMapper
 {

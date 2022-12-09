@@ -12,7 +12,7 @@ using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
+using Nicosia.Assessment.WebApi.Filters.AuthFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student
@@ -30,7 +30,6 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student
         
         /// <summary>
         /// Add new student
-        /// Sample Phone Number: +989123123456
         /// </summary>
         /// <param name="addNewStudentCommand"></param>
         /// <param name="cancellationToken"></param>

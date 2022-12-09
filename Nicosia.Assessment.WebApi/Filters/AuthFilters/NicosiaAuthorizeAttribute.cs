@@ -9,7 +9,7 @@ using Nicosia.Assessment.Shared.Token.JWT;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Nicosia.Assessment.WebApi.Filters
+namespace Nicosia.Assessment.WebApi.Filters.AuthFilters
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class NicosiaAuthorizeAttribute : Attribute, IAuthorizationFilter
@@ -35,9 +35,9 @@ namespace Nicosia.Assessment.WebApi.Filters
             var jwtTokenValidationResult = JwtTokenHelper.ValidateJwtToken(token, _jwtSettings.Secret);
 
             // authorization
-            if (jwtTokenValidationResult is null 
+            if (jwtTokenValidationResult is null
                 || jwtTokenValidationResult.UserId == Guid.Empty
-                || (_roles.Any() && !_roles.Select(s=> s.ToLower()).Contains(jwtTokenValidationResult.UserRole.ToLower())))
+                || _roles.Any() && !_roles.Select(s => s.ToLower()).Contains(jwtTokenValidationResult.UserRole.ToLower()))
             {
                 // not logged in or role not authorized
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };

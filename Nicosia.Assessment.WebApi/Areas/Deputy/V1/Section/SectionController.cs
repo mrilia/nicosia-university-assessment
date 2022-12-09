@@ -16,7 +16,7 @@ using Nicosia.Assessment.Application.Handlers.Section.Commands.WithdrawStudentTo
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
+using Nicosia.Assessment.WebApi.Filters.AuthFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Section

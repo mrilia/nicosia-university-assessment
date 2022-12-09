@@ -8,7 +8,6 @@ namespace Nicosia.Assessment.Application.Handlers.Lecturer.Dto
 {
     public class MessagingRequestDto
     {
-        [JsonIgnore]
         public Guid ApprovalRequestId { get; set; }
         public string Details { get; set; }
         public ApprovalRequestStatus Status { get; set; }

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
@@ -9,7 +10,6 @@ using Nicosia.Assessment.Application.Handlers.Section.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Class.V1

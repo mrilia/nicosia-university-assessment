@@ -12,6 +12,8 @@ using Nicosia.Assessment.Application.AutoMapper;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Persistence.Context;
 using Nicosia.Assessment.Shared.Token.JWT.Models;
+using Nicosia.Assessment.WebApi.Filters.Swagger.DocumentFilters;
+using Nicosia.Assessment.WebApi.Filters.Swagger.SchemaFilters;
 using Nicosia.Assessment.WebApi.Middleware;
 
 namespace Nicosia.Assessment.WebApi.Installer
@@ -72,6 +74,12 @@ namespace Nicosia.Assessment.WebApi.Installer
             services.AddSwaggerGen(options =>
             {
                 options.UseDateOnlyTimeOnlyStringConverters();
+
+                options.DocumentFilter<OrderTagsDocumentFilter>();
+
+                options.SchemaFilter<AdminSchemaFilter>();
+                options.SchemaFilter<LecturerSchemaFilter>();
+                options.SchemaFilter<StudentSchemaFilter>();
 
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {

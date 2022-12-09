@@ -18,7 +18,6 @@
         <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin.AdminController.AddNew(Nicosia.Assessment.Application.Handlers.Admin.Commands.AddNewAdmin.AddNewAdminCommand,System.Threading.CancellationToken)">
             <summary>
             Add new admin
-            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewAdminCommand"></param>
             <param name="cancellationToken"></param>
@@ -125,7 +124,6 @@
         <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Lecturer.LecturerController.AddNew(Nicosia.Assessment.Application.Handlers.Lecturer.Commands.AddNewLecturer.AddNewLecturerCommand,System.Threading.CancellationToken)">
             <summary>
             Add new lecturer
-            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewLecturerCommand"></param>
             <param name="cancellationToken"></param>
@@ -325,7 +323,6 @@
         <member name="M:Nicosia.Assessment.WebApi.Areas.Deputy.V1.Student.StudentController.AddNew(Nicosia.Assessment.Application.Handlers.Student.Commands.AddNewStudent.AddNewStudentCommand,System.Threading.CancellationToken)">
             <summary>
             Add new student
-            Sample Phone Number: +989123123456
             </summary>
             <param name="addNewStudentCommand"></param>
             <param name="cancellationToken"></param>

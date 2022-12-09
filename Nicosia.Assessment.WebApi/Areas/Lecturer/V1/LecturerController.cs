@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Nicosia.Assessment.Application.Handlers.Admin.Dto;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.ApproveMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Commands.RejectMessagingRequest;
 using Nicosia.Assessment.Application.Handlers.Lecturer.Dto;
@@ -16,13 +15,13 @@ using Nicosia.Assessment.Application.Handlers.Student.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
+using Nicosia.Assessment.WebApi.Filters.AuthFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Lecturer.V1
 {
     [Route("api/lecturer/v1/[controller]")]
-    [NicosiaAuthorize("lecturer")]
+    [NicosiaAuthorize("lecturer,admin")]
     public class LecturerController : BaseController
     {
         private readonly IMediator _mediator;

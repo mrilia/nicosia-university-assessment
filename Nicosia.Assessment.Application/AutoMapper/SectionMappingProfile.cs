@@ -3,10 +3,8 @@ using Nicosia.Assessment.Application.Handlers.Section.Commands.AddNewSection;
 using Nicosia.Assessment.Application.Handlers.Section.Commands.UpdateSection;
 using Nicosia.Assessment.Application.Handlers.Section.Dto;
 using Nicosia.Assessment.Application.Handlers.Section.Queries;
-using Nicosia.Assessment.Application.Handlers.Student.Dto;
 using Nicosia.Assessment.Application.Interfaces;
 using Nicosia.Assessment.Domain.Models.Section;
-using Nicosia.Assessment.Domain.Models.User;
 
 namespace Nicosia.Assessment.Application.AutoMapper
 {

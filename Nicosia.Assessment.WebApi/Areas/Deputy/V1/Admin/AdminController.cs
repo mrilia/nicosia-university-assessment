@@ -12,7 +12,7 @@ using Nicosia.Assessment.Application.Handlers.Admin.Queries;
 using Nicosia.Assessment.Application.Messages;
 using Nicosia.Assessment.Application.Models;
 using Nicosia.Assessment.WebApi.Controllers;
-using Nicosia.Assessment.WebApi.Filters;
+using Nicosia.Assessment.WebApi.Filters.AuthFilters;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
@@ -31,7 +31,6 @@ namespace Nicosia.Assessment.WebApi.Areas.Deputy.V1.Admin
 
         /// <summary>
         /// Add new admin
-        /// Sample Phone Number: +989123123456
         /// </summary>
         /// <param name="addNewAdminCommand"></param>
         /// <param name="cancellationToken"></param>
