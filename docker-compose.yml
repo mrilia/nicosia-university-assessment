@@ -1,8 +1,30 @@
 ﻿version: '3'
 services:
-  book-app:
+  nicosia-app:
     build: .
     ports: 
       - "80:80"
       - "443:443"
-      - "5000:5000"
+    networks:
+      - nicosia-network
+
+  postgresql_db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - 5432
+    volumes: 
+      - db:/var/lib/postgresql/data
+    networks:
+      - nicosia-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  nicosia-network:
+    driver: bridge

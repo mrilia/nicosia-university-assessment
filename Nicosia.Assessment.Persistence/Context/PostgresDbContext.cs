@@ -26,7 +26,7 @@ namespace Nicosia.Assessment.Persistence.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlite(@"Server=localhost;Database=NicosiaAssessmentDb;Port=5432;User Id=postgres;Password=1234;");
+                optionsBuilder.UseNpgsql(@"Server=localhost;Database=NicosiaAssessmentDb;Port=5432;User Id=postgres;Password=1234;");
             }
         }
 
