@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http;
 using BoDi;
 using Ductus.FluentDocker.Builders;
 using Ductus.FluentDocker.Services;
@@ -62,17 +63,19 @@ namespace Nicosia.Assessment.AcceptanceTests.Hooks
                 .UseCompose()
                 .FromFile(dockerComposePath)
                 .RemoveOrphans()
-                .WaitForHttp("WebApi", $"{confirmationUrl}/swagger",
+                .WaitForHttp("nicosia-app-1", $"{confirmationUrl}/HealthCheck/health-check",
                     continuation: (response, _) => response.Code != HttpStatusCode.OK ? 2000 : 0)
                 .Build()
                 .Start();
+            
         }
-
+        
         [AfterTestRun]
         public static void DockerComposeDown()
         {
             _compositeService!.Stop();
             _compositeService.Dispose();
         }
+        
     }
 }
