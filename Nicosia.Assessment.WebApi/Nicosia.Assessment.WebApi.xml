@@ -503,6 +503,13 @@
             Revoke Token For Student user
             </summary>
         </member>
+        <member name="M:Nicosia.Assessment.WebApi.Controllers.HealthCheckController.Get">
+            <summary>
+            Health Check 
+            </summary>
+            <returns> String</returns>
+            <response code="500">If an unexpected error happen</response>
+        </member>
         <member name="T:Nicosia.Assessment.WebApi.Middleware.OnExceptionMiddleware">
             <summary>
              OnExceptionMiddleware , Produce Custom message during Internal Server Exception

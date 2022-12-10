@@ -66,8 +66,6 @@ namespace Nicosia.Assessment.AcceptanceTests.Hooks
                     continuation: (response, _) => response.Code != HttpStatusCode.OK ? 2000 : 0)
                 .Build()
                 .Start();
-
-            Thread.Sleep(3000);
         }
 
         [AfterTestRun]
