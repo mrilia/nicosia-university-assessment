@@ -1,5 +1,21 @@
 ## **Nicosia University Assessment For Software Developer (C#)**
 
+### Practices and patterns
+- Asp.net 7.0 WebApi
+- CQRS
+- Docker Compose
+- SpecFlow for BDD tests
+- Swagger
+- JWT Authentication
+- Postgres + Sqlite
+- MediatR
+- Auto Mapper
+- Fluent Validation
+- EF core 7.0
+
+
+
+### Intro 
 For this assignment, there are certain objectives that we would like to achieve. However, as there is no time limit for how long you should spend on it, feel free to add what you see fit and treat it like a production system. **You should make a public repository on github for this assignment and provide us with the link.**
 For this assignment, the focus is on setting up an API as a whole. You are asked to implement some endpoints to serve data around students and their classes.
 
